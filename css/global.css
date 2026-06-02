@@ -21,7 +21,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--black-fla);
   color: var(--white-fla);
-  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais nítida em telas Mac/iOS */
+  -webkit-font-smoothing: antialiased;
 }
 
 main {
