@@ -1,0 +1,199 @@
+.navbar {
+    background: var(--red-fla);
+    background: var(--linear-red-fla);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+
+}
+
+/* LOGOTIPO */
+.navbar .logo-brand-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .logo-brand-name img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar .logo-brand-name img:hover {
+    transform: scale(1.1);
+}
+
+.navbar .logo-brand-name .brand-name {
+    margin: 0px 15px;
+}
+
+.navbar .logo-brand-name .brand-name h3 {
+    font-size: 16px;
+}
+
+.navbar .logo-brand-name .brand-name p {
+    font-size: 12px;
+}
+
+/* MENU */
+.navbar .menu ul {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .menu ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.navbar .menu li {
+    display: flex;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar .menu.compressed li:hover {
+    padding-bottom: 5px;
+}
+
+
+.navbar .menu a {
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.navbar .menu a:hover {
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--white-fla);
+}
+
+.navbar .menu a:active {
+    transform: scale(0.9);
+}
+
+.navbar .menu.extends {
+    display: none;
+}
+
+@media (min-width: 780px) {
+    .navbar .menu.extends {
+        display: block;
+    }
+
+    .navbar .menu.compressed {
+        display: none;
+    }
+}
+
+.navbar .menu.compressed i {
+    font-size: 24px;
+}
+
+
+/* Menu Lateral */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--red-fla); 
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: right 0.4s ease-in-out; /* Animação suave deslizando */
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+/* Botão de fechar do topo */
+.sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.sidebar-header button {
+    background: none;
+    border: none;
+    color: var(--white-fla);
+    font-size: 28px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-header button:hover {
+    transform: scale(1.1);
+}
+
+/* Lista de Links */
+.sidebar-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-links li a {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--white-fla);
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 400;
+    transition: background 0.2s ease, padding-left 0.2s ease;
+}
+
+.sidebar-links li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 20px;
+}
+
+.sidebar-links i {
+    font-size: 22px;
+}
+
+.login-item a {
+    font-weight: 600;
+}
+
+.sidebar-divider {
+    border: none;
+    border-top: 2px solid rgba(240, 240, 240, 0.4);
+    margin: 15px 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}

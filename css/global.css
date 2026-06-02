@@ -1,0 +1,36 @@
+/* Importação da fonte Poppins (pesos: 300, 400, 600 e 700) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Definição das variáveis de cor globais */
+:root {
+  --red-fla: #E11A22;
+  --red-fla-dark: #941419;
+  --white-fla: #F0F0F0;
+  --black-fla: #242424;
+  --linear-red-fla: linear-gradient(90deg, rgba(110, 0, 0, 1) 0%, var(--red-fla) 100%);
+}
+
+/* Reset Padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--black-fla);
+  color: var(--white-fla);
+  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais nítida em telas Mac/iOS */
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
