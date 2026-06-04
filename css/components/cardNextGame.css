@@ -49,14 +49,14 @@
     width: 60px;
 }
 
-.container-next-game .match .time {
+.container-next-game .match .team {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.container-next-game .match .time .name {
+.container-next-game .match .team .name {
     font-size: 14px;
     font-weight: bold;
 }

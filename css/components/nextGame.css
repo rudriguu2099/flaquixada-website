@@ -1,0 +1,32 @@
+.next-game {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.next-game .block {
+    background-color: var(--red-fla);
+    width: 10px;
+    height: auto;
+}
+
+.next-game .infor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.next-game .infor div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.next-game .infor .championship-stage {
+    color: var(--red-fla);
+    font-size: 10px;
+}
