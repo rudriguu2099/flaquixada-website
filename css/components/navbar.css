@@ -1,5 +1,5 @@
 .navbar {
-    background: var(--red-fla);
+    background: var(--main-color);
     background: var(--linear-red-fla);
     display: flex;
     flex-direction: row;
@@ -76,7 +76,7 @@
 
 .navbar .menu a:hover {
     margin-bottom: 10px;
-    border-bottom: 2px solid var(--white-fla);
+    border-bottom: 2px solid var(--secundary-color-2);
 }
 
 .navbar .menu a:active {
@@ -102,7 +102,7 @@
 }
 
 .navbar .menu.extends .login-item {
-    background-color: var(--black-fla);
+    background-color: var(--secundary-color-1);
     border-radius: 10px;
     padding: 0px 5px;
     transition: all 0.3s ease-in-out;
@@ -124,7 +124,7 @@
     right: -300px;
     width: 300px;
     height: 100vh;
-    background: var(--red-fla); 
+    background: var(--main-color); 
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
     z-index: 9999;
     display: flex;
@@ -147,7 +147,7 @@
 .sidebar-header button {
     background: none;
     border: none;
-    color: var(--white-fla);
+    color: var(--secundary-color-2);
     font-size: 28px;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -169,7 +169,7 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    color: var(--white-fla);
+    color: var(--secundary-color-2);
     padding: 12px 15px;
     border-radius: 8px;
     font-size: 18px;

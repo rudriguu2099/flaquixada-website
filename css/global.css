@@ -3,6 +3,13 @@
 
 /* Definição das variáveis de cor globais */
 :root {
+  /* Backgrounds */
+  --background: var(--black-fla);
+  --main-color: var(--red-fla);
+  --secundary-color-1: var(--black-fla);
+  --secundary-color-2: var(--white-fla);
+
+  /* Color */
   --red-fla: #E11A22;
   --red-fla-dark: #941419;
   --white-fla: #F0F0F0;
@@ -19,8 +26,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--black-fla);
-  color: var(--white-fla);
+  background-color: var(--background);
+  color: var(--secundary-color-2);
   -webkit-font-smoothing: antialiased;
 }
 
