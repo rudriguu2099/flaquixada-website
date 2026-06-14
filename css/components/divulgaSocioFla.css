@@ -32,7 +32,7 @@
 }
 
 .socio-fla .socio-card-text {
-    background: var(--red-fla);
+    background: var(--linear-red-fla);
     border-radius: 20px;
     padding: 20px;
     width: 100%;
@@ -49,7 +49,7 @@
 #btn-socio-fla {
     font-family: 'Poppins', sans-serif;
     width: 100%;
-    background-color: var(--red-fla);
+    background: var(--linear-red-fla);
     border-radius: 20px;
     font-weight: 500;
     color: var(--white-fla);
@@ -61,7 +61,20 @@
     justify-content: center;
     gap: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#btn-socio-fla::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 1);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
 }
 
 #btn-socio-fla i {
@@ -73,9 +86,8 @@
     font-weight: bold;
 }
 
-#btn-socio-fla:hover {
-    background-color: rgba(0, 0, 0, 0.5); 
-    /* transform: scale(1.05); */
+#btn-socio-fla:hover::before {
+    opacity: 1;
 }
 
 #btn-socio-fla:active {

@@ -87,6 +87,6 @@
 }
 
 .btn-ver-mais:hover {
-    background-color: var(--white-fla);
-    color: var(--black-fla);
+    border-color: var(--black-fla);
+    background-color: var(--black-fla);
 }

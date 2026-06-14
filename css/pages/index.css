@@ -1,18 +1,27 @@
 main {
     margin-top: 100px;
-    width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px 40px;
 }
 
 main .container-main {
-    display: grid;
-    grid-template-columns: 1fr 400px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 30px;
+}
+
+main .container-main > div-socio-fla,
+main .container-main > card-cardapio {
+    flex: 1 1 300px;
 }
 
 #match-fla { 
     display: flex;
     flex-direction: column;
+    flex: 0 0 400px;
 }
 
 #match-fla card-next-game {
@@ -25,6 +34,7 @@ main .container-main {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    flex: 0 0 400px;
 }
 
 main .container-sec {
@@ -38,5 +48,15 @@ main .container-sec {
         gap: 30px;
         align-items: stretch;
         width: 100%;
+    }
+
+    main .container-main > div-socio-fla,
+    main .container-main > card-cardapio {
+        flex: 1 1 auto;
+    }
+
+    #match-fla,
+    .side-widgets {
+        flex: 1 1 auto;
     }
 }

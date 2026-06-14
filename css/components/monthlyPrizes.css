@@ -100,7 +100,7 @@
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 #btn-compete i {
@@ -108,8 +108,7 @@
 }
 
 #btn-compete:hover {
-    background-color: #1a1a1a;
-    transform: translateY(-2px);
+    background-color: #000000;
 }
 
 #btn-compete:active {

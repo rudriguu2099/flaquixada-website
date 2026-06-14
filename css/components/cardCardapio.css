@@ -81,18 +81,19 @@
 
 /* Tabela de Preços*/
 .tabela-precos {
-    display: grid;
-    grid-template-columns: 80px 10px 80px;
+    display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     text-align: center;
 }
 
 .col-socio, .col-normal {
+    width: 80px;
     font-size: 0.95em;
 }
 
 .col-divisor {
+    width: 10px;
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.9em;
 }
@@ -142,8 +143,8 @@
 }
 
 .btn-cardapio-completo:hover {
-    color: var(--black-fla);
-    background-color: var(--white-fla);
+    border-color: var(--red-fla);
+    background-color: var(--red-fla);
 }
 
 .btn-cardapio-completo i {

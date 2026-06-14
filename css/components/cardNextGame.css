@@ -136,8 +136,8 @@
 }
 
 #btn-see-more-next-game:hover {
-    color: var(--black-fla);
-    background-color: var(--white-fla);
+    border-color: var(--red-fla);
+    background-color: var(--red-fla);
 }
 
 @media (min-width: 940px) {
