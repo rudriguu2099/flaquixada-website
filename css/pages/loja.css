@@ -1,0 +1,14 @@
+main {
+    margin-top: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 40px;
+}
+
+main .container-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}

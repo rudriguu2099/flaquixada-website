@@ -1,0 +1,166 @@
+.container-card-live {
+    width: 100%;
+    min-width: 350px;
+    flex: 1;
+    background-color: var(--black-fla-dark);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 20px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+/* Titulo */
+.container-card-live .title-card-live {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    color: var(--red-fla);
+}
+
+.container-card-live .title-card-live i {
+    font-size: 20px;
+}
+
+.container-card-live .title-card-live h2 {
+    font-size: 16px;
+}
+
+/* Painel */
+.container-card-live .panel-card-live {
+    width: 100%;
+    background-color: var(--black-fla);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.container-card-live .panel-card-live:hover {
+    transform: scale(1.02);
+}
+
+.container-card-live .championship-time-stage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 5px;
+    color: var(--red-fla);
+    font-size: 12px;
+}
+
+.container-card-live .championship-time-stage p{
+    width: 77px;
+    text-align: center;
+}
+
+.container-card-live .championship-time-stage #time-game {
+    color: var(--white-fla);
+    width: auto;
+}
+
+.container-card-live .match {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-card-live .match img {
+    width: 60px;
+}
+
+.container-card-live .match .team {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-card-live .match .team .name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.container-card-live .match .vs {
+    font-size: 24px;
+    color: var(--red-fla);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.container-card-live .match-infor {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.container-card-live .match-infor .scoreboard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: var(--white-fla);
+    font-weight: bold;
+    gap: 5px;
+    font-size: 16px;
+}
+
+.container-card-live .match-infor .scoreboard #x{
+    color: var(--red-fla);
+}
+
+
+/* Ver Mais Jogos */
+
+.team-lineup-block {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.team-lineup-block.expandido {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 1px solid var(--white-fla);
+    max-height: auto;
+    padding: 10px;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.team-lineup-block.expandido div {
+    display: flex;
+    flex-direction: row;
+    padding: 0px 5px;
+    justify-content: space-between;
+}
+
+#btn-team-lineup {
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    color: var(--white-fla);
+    padding: 10px 0px;
+    border: 1px solid var(--white-fla);
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    cursor: pointer;
+}
+
+#btn-team-lineup:hover {
+    border-color: var(--red-fla);
+    background-color: var(--red-fla);
+}
+
+@media (min-width: 940px) {
+    .container-next-game {
+        margin-top: 40px;
+    }
+}
+
+
