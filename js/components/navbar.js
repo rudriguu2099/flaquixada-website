@@ -2,12 +2,13 @@ class Navbar extends HTMLElement {
   async connectedCallback() {
     try {
       // Busca o arquivo HTML
-      const resposta = await fetch('./components_html/navbar.html');
+      const baseUrl = window.APP_BASE_URL || './';
+      const resposta = await fetch(`${baseUrl}components_html/navbar.html`);
       const htmlPuro = await resposta.text();
 
       // Injeta o CSS e o HTML
       this.innerHTML = `
-        <link rel="stylesheet" href="./css/components/navbar.css">
+        <link rel="stylesheet" href="${baseUrl}css/components/navbar.css">
         ${htmlPuro}
       `;
 

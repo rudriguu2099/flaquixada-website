@@ -1,11 +1,12 @@
 class CustomFooter extends HTMLElement {
     async connectedCallback() {
         try {
-            const response = await fetch('./components_html/footer.html');
+            const baseUrl = window.APP_BASE_URL || './';
+            const response = await fetch(`${baseUrl}components_html/footer.html`);
             const pureHtml = await response.text();
 
             this.innerHTML = `
-                <link rel="stylesheet" href="./css/components/footer.css">
+                <link rel="stylesheet" href="${baseUrl}css/components/footer.css">
                 ${pureHtml}
             `;
             

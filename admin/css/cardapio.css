@@ -1,0 +1,7 @@
+/* admin-cardapio.css */
+
+.cardapio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
