@@ -1,0 +1,180 @@
+.page-hero {
+    max-width: 960px;
+}
+
+.bolao-page-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+.bolao-jogo-atual {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* We style card-next-game to fill its container */
+.bolao-jogo-atual card-next-game {
+    width: 100%;
+}
+
+/* Hide the "Ver Mais" button only on the Bolão page */
+.bolao-jogo-atual card-next-game #btn-see-more-next-game {
+    display: none !important;
+}
+
+.bolao-participants-card {
+    width: 100%;
+    max-width: 500px;
+    background: var(--linear-red-fla);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(225, 26, 34, 0.25);
+    color: var(--white-fla);
+}
+
+.bolao-participants-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bolao-participants-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.bolao-participants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.bolao-participants-list::-webkit-scrollbar {
+    width: 6px;
+}
+.bolao-participants-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.bolao-participant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.bolao-player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bolao-participant-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    width: 20px;
+}
+
+.bolao-player-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white-fla);
+}
+
+.bolao-participant-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.bolao-participant-name.taken {
+    color: #fbbf24; /* Dourado Premium */
+}
+
+.bolao-participant-name.free {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+}
+
+.bolao-insert-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.bolao-novo-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--black-fla);
+    background: var(--white-fla);
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.bolao-novo-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
+.btn-bolao {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-bolao-salvar {
+    background: #000;
+    color: var(--white-fla);
+}
+
+.btn-bolao-salvar:hover {
+    background: #111;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .bolao-page-content {
+        padding: 24px 20px 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bolao-participants-card {
+        padding: 20px;
+    }
+}

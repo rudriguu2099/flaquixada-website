@@ -1,6 +1,5 @@
 .socio-fla {
     width: 100%;
-    min-width: 350px;
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -121,5 +120,14 @@
         align-items: first baseline;
         margin-top: 40px;
         width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .socio-fla h2 {
+        font-size: 24px;
+    }
+    .socio-fla h3 {
+        font-size: 14px;
     }
 }

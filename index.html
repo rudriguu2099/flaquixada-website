@@ -17,7 +17,11 @@
         <div class="container-main">
             <div-socio-fla></div-socio-fla>
             <div id="match-fla"></div>
-            
+            <!-- <div id="match-live"></div> -->
+            <!-- Trocar o id dinamicamente quando estiver ao vivo -->
+        </div>
+
+        <div class="container-main" style="margin-top: 30px;">
             <card-cardapio></card-cardapio>
             <aside class="side-widgets">
                 <bolao-fla></bolao-fla>
@@ -31,10 +35,12 @@
     
     <custom-footer></custom-footer>
 
+    <script src="./js/utils/mockCardapio.js"></script>
     <script src="./js/pages/index.js"></script>
     <!-- Componentes -->
     <script src="js/components/navbar.js" defer></script>
     <script src="js/components/CardNextGame.js" defer></script>
+    <script src="js/components/CardLive.js" defer></script>
     <script src="js/components/NextGame.js" defer></script>
     <script src="js/components/Bolao.js" defer></script>
     <script src="js/components/DivulgaSocioFla.js" defer></script>

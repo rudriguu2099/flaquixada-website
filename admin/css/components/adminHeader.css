@@ -1,0 +1,85 @@
+/* adminHeader.css */
+.admin-header {
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.admin-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-header-icon {
+    color: var(--white-fla);
+    font-size: 2rem;
+}
+
+.admin-header-titles h1 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.admin-header-titles p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.btn-logout {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    background: transparent;
+    color: var(--white-fla);
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    border-color: var(--black-fla);
+    background-color: var(--black-fla);
+}
+
+.btn-logout:active {
+    transform: scale(0.9);
+}
+
+.btn-hamburger {
+    background: transparent;
+    border: none;
+    color: var(--white-fla);
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        padding: 16px 20px;
+    }
+
+    .admin-header-titles h1 {
+        font-size: 1rem;
+    }
+
+    .admin-header-icon {
+        font-size: 1.5rem;
+    }
+}

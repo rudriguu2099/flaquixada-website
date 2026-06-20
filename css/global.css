@@ -25,17 +25,95 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+noticias-fla, bolao-fla, monthly-prizes, div-socio-fla, card-cardapio, card-next-game, custom-footer, nav-bar {
+    display: block;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--background);
   color: var(--secundary-color-2);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+}
+
+.main-full-width {
+    margin-top: 80px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    max-width: none;
+}
+
+/* ===== GLOBAL HERO ===== */
+.page-hero {
+    position: relative;
+    padding: 30px 60px 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.page-hero h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--white-fla);
+    margin: 10px 0 10px;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.page-hero h1 i {
+    font-size: 2.2rem;
+}
+
+.page-hero p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    max-width: 480px;
+}
+
+@media (max-width: 900px) {
+    .page-hero { padding: 24px 30px 16px; }
+    .page-hero h1 { font-size: 2rem; }
+}
+
+@media (max-width: 600px) {
+    .page-hero { padding: 20px 20px 12px; }
+    .page-hero h1 { font-size: 1.5rem; }
+}
+
+/* ===== GLOBAL SHIMMER ANIMATION ===== */
+@keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 a {

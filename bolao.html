@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Participe do Bolão do Consulado Fla-Quixadá e concorra a prêmios incríveis.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/bolao.css">
+    <title>Bolão | Fla-Quixadá</title>
+</head>
+<body>
+    <header>
+        <nav-bar></nav-bar>
+    </header>
+
+    <main class="main-full-width">
+        <!-- Hero da página -->
+        <div class="page-hero">
+            <div class="page-hero-text">
+                <h1><i class="ri-trophy-line" style="color:var(--white-fla);font-size:2.2rem;vertical-align:middle;margin-right:10px;"></i> Bolão Fla-Quixadá</h1>
+            </div>
+        </div>
+
+        <div class="bolao-page-content">
+            <!-- Jogo Atual -->
+            <div class="bolao-jogo-atual">
+                <card-next-game></card-next-game>
+            </div>
+            
+            <!-- Lista de participantes -->
+            <div class="bolao-participants-card">
+                <div class="bolao-participants-header">
+                    <h2><i class="ri-trophy-line"></i> Faça sua aposta</h2>
+                </div>
+                <div class="bolao-participants-list" id="bolao-participants-list">
+                    <!-- Gerado pelo JS -->
+                </div>
+                
+                <div class="bolao-insert-area" id="bolao-insert-area">
+                    <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">Faça sua aposta:</p>
+                    <select id="select-jogador" class="bolao-novo-input" style="margin-bottom: 12px;">
+                        <!-- JS vai popular -->
+                    </select>
+                    <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
+                    <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar" style="margin-top: 12px;">
+                        <i class="ri-check-line"></i> Confirmar Aposta</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="./js/pages/bolao.js"></script>
+    <!-- Componentes -->
+    <script src="js/components/navbar.js" defer></script>
+    <script src="js/components/Bolao.js" defer></script>
+    <script src="js/components/CardNextGame.js" defer></script>
+    <script src="js/components/Footer.js" defer></script>
+</body>
+</html>

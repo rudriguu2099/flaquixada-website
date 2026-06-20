@@ -1,0 +1,129 @@
+:root {
+    --admin-border: rgba(255, 255, 255, 0.1);
+    --admin-text-muted: rgba(255, 255, 255, 0.6);
+    /* Backgrounds */
+    --background: var(--black-fla);
+    --main-color: var(--red-fla);
+    --secundary-color-1: var(--black-fla);
+    --secundary-color-2: var(--white-fla);
+
+    /* Color */
+    --red-fla: #E11A22;
+    --red-fla-dark: #941419;
+    --white-fla: #F0F0F0;
+    --black-fla: #242424;
+    --black-fla-dark: #1E1E1E;
+    --linear-red-fla: linear-gradient(90deg, rgba(110, 0, 0, 1) 0%, var(--red-fla) 100%);
+}
+
+body {
+    background-color: var(--black-fla-dark);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--white-fla);
+}
+
+[class^="ri-"], [class*=" ri-"] {
+    font-weight: 400 !important;
+}
+
+admin-sidebar {
+    display: block;
+    min-width: 250px;
+    flex-shrink: 0;
+}
+
+admin-header {
+    display: block;
+    min-height: 73px;
+}
+
+/* Layout Principal */
+.admin-container {
+    display: flex;
+    gap: 24px;
+    padding: 32px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.admin-card {
+    background: var(--black-fla);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--admin-border);
+}
+
+/* Área Principal */
+.admin-main {
+    flex: 1;
+}
+
+.admin-main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-main-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Elementos Comuns (Botões, etc) */
+.btn-primary {
+    background: var(--red-fla);
+    color: var(--white-fla);
+    border: 1px solid var(--white-fla);
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-primary:hover {
+    background: var(--black-fla);
+    border-color: var(--black-fla);
+}
+/* Responsividade e Mobile */
+.mobile-only { display: none !important; }
+.desktop-only { display: flex !important; }
+
+@media (max-width: 768px) {
+    .mobile-only { display: flex !important; }
+    .desktop-only { display: none !important; }
+
+    .admin-container {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    admin-sidebar {
+        min-width: unset;
+        width: 0;
+        height: 0;
+        overflow: visible;
+    }
+
+    admin-header {
+        min-height: 56px;
+    }
+}
+.btn-primary:active {
+    transform: scale(0.9);
+}

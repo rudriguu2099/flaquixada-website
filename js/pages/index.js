@@ -74,3 +74,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardDestaque = new CardNextGame(proximosJogosMock);
     containerPrincipal.appendChild(cardDestaque);
 });
+
+
+
+/* JOGO AO VIVO */
+/* Teste de Escalação */
+const matchData = {
+    championship: "Brasileirão",
+    stage: "Rodada 24",
+    timeGame: "67'",
+
+    homeTeam: {
+        name: "FLAMENGO",
+        logo: "https://images.seeklogo.com/logo-png/5/2/flamengo-logo-png_seeklogo-55627.png"
+    },
+
+    awayTeam: {
+        name: "PALMEIRAS",
+        logo: "https://logodetimes.com/times/palmeiras/logo-palmeiras-256.png"
+    },
+
+    score: {
+        home: 3,
+        away: 0
+    },
+
+    lineup: [
+        { posicao: "GL", jogador: "Rossi" },
+        { posicao: "LD", jogador: "E. Royal" },
+        { posicao: "ZAG", jogador: "L. Pereira" },
+        { posicao: "ZAG", jogador: "L. Ortiz" },
+        { posicao: "LE", jogador: "Ayrton Lucas" },
+        { posicao: "VOL", jogador: "Pulgar" },
+        { posicao: "VOL", jogador: "Jorginho" },
+        { posicao: "MA", jogador: "Arrascaeta" },
+        { posicao: "PE", jogador: "Samuel Lino" },
+        { posicao: "CA", jogador: "Pedro" },
+        { posicao: "PD", jogador: "Paquetá" }
+    ]
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const containerPrincipal = document.getElementById('match-live');
+
+    if (!containerPrincipal || Object.keys(matchData).length === 0) return;
+
+    // Passa a lista COMPLETA da escalação diretamente para o construtor do componente
+    const cardDestaque = new CardLive(matchData);
+    containerPrincipal.appendChild(cardDestaque);
+});

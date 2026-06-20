@@ -150,3 +150,21 @@
 .btn-cardapio-completo i {
     font-size: 1.2em;
 }
+
+@media (max-width: 600px) {
+    .col-socio, .col-normal {
+        width: 60px;
+        font-size: 0.85em;
+    }
+    .cardapio-section {
+        padding: 15px 10px;
+    }
+    .cardapio-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .tabela-precos {
+        align-self: flex-end;
+    }
+}

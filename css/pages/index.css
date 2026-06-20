@@ -57,6 +57,14 @@ main .container-sec {
 
     #match-fla,
     .side-widgets {
-        flex: 1 1 auto;
+        flex: none;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 20px 15px;
     }
 }

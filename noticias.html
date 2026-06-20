@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fique por dentro das últimas notícias do Consulado Fla-Quixadá.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/noticias.css">
+    <title>Notícias | Fla-Quixadá</title>
+</head>
+<body>
+    <header>
+        <nav-bar></nav-bar>
+    </header>
+
+    <main class="main-full-width">
+        <!-- Hero da página -->
+        <div class="page-hero">
+            <div class="page-hero-text">
+                <h1><i class="ri-megaphone-line"></i> Últimas Notícias</h1>
+                <p>Tudo o que acontece no Consulado Fla-Quixadá, em um só lugar.</p>
+            </div>
+        </div>
+
+        <!-- Grid de cards de notícias -->
+        <div class="noticias-page-content">
+            <div id="noticias-page-grid" class="noticias-page-grid">
+                <!-- Skeletons enquanto carrega -->
+                <div class="noticia-skeleton"></div>
+                <div class="noticia-skeleton"></div>
+                <div class="noticia-skeleton"></div>
+            </div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="./js/pages/noticias.js"></script>
+    <!-- Componentes -->
+    <script src="js/components/navbar.js" defer></script>
+    <script src="js/components/Footer.js" defer></script>
+</body>
+</html>

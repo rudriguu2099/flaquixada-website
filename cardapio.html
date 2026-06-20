@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Confira o cardápio completo do Consulado Fla-Quixadá com preços especiais para sócios.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/cardapio.css">
+    <title>Cardápio | Fla-Quixadá</title>
+</head>
+<body>
+    <header>
+        <nav-bar></nav-bar>
+    </header>
+
+    <main class="main-full-width">
+        <!-- Hero -->
+        <div class="page-hero">
+            <div class="page-hero-text">
+                <h1><i class="ri-restaurant-line" style="color:var(--white-fla);font-size:2.2rem;vertical-align:middle;margin-right:10px;"></i>Nosso Cardápio</h1>
+                <p>Preços exclusivos para sócios em todos os itens.</p>
+                <div class="cardapio-shortcuts">
+                    <a href="#secao-bebidas" class="btn-shortcut">Bebidas</a>
+                    <a href="#secao-petiscos" class="btn-shortcut">Petiscos</a>
+                    <a href="#secao-pratos" class="btn-shortcut">Pratos</a>
+                </div>
+            </div>
+            <i class="ri-restaurant-line page-hero-icon" style="display: none;"></i>
+        </div>
+
+        <!-- Conteúdo -->
+        <div class="cardapio-page-content">
+
+            <!-- Bebidas -->
+            <div class="cardapio-page-section" id="secao-bebidas">
+                <div class="cardapio-page-section-header">
+                    <h2><i class="ri-goblet-line"></i> Bebidas</h2>
+                    <div class="col-labels">
+                        <span class="lbl-socio">SÓCIO</span>
+                        <span class="col-divisor">|</span>
+                        <span class="lbl-normal">NORMAL</span>
+                    </div>
+                </div>
+                <ul id="page-lista-bebidas" class="cardapio-page-list">
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                </ul>
+            </div>
+
+            <!-- Petiscos -->
+            <div class="cardapio-page-section" id="secao-petiscos">
+                <div class="cardapio-page-section-header">
+                    <h2><i class="ri-bowl-line"></i> Petiscos</h2>
+                    <div class="col-labels">
+                        <span class="lbl-socio">SÓCIO</span>
+                        <span class="col-divisor">|</span>
+                        <span class="lbl-normal">NORMAL</span>
+                    </div>
+                </div>
+                <ul id="page-lista-petiscos" class="cardapio-page-list">
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                </ul>
+            </div>
+
+            <!-- Pratos -->
+            <div class="cardapio-page-section" id="secao-pratos">
+                <div class="cardapio-page-section-header">
+                    <h2><i class="ri-restaurant-2-line"></i> Pratos</h2>
+                    <div class="col-labels">
+                        <span class="lbl-socio">SÓCIO</span>
+                        <span class="col-divisor">|</span>
+                        <span class="lbl-normal">NORMAL</span>
+                    </div>
+                </div>
+                <ul id="page-lista-pratos" class="cardapio-page-list">
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                    <li class="cardapio-skeleton" style="height:56px;margin:8px 16px;border-radius:8px;"></li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="./js/utils/mockCardapio.js"></script>
+    <script src="./js/pages/cardapio.js"></script>
+    <script src="js/components/navbar.js" defer></script>
+    <script src="js/components/Footer.js" defer></script>
+</body>
+</html>
