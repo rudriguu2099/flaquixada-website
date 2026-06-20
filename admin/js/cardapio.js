@@ -1,7 +1,9 @@
+import { mascaraTextoENumeros, mascaraMoeda, desmascararMoeda, formatarMoedaInput } from '../../js/utils/mascaras.js';
+import { obterCardapioLocal, salvarCardapioLocal } from '../../js/utils/mockCardapio.js';
+
 const CAMINHO_API = 'caminho_api';
 
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Admin Cardápio inicializado.");
+console.log("Admin Cardápio inicializado.");
     
     const btnNovo = document.getElementById('btn-novo-item');
     const containerLista = document.getElementById('admin-cardapio-list');
@@ -230,13 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('action') === 'novo-item') {
         customElements.whenDefined('modal-cardapio').then(() => {
-            limparFormulario();
-            const componenteModal = document.querySelector('modal-cardapio');
-            if(componenteModal && componenteModal.abrirModal) {
-                componenteModal.abrirModal();
-            }
-            // Limpa a URL para não ficar com o parâmetro caso o usuário recarregue a página
-            window.history.replaceState({}, document.title, window.location.pathname);
+            setTimeout(() => {
+                limparFormulario();
+                const componenteModal = document.querySelector('modal-cardapio');
+                if(componenteModal && componenteModal.abrirModal) {
+                    componenteModal.abrirModal();
+                }
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }, 300); // Tempo para o fetch do HTML interno do Modal finalizar
         });
     }
-});
+

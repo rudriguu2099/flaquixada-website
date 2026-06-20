@@ -1,4 +1,4 @@
-const DADOS_CARDAPIO_MOCK = {
+export const DADOS_CARDAPIO_MOCK = {
     bebidas: [
         { id: 1, nome: 'Brahma Chopp', descricao: 'CERVEJA (600ml)', precoNormal: 12.00, precoSocio: 10.00, categoria: 'bebidas' },
         { id: 2, nome: 'Refrigerante', descricao: 'LATA (350ml)', precoNormal: 6.00, precoSocio: 5.00, categoria: 'bebidas' },
@@ -22,20 +22,20 @@ const DADOS_CARDAPIO_MOCK = {
 };
 
 // Inicializa o mock no localStorage caso não exista
-function inicializarMockCardapio() {
+export function inicializarMockCardapio() {
     const dadosSalvos = localStorage.getItem('cardapio_mock');
     if (!dadosSalvos) {
         localStorage.setItem('cardapio_mock', JSON.stringify(DADOS_CARDAPIO_MOCK));
     }
 }
 
-function obterCardapioLocal() {
+export function obterCardapioLocal() {
     inicializarMockCardapio(); // Garante que foi inicializado
     const dados = localStorage.getItem('cardapio_mock');
     return JSON.parse(dados);
 }
 
-function salvarCardapioLocal(dados) {
+export function salvarCardapioLocal(dados) {
     localStorage.setItem('cardapio_mock', JSON.stringify(dados));
 }
 

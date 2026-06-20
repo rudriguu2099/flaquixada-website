@@ -1,12 +1,8 @@
 class ModalCardapio extends HTMLElement {
     async connectedCallback() {
         try {
-            let pureHtml = sessionStorage.getItem('modalCardapioCacheV2');
-            if (!pureHtml) {
-                const response = await fetch('./components_html/modalCardapio.html');
-                pureHtml = await response.text();
-                sessionStorage.setItem('modalCardapioCacheV2', pureHtml);
-            }
+            const response = await fetch('./components_html/modalCardapio.html');
+            const pureHtml = await response.text();
 
             this.innerHTML = pureHtml;
 

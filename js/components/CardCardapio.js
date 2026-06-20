@@ -1,3 +1,5 @@
+import { obterCardapioLocal } from '../utils/mockCardapio.js';
+
 class CardCardapio extends HTMLElement {
     async connectedCallback() {
         try {
