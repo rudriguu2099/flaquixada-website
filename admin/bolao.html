@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Bolão | Fla-Quixadá</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="./css/admin-global.css">
+    <link rel="stylesheet" href="./css/bolao.css">
+</head>
+<body>
+    <admin-header></admin-header>
+
+    <div class="admin-container">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="admin-main admin-card">
+            <div class="admin-main-header">
+                <h2><i class="ri-trophy-line"></i> Gerenciar Bolão</h2>
+                <button id="btn-zerar-apostas">
+                    <i class="ri-refresh-line"></i> Zerar Apostas
+                </button>
+            </div>
+
+            <div class="admin-content-padding">                
+                <div class="admin-accordion">
+                    <button type="button" class="accordion-header" id="btn-toggle-jogadores">
+                        <span><i class="ri-group-line"></i> Definir os 10 Jogadores</span>
+                        <i class="ri-arrow-down-s-line icon-arrow"></i>
+                    </button>
+                    
+                    <div class="accordion-content" id="content-jogadores" style="display: none;">
+                        <form id="form-bolao-jogadores" class="bolao-jogadores-list">
+                            <div id="bolao-jogadores-container" style="display: flex; flex-direction: column; gap: 15px;">
+                            </div>
+
+                            <div class="bolao-admin-actions">
+                                <button type="button" class="btn-primary" id="btn-salvar-jogadores">
+                                    <i class="ri-save-line"></i> Salvar Lista de Jogadores
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./js/bolao.js"></script>
+</body>
+</html>
