@@ -80,7 +80,7 @@ admin-header {
 
 /* Elementos Comuns (Botões, etc) */
 .btn-primary {
-    background: var(--red-fla);
+    background: transparent;
     color: var(--white-fla);
     border: 1px solid var(--white-fla);
     padding: 10px 20px;
@@ -96,9 +96,29 @@ admin-header {
 }
 
 .btn-primary:hover {
-    background: var(--black-fla);
-    border-color: var(--black-fla);
+    background: var(--red-fla);
+    color: var(--white-fla);
+    border-color: var(--red-fla);
 }
+
+/* Botões de Ação em Listas */
+.btn-icon {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white-fla);
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-icon:hover { background: rgba(255,255,255,0.1); }
+.btn-icon.edit:hover { background: black; color: white; border-color: black; }
+.btn-icon.delete:hover { background: #dc3545; color: white; border-color: #dc3545; }
 /* Responsividade e Mobile */
 .mobile-only { display: none !important; }
 .desktop-only { display: flex !important; }

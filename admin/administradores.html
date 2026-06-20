@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Administradores | Fla-Quixadá</title>
+    
+    <!-- Ícones e Fontes -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="./css/admin-global.css">
+    <link rel="stylesheet" href="./css/administradores.css">
+</head>
+<body>
+    <admin-header></admin-header>
+
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <admin-sidebar></admin-sidebar>
+
+        <!-- Main Content -->
+        <main class="admin-main admin-card">
+            <div class="admin-main-header">
+                <h2><i class="ri-admin-line"></i> Administradores</h2>
+                <button class="btn-primary" id="btn-novo-admin">
+                    <i class="ri-add-line"></i> <span class="btn-text">Novo Administrador</span>
+                </button>
+            </div>
+
+            <!-- Lista de Administradores (Hardcoded temporário) -->
+                <div class="admin-list-container" id="admin-list-container">
+                    
+                    <div class="admin-card-item">
+                        <div class="admin-info">
+                            <div class="admin-avatar">
+                                <i class="ri-user-fill"></i>
+                            </div>
+                            <div class="admin-details">
+                                <span class="admin-name">Higor Silva</span>
+                                <span class="admin-email">higor@flaquixada.com.br</span>
+                            </div>
+                        </div>
+                        <div class="admin-actions">
+                            <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
+                            <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card-item">
+                        <div class="admin-info">
+                            <div class="admin-avatar" style="background: rgba(255, 255, 255, 0.1);">
+                                <i class="ri-user-settings-line"></i>
+                            </div>
+                            <div class="admin-details">
+                                <span class="admin-name">Lucas Oliveira</span>
+                                <span class="admin-email">lucas@flaquixada.com.br</span>
+                            </div>
+                        </div>
+                        <div class="admin-actions">
+                            <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
+                            <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="admin-card-item">
+                        <div class="admin-info">
+                            <div class="admin-avatar" style="background: rgba(255, 255, 255, 0.1);">
+                                <i class="ri-user-settings-line"></i>
+                            </div>
+                            <div class="admin-details">
+                                <span class="admin-name">Ana Beatriz</span>
+                                <span class="admin-email">ana@flaquixada.com.br</span>
+                            </div>
+                        </div>
+                        <div class="admin-actions">
+                            <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
+                            <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+        </main>
+    </div>
+
+    <!-- Módulo JS Principal -->
+    <script type="module" src="./js/administradores.js"></script>
+</body>
+</html>
