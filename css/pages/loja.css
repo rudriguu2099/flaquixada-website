@@ -8,7 +8,17 @@ main {
 main .container-main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     gap: 30px;
+}
+
+/* Container que guarda a lista de cards gerados pelo JS */
+#products {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px; 
 }

@@ -1,7 +1,7 @@
 .container-carousel {
     position: relative;
     width: 100%;
-    max-width: 900px; /* Ajuste o tamanho máximo conforme sua tela */
+    max-width: 750px;
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
@@ -28,7 +28,7 @@
     height: auto;
     display: block;
     object-fit: cover;
-    aspect-ratio: 16 / 10; /* Proporção aproximada da imagem do post */
+    aspect-ratio: 16 / 10; /
 }
 
 .carousel-indicators {
