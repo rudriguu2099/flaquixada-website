@@ -24,66 +24,14 @@
                 <button class="btn-primary" id="btn-novo-item"><i class="ri-add-line"></i> <span class="btn-text">Novo Item</span></button>
             </div>
 
+            <!-- Atalhos de Navegação -->
+            <nav class="cardapio-shortcuts">
+                <a href="#secao-bebidas" class="btn-shortcut"><i class="ri-goblet-line"></i> Bebidas</a>
+                <a href="#secao-petiscos" class="btn-shortcut"><i class="ri-bowl-line"></i> Petiscos</a>
+                <a href="#secao-pratos" class="btn-shortcut"><i class="ri-restaurant-2-line"></i> Pratos</a>
+            </nav>
+
             <div class="cardapio-list" id="admin-cardapio-list">
-                <div class="admin-categoria">
-                    <h3><i class="ri-goblet-line"></i> Bebidas</h3>
-                    <ul id="admin-lista-bebidas" class="admin-lista-itens">
-                        <li class="admin-item">
-                            <div class="item-info">
-                                <span class="item-nome">Brahma Chopp</span>
-                                <span class="item-descricao">CERVEJA (600ml)</span>
-                                <div class="item-precos">
-                                    <span class="preco-socio">Sócio: R$ 10,00</span>
-                                    <span class="preco-normal">Normal: R$ 12,00</span>
-                                </div>
-                            </div>
-                            <div class="item-acoes">
-                                <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
-                                <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="admin-categoria">
-                    <h3><i class="ri-bowl-line"></i> Petiscos</h3>
-                    <ul id="admin-lista-petiscos" class="admin-lista-itens">
-                        <li class="admin-item">
-                            <div class="item-info">
-                                <span class="item-nome">Batatinha</span>
-                                <span class="item-descricao">PORÇÃO DE BATATA FRITA</span>
-                                <div class="item-precos">
-                                    <span class="preco-socio">Sócio: R$ 20,00</span>
-                                    <span class="preco-normal">Normal: R$ 25,00</span>
-                                </div>
-                            </div>
-                            <div class="item-acoes">
-                                <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
-                                <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="admin-categoria">
-                    <h3><i class="ri-restaurant-2-line"></i> Pratos</h3>
-                    <ul id="admin-lista-pratos" class="admin-lista-itens">
-                        <li class="admin-item">
-                            <div class="item-info">
-                                <span class="item-nome">Feijoada</span>
-                                <span class="item-descricao">PRATO COMPLETO (SERVE 2)</span>
-                                <div class="item-precos">
-                                    <span class="preco-socio">Sócio: R$ 35,00</span>
-                                    <span class="preco-normal">Normal: R$ 45,00</span>
-                                </div>
-                            </div>
-                            <div class="item-acoes">
-                                <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
-                                <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
             <modal-cardapio></modal-cardapio>

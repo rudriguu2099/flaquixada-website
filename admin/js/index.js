@@ -6,16 +6,29 @@ function renderDashboard() {
     const container = document.getElementById('dashboard-content');
     if (!container) return;
 
-    // Dados mockados que viriam do Backend
+    // Busca o total de itens
+    let totalCardapio = 24; // fallback
+    try {
+        const dadosCardapio = obterCardapioLocal();
+        if (dadosCardapio) {
+            totalCardapio = (dadosCardapio.bebidas?.length || 0) + 
+                            (dadosCardapio.petiscos?.length || 0) + 
+                            (dadosCardapio.pratos?.length || 0);
+        }
+    } catch(e) {
+        console.error("Erro ao ler cardápio", e);
+    }
+
+    // Dados que viriam do Backend
     const kpis = [
         { icone: 'ri-newspaper-line', valor: '12', label: 'Notícias Publicadas' },
-        { icone: 'ri-restaurant-line', valor: '24', label: 'Itens no Cardápio' },
+        { icone: 'ri-restaurant-line', valor: totalCardapio.toString(), label: 'Itens no Cardápio' },
         { icone: 'ri-shopping-bag-line', valor: '8', label: 'Produtos na Loja' }
     ];
 
     const actions = [
         { link: 'noticias.html', icone: 'ri-edit-box-line', label: 'Nova Notícia', isButton: false },
-        { link: 'cardapio.html', icone: 'ri-restaurant-line', label: 'Adicionar ao Cardápio', isButton: false },
+        { link: 'cardapio.html?action=novo-item', icone: 'ri-restaurant-line', label: 'Adicionar ao Cardápio', isButton: false },
         { link: '#', icone: 'ri-check-line', label: 'Encerrar Bolão', isButton: true }
     ];
 

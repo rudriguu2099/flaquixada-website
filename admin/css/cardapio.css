@@ -10,6 +10,32 @@
     border-color: var(--red-fla);
 }
 
+/* --- Atalhos (Shortcuts) --- */
+.cardapio-shortcuts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.btn-shortcut {
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(225, 26, 34, 0.2);
+}
+
+.btn-shortcut:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(225, 26, 34, 0.4);
+}
+
 /* --- Layout da Lista --- */
 .cardapio-list {
     display: flex;
@@ -119,11 +145,14 @@
 
 .form-group label { font-size: 0.9rem; color: var(--white-fla); }
 .form-group input, .form-group select {
+    width: 100%;
+    box-sizing: border-box;
     padding: 10px;
     background: var(--black-fla-dark);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 6px;
     color: var(--white-fla);
+    font-family: inherit;
 }
 .form-group input:focus, .form-group select:focus {
     outline: none; border-color: var(--red-fla);
