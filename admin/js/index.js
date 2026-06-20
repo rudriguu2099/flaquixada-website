@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-    renderDashboard();
-});
+import { obterCardapioLocal } from '../../js/utils/mockCardapio.js';
+
+renderDashboard();
 
 function renderDashboard() {
     const container = document.getElementById('dashboard-content');

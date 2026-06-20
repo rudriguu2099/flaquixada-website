@@ -1,7 +1,7 @@
 const jogadoresFlamengo = [
     { id: 1, nomeJogador: "Varela", participante: "Randson" },
     { id: 2, nomeJogador: "Fabrício Bruno", participante: "" },
-    { id: 3, nomeJogador: "Léo Pereira", participante: "Herny" },
+    { id: 3, nomeJogador: "Léo Pereira", participante: "Henry" },
     { id: 4, nomeJogador: "Ayrton Lucas", participante: "" },
     { id: 5, nomeJogador: "Erick Pulgar", participante: "" },
     { id: 6, nomeJogador: "De La Cruz", participante: "" },

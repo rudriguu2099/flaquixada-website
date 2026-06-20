@@ -14,15 +14,43 @@
     </header>
     
     <main>
-        
+        <div class="container-main">
+            <div class="page-hero">
+                <div class="page-hero-text">
+                    <h1><i class="ri-shopping-bag-fill"></i> Explore nossa Loja</h1>
+                    <p>Tudo o que você precisa em um só lugar.</p>
+                </div>
+            </div>
+            
+            <carousel-fla></carousel-fla>
+
+            <div id="products">
+                <div class="product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-button"></div>
+                </div>
+                
+                <div class="product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+        </div>
     </main>
     
     <custom-footer></custom-footer>
 
-    <script src="./js/pages/loja.js"></script>
     <!-- Componentes -->
     <script src="js/components/navbar.js" defer></script>
-    <script src="js/components/cardLive.js" defer></script>
+    <script src="js/components/CardLive.js" defer></script>
+    <script src="js/components/Carousel.js" defer></script>
+    <script src="js/components/CardItemStore.js" defer></script>
     <script src="js/components/Footer.js" defer></script>
+    
+    <script src="./js/pages/loja.js"></script>
 </body>
 </html>

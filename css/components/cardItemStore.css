@@ -1,0 +1,92 @@
+.container-card-store {
+    background-color: var(--black-fla-dark); 
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 350px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.3s ease;
+}
+
+.container-card-store:hover {
+    transform: scale(1.05);
+}
+
+.product-image-block {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.product-image-block img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+}
+
+.product-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white-fla);
+}
+
+.product-title-row i {
+    font-size: 1.4rem;
+}
+
+.product-title-row h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.product-description {
+    color: #cccccc;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.product-action {
+    width: 100%;
+}
+
+/* Estilização do Botão de Compra Vazado (Outline) */
+.btn-buy-store {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 15px;
+    color: var(--white-fla);
+    padding: 14px 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-buy-store:hover {
+    background-color: var(--white-fla);
+    color: var(--black-fla);
+}
+
+.btn-buy-store:active {
+    transform: scale(0.98);
+}

@@ -43,8 +43,10 @@ admin-header {
     display: flex;
     gap: 24px;
     padding: 32px 40px;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .admin-card {
@@ -80,7 +82,7 @@ admin-header {
 
 /* Elementos Comuns (Botões, etc) */
 .btn-primary {
-    background: var(--red-fla);
+    background: transparent;
     color: var(--white-fla);
     border: 1px solid var(--white-fla);
     padding: 10px 20px;
@@ -96,9 +98,110 @@ admin-header {
 }
 
 .btn-primary:hover {
-    background: var(--black-fla);
-    border-color: var(--black-fla);
+    background: var(--red-fla);
+    color: var(--white-fla);
+    border-color: var(--red-fla);
 }
+
+/* Botões de Ação em Listas */
+.btn-icon {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white-fla);
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-icon:hover { background: rgba(255,255,255,0.1); }
+.btn-icon.edit:hover { background: black; color: white; border-color: black; }
+.btn-icon.delete:hover { background: #dc3545; color: white; border-color: #dc3545; }
+
+/* --- Modal Base e Formulários --- */
+.admin-modal {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+}
+
+.admin-modal-content {
+    background: var(--black-fla);
+    padding: 24px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+.admin-modal-header h3 { margin: 0; color: var(--white-fla); }
+.btn-fechar { background: none; border: none; font-size: 1.5rem; color: #999; cursor: pointer; }
+.btn-fechar:hover { color: var(--red-fla); }
+
+/* --- Formulário do Modal --- */
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.form-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.form-row > .form-group { flex: 1 1 calc(50% - 8px); margin-bottom: 0; }
+
+.form-group label { font-size: 0.9rem; color: var(--white-fla); }
+.form-group input, .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: var(--white-fla);
+    font-family: inherit;
+}
+.form-group input:focus, .form-group select:focus {
+    outline: none; border-color: var(--red-fla);
+}
+
+.admin-modal-actions {
+    display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;
+}
+
+.admin-modal-actions .btn-primary {
+    background-color: var(--red-fla);
+    color: var(--white-fla);
+    border: 1px solid var(--red-fla);
+    border-radius: 15px;
+}
+.admin-modal-actions .btn-primary:hover {
+    background-color: black;
+    border-color: black;
+}
+
+.btn-secundary {
+    padding: 10px 20px;
+    background: var(--black-fla-dark);
+    color: var(--white-fla);
+    border: 1px solid var(--black-fla-dark);
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.btn-secundary:hover { 
+    background: black; 
+    border-color: black;
+}
+
 /* Responsividade e Mobile */
 .mobile-only { display: none !important; }
 .desktop-only { display: flex !important; }
@@ -113,6 +216,15 @@ admin-header {
         gap: 16px;
     }
     
+    .admin-main {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-main-header h2 {
+        font-size: 1.25rem;
+    }
+    
     admin-sidebar {
         min-width: unset;
         width: 0;
@@ -122,6 +234,30 @@ admin-header {
 
     admin-header {
         min-height: 56px;
+    }
+
+    /* Botão Primário Responsivo (Headers) */
+    .admin-main-header .btn-primary .btn-text {
+        display: none;
+    }
+    
+    .admin-main-header .btn-primary {
+        background: var(--red-fla);
+        color: var(--white-fla);
+        border-color: var(--red-fla);
+        padding: 0;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        font-size: 1.5rem; /* Ícone maior */
+    }
+    
+    .admin-main-header .btn-primary:active {
+        background: black;
+        border-color: black;
     }
 }
 .btn-primary:active {

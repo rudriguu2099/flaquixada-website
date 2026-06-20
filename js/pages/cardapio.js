@@ -1,3 +1,5 @@
+import { obterCardapioLocal } from '../utils/mockCardapio.js';
+
 const formataMoeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 async function carregarCardapio() {
@@ -45,4 +47,4 @@ function renderizarLista(idLista, itens) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', carregarCardapio);
+carregarCardapio();

@@ -8,7 +8,68 @@ main {
 main .container-main {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     gap: 30px;
+}
+
+/* Container que guarda a lista de cards gerados pelo JS */
+#products {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px; 
+}
+
+/* ===== CONTAINER DO SKELETON ===== */
+.product-skeleton {
+    background-color: #161616; 
+    border-radius: 20px;
+    padding: 24px;
+    width: 100%;
+    max-width: 360px; /* Alinha o tamanho do esqueleto com o tamanho final do card real */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== ELEMENTOS DO SKELETON COM O SHIMMER GLOBAL ===== */
+.skeleton-image, 
+.skeleton-title, 
+.skeleton-text, 
+.skeleton-button {
+    background: linear-gradient(
+        90deg,
+        rgba(225, 26, 34, 0.15) 25%,
+        rgba(225, 26, 34, 0.35) 50%,
+        rgba(225, 26, 34, 0.15) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite linear; /* Puxando o @keyframes do seu global */
+    border-radius: 12px;
+}
+
+/* Proporções fiéis aos componentes reais da loja */
+.skeleton-image {
+    width: 100%;
+    height: 250px; 
+}
+
+.skeleton-title {
+    width: 65%;
+    height: 24px;
+}
+
+.skeleton-text {
+    width: 90%;
+    height: 45px;
+}
+
+.skeleton-button {
+    width: 100%;
+    height: 50px;
+    border-radius: 30px; /* Formato oval do botão de compra */
 }

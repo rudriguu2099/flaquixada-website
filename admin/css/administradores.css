@@ -1,0 +1,83 @@
+/* Lista de Administradores (Flexbox) */
+.admin-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-card-item {
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    transition: transform 0.2s ease;
+}
+
+.admin-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.admin-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--linear-red-fla);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--white-fla);
+    flex-shrink: 0;
+}
+
+.admin-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--white-fla);
+}
+
+.admin-email {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Responsividade Mínima */
+@media (max-width: 650px) {
+    .admin-card-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    .admin-actions {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 15px;
+        margin-top: 5px;
+    }
+}

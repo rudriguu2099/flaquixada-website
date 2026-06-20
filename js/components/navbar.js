@@ -13,6 +13,7 @@ class Navbar extends HTMLElement {
       `;
 
       this.configurarMenu();
+      this.destacarPaginaAtual();
 
     } catch (error) {
       console.error('Erro ao carregar o HTML do navbar:', error);
@@ -48,6 +49,27 @@ class Navbar extends HTMLElement {
         overlay.classList.remove('active');
       });
     }
+  }
+
+  destacarPaginaAtual() {
+    let path = window.location.pathname;
+    let paginaAtual = path.split('/').pop();
+    
+    // Fallback para raiz
+    if (!paginaAtual || paginaAtual === '') {
+        paginaAtual = 'index.html';
+    }
+
+    // Busca os links do menu topbar e da sidebar
+    const links = this.querySelectorAll('.menu.extends a, .sidebar-links a');
+    
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+
+      if (href && href.includes(paginaAtual) && paginaAtual !== 'login.html') {
+         link.classList.add('active-link');
+      }
+    });
   }
 }
 
