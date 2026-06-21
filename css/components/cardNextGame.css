@@ -188,4 +188,104 @@
     }
 }
 
+@media (max-width: 768px) {
+    .container-next-game {
+        padding: 12px;
+    }
 
+    .container-next-game .panel-next-game {
+        padding: 12px 10px;
+    }
+
+    .container-next-game .panel-next-game .championship-stage {
+        font-size: 11px;
+        padding: 4px 12px;
+        text-align: center;
+        white-space: normal;
+        max-width: 100%;
+        box-sizing: border-box;
+        border-radius: 20px;
+    }
+
+    .container-next-game .match img {
+        width: 50px;
+    }
+
+    .container-next-game .match .team .name {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .container-next-game .match .vs {
+        font-size: 20px;
+    }
+
+    .container-next-game .match-infor .stadium-time {
+        font-size: 18px;
+    }
+
+    .container-next-game .match-infor .date-match {
+        font-size: 12px;
+        text-align: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+        display: block;
+    }
+}
+
+@media (max-width: 400px) {
+    .container-next-game .panel-next-game {
+        padding: 10px 8px;
+    }
+    .container-next-game .panel-next-game .championship-stage {
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+    .container-next-game .match img {
+        width: 40px;
+    }
+    .container-next-game .match .team .name {
+        font-size: 11px;
+    }
+    .container-next-game .match .vs {
+        font-size: 16px;
+    }
+    .container-next-game .match-infor .stadium-time {
+        font-size: 15px;
+    }
+    .container-next-game .match-infor .date-match {
+        font-size: 10px;
+    }
+}
+
+.score-separator {
+    margin: 0 4px;
+}
+
+.live-score-status {
+    font-size: 0.8rem;
+    background: var(--red-fla);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: -5px;
+    font-weight: 600;
+}
+
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-numbers {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.score-x {
+    font-size: 1.5rem;
+    color: #999;
+    margin: 0 5px;
+}

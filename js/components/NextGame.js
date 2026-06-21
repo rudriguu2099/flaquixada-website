@@ -6,11 +6,11 @@ class NextGame extends HTMLElement {
 
     async connectedCallback() {
         try {
-            const resposta = await fetch('./components_html/nextGame.html');
+            const resposta = await fetch('/components_html/nextGame.html');
             const htmlPuro = await resposta.text();
 
             this.innerHTML = `
-                <link rel="stylesheet" href="./css/components/nextGame.css">
+                <link rel="stylesheet" href="/css/components/nextGame.css">
                 ${htmlPuro}
             `;
 
@@ -23,7 +23,7 @@ class NextGame extends HTMLElement {
                 this.querySelector('#date').textContent = this.jogo.dataFormatada;
                 
                 if (this.jogo.placar) {
-                    this.querySelector('#vs-or-score').innerHTML = `<span style="color: var(--black-fla-dark); background: white; padding: 1px 6px; border-radius: 4px; font-weight: bold;">${this.jogo.placar.casa} x ${this.jogo.placar.visitante}</span>`;
+                    this.querySelector('#vs-or-score').innerHTML = `<span class="live-score-badge">${this.jogo.placar.casa} x ${this.jogo.placar.visitante}</span>`;
                     this.querySelector('#time').textContent = this.jogo.placar.status;
                 } else {
                     this.querySelector('#vs-or-score').textContent = 'X';

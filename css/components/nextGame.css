@@ -62,3 +62,30 @@
 .next-game .infor .datetime .bullet {
     color: rgba(255, 255, 255, 0.5);
 }
+
+.live-score-badge {
+    color: var(--black-fla-dark);
+    background: white;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .next-game .infor .teams-score {
+        font-size: 13px;
+    }
+    .next-game .infor .championship-stage,
+    .next-game .infor .datetime {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .next-game {
+        gap: 6px;
+    }
+    .next-game .block {
+        width: 6px;
+    }
+}

@@ -8,11 +8,11 @@ class CardNextGame extends HTMLElement {
 
     async connectedCallback() {
         try {
-            const resposta = await fetch('./components_html/cardNextGame.html');
+            const resposta = await fetch('/components_html/cardNextGame.html');
             const htmlPuro = await resposta.text();
             
             this.innerHTML = `
-                <link rel="stylesheet" href="./css/components/cardNextGame.css">
+                <link rel="stylesheet" href="/css/components/cardNextGame.css">
                 ${htmlPuro}
             `;
             
@@ -52,11 +52,11 @@ class CardNextGame extends HTMLElement {
 
                 if (primeiroJogo.placar && scoreContainer) {
                     scoreContainer.innerHTML = `
-                        <div class="score-display" style="display: flex; flex-direction: column; align-items: center;">
-                            <div style="font-size: 2.5rem; font-weight: 700; color: white;">
-                                ${primeiroJogo.placar.casa} <span style="font-size: 1.5rem; color: #999; margin: 0 5px;">X</span> ${primeiroJogo.placar.visitante}
+                        <div class="score-display">
+                            <div class="score-numbers">
+                                ${primeiroJogo.placar.casa} <span class="score-x">X</span> ${primeiroJogo.placar.visitante}
                             </div>
-                            <span style="font-size: 0.8rem; background: var(--red-fla); color: white; padding: 2px 8px; border-radius: 4px; margin-top: -5px; font-weight: 600;">
+                            <span class="live-score-status">
                                 ${primeiroJogo.placar.status}
                             </span>
                         </div>
