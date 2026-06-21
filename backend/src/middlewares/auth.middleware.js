@@ -13,6 +13,7 @@ export function verificarAutenticacao(req, res, next) {
 
     const payload = jwt.verify(token, process.env.JWT_SECRET);
 
+    req.usuario = payload;
     req.usuarioLogado = payload;
 
     return next();
@@ -37,7 +38,10 @@ export function permitirApenasSuperAdmin(req, res, next) {
 }
 
 export function permitirApenasAdmin(req, res, next) {
-  if (!req.usuarioLogado || req.usuarioLogado.role !== "admin") {
+  if (
+    !req.usuarioLogado ||
+    !["admin", "super-admin"].includes(req.usuarioLogado.role)
+  ) {
     return res.status(403).json({
       success: false,
       error:
@@ -47,3 +51,7 @@ export function permitirApenasAdmin(req, res, next) {
 
   return next();
 }
+
+export const verificarJWT = verificarAutenticacao;
+export const verificarSuperAdmin = permitirApenasSuperAdmin;
+export const verificarAdmin = permitirApenasAdmin;

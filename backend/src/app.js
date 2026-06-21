@@ -5,6 +5,8 @@ import { conectarBanco } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import fixturesRoutes from "./routes/fixtures.routes.js";
 import cardapioRoutes from "./routes/cardapio.routes.js";
+import noticiaRoutes from "./routes/noticia.routes.js";
+import usuarioRoutes from "./routes/usuario.routes.js";
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/fixtures", fixturesRoutes);
 app.use("/api/cardapios", cardapioRoutes);
+app.use("/api/noticias", noticiaRoutes);
+app.use("/api/usuarios", usuarioRoutes);
 
 async function iniciarServidor() {
   await conectarBanco();

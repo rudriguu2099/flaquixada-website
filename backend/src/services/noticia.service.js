@@ -1,16 +1,17 @@
 import { db } from "../config/db.js";
 import { ObjectId } from "mongodb";
 
-export class CardapioService {
-  static async criar(cardapioData) {
-    const novoCardapio = {
-      ...cardapioData,
+export class NoticiaService {
+  static async criar(noticiaData) {
+    const novaNoticia = {
+      ...noticiaData,
+      data: noticiaData.data || new Date().toISOString(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
 
-    const resultado = await db.collection("cardapios").insertOne(novoCardapio);
-    return { _id: resultado.insertedId, ...novoCardapio };
+    const resultado = await db.collection("noticias").insertOne(novaNoticia);
+    return { _id: resultado.insertedId, ...novaNoticia };
   }
 
   static async listar(filtros = {}) {
@@ -21,9 +22,9 @@ export class CardapioService {
     }
 
     return await db
-      .collection("cardapios")
+      .collection("noticias")
       .find(query)
-      .sort({ categoria: 1, nome: 1 })
+      .sort({ data: -1 })
       .toArray();
   }
 
@@ -32,9 +33,7 @@ export class CardapioService {
       throw new Error("ID inválido");
     }
 
-    return await db
-      .collection("cardapios")
-      .findOne({ _id: new ObjectId(id) });
+    return await db.collection("noticias").findOne({ _id: new ObjectId(id) });
   }
 
   static async atualizar(id, dadosAtualizacao) {
@@ -45,7 +44,7 @@ export class CardapioService {
     dadosAtualizacao.updatedAt = new Date();
 
     const resultado = await db
-      .collection("cardapios")
+      .collection("noticias")
       .findOneAndUpdate(
         { _id: new ObjectId(id) },
         { $set: dadosAtualizacao },
@@ -53,7 +52,7 @@ export class CardapioService {
       );
 
     if (!resultado) {
-      throw new Error("Cardápio não encontrado");
+      throw new Error("Notícia não encontrada");
     }
 
     return resultado;
@@ -65,13 +64,13 @@ export class CardapioService {
     }
 
     const resultado = await db
-      .collection("cardapios")
+      .collection("noticias")
       .deleteOne({ _id: new ObjectId(id) });
 
     if (resultado.deletedCount === 0) {
-      throw new Error("Cardápio não encontrado");
+      throw new Error("Notícia não encontrada");
     }
 
-    return { mensagem: "Cardápio deletado com sucesso" };
+    return { mensagem: "Notícia deletada com sucesso" };
   }
 }
