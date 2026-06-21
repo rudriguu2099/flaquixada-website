@@ -30,7 +30,7 @@
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center; /* Centraliza verticalmente o card */
     z-index: 1000;
