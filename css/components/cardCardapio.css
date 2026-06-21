@@ -190,9 +190,6 @@
         width: 60px;
         font-size: 0.85em;
     }
-    .cardapio-section {
-        padding: 15px 10px;
-    }
     .cardapio-item {
         flex-direction: column;
         align-items: flex-start;
