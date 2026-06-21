@@ -128,3 +128,7 @@
     margin: 5px 0 0 0;
     padding: 0 5px;
 }
+
+.medal-gold { color: #FFD700; }
+.medal-silver { color: #C0C0C0; }
+.medal-bronze { color: #C5832B; }
