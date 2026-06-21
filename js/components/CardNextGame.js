@@ -8,11 +8,13 @@ class CardNextGame extends HTMLElement {
 
     async connectedCallback() {
         try {
-            const resposta = await fetch('./components_html/cardNextGame.html');
+            const basePath = window.location.pathname.includes('/admin') ? '../' : './';
+            
+            const resposta = await fetch(`${basePath}components_html/cardNextGame.html`);
             const htmlPuro = await resposta.text();
             
             this.innerHTML = `
-                <link rel="stylesheet" href="./css/components/cardNextGame.css">
+                <link rel="stylesheet" href="${basePath}css/components/cardNextGame.css">
                 ${htmlPuro}
             `;
             
