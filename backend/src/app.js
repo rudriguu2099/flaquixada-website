@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import { conectarBanco } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
+import bolaoRoutes from "./routes/bolao.routes.js";
 import cardapioRoutes from "./routes/cardapio.routes.js";
 import fixturesRoutes from "./routes/fixtures.routes.js";
 import noticiaRoutes from "./routes/noticia.routes.js";
@@ -23,6 +24,7 @@ app.use("/api/cardapios", cardapioRoutes);
 app.use("/api/noticias", noticiaRoutes);
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/produtos", produtoRoutes);
+app.use("/api/bolao", bolaoRoutes);
 
 async function iniciarServidor() {
   await conectarBanco();
