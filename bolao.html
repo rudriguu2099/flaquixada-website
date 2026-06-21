@@ -30,34 +30,16 @@
             
             <!-- Lista de participantes -->
             <div class="bolao-participants-card">
-                <div class="bolao-participants-header">
-                    <h2><i class="ri-trophy-line"></i> Faça sua aposta</h2>
-                </div>
-                <div class="bolao-participants-list" id="bolao-participants-list">
-                    <!-- Gerado pelo JS -->
-                </div>
-                
-                <div class="bolao-insert-area" id="bolao-insert-area">
-                    <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">Faça sua aposta:</p>
-                    <select id="select-jogador" class="bolao-novo-input" style="margin-bottom: 12px;">
-                        <!-- JS vai popular -->
-                    </select>
-                    <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
-                    <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar" style="margin-top: 12px;">
-                        <i class="ri-check-line"></i> Confirmar Aposta</button>
+                <div id="bolao-dynamic-container">
+                    <!-- O JS vai injetar a tela correspondente ao estado do Bolão aqui -->
                 </div>
             </div>
         </div>
+
     </main>
 
     <custom-footer></custom-footer>
 
     <script type="module" src="./js/pages/bolao.js"></script>
-    
-    <!-- Componentes -->
-    <script src="js/components/navbar.js" defer></script>
-    <script src="js/components/Bolao.js" defer></script>
-    <script src="js/components/CardNextGame.js" defer></script>
-    <script src="js/components/Footer.js" defer></script>
 </body>
 </html>

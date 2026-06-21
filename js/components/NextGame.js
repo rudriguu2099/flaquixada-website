@@ -47,3 +47,4 @@ class NextGame extends HTMLElement {
 }
 
 customElements.define('next-game', NextGame);
+window.NextGame = NextGame;

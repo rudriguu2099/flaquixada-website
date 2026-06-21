@@ -1,4 +1,9 @@
 import { fetchJogos } from '../services/ApiJogosService.js';
+import '../components/navbar.js';
+import '../components/Bolao.js';
+import '../components/NextGame.js';
+import '../components/CardNextGame.js';
+import '../components/Footer.js';
 
 const jogadoresFlamengo = [
     { id: 1, nomeJogador: "Varela", participante: "Randson" },
@@ -13,7 +18,48 @@ const jogadoresFlamengo = [
     { id: 10, nomeJogador: "Pedro", participante: "" },
 ];
 
-function renderBolao() {
+let currentBolaoState = 'PADRAO'; // 'INATIVO', 'AGUARDANDO', 'PADRAO'
+
+function renderBolaoState() {
+    const container = document.getElementById('bolao-dynamic-container');
+    if (!container) return;
+
+    if (currentBolaoState === 'INATIVO') {
+        container.innerHTML = `
+            <div class="bolao-empty-state">
+                <i class="ri-lock-2-line"></i>
+                <h2>Bolão Inativo</h2>
+                <p>O bolão para essa partida logo mais será aberto, fique de olho!</p>
+            </div>
+        `;
+    } else if (currentBolaoState === 'AGUARDANDO') {
+        container.innerHTML = `
+            <div class="bolao-empty-state">
+                <i class="ri-clipboard-line"></i>
+                <h2>Aguardando Escalação</h2>
+                <p>Estamos fazendo o sorteio da escalação do bolão, em breve divulgaremos!</p>
+            </div>
+        `;
+    } else {
+        container.innerHTML = `
+            <div class="bolao-participants-list" id="bolao-participants-list"></div>
+            
+            <div class="bolao-insert-area" id="bolao-insert-area">
+                <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">Faça sua aposta:</p>
+                <select id="select-jogador" class="bolao-novo-input" style="margin-bottom: 12px;"></select>
+                <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
+                <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar" style="margin-top: 12px;">
+                    <i class="ri-check-line"></i> Confirmar Aposta</button>
+            </div>
+        `;
+        renderBolaoList();
+        
+        const btnSalvar = document.getElementById('btn-bolao-salvar');
+        if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
+    }
+}
+
+function renderBolaoList() {
     const list = document.getElementById('bolao-participants-list');
     const select = document.getElementById('select-jogador');
     if (!list || !select) return;
@@ -72,16 +118,14 @@ function salvarAposta() {
     if (jogador) {
         jogador.participante = participanteNome;
         inputNome.value = '';
-        renderBolao();
+        renderBolaoList();
         alert(`Aposta confirmada! Se ${jogador.nomeJogador} fizer o 1º gol, você ganha o prêmio!`);
     }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    renderBolao();
-    
-    const btnSalvar = document.getElementById('btn-bolao-salvar');
-    if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
+    // Renderiza o bolão pela primeira vez
+    renderBolaoState();
 
     // Carrega e renderiza o Próximo Jogo
     const containerPrincipal = document.getElementById('bolao-jogo-atual');
@@ -97,6 +141,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (jogosDaRodada.length > 0) {
             const cardDestaque = new CardNextGame(jogosDaRodada);
+            cardDestaque.setAttribute('custom-title', 'Faça sua aposta');
+            cardDestaque.setAttribute('custom-icon', 'ri-trophy-line');
             containerPrincipal.appendChild(cardDestaque);
         } else {
             containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Nenhum jogo disponível no momento.</p>';

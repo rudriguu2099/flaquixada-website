@@ -35,12 +35,19 @@ class CardNextGame extends HTMLElement {
                 const scoreContainer = this.querySelector('#match-score-container');
                 const titleHeader = this.querySelector('#title-next-game h2');
                 
-                if (primeiroJogo.statusTipo === 'inprogress') {
-                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-live-line"></i> Jogo Atual`;
-                } else if (primeiroJogo.statusTipo === 'finished') {
-                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-checkbox-circle-line"></i> Último Jogo`;
-                } else {
-                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-calendar-line"></i> Próximo Jogo`;
+                const customTitle = this.getAttribute('custom-title');
+                const customIcon = this.getAttribute('custom-icon') || 'ri-calendar-line';
+                
+                if (customTitle && titleHeader) {
+                    titleHeader.innerHTML = `<i class="${customIcon}"></i> ${customTitle}`;
+                } else if (titleHeader) {
+                    if (primeiroJogo.statusTipo === 'inprogress') {
+                        titleHeader.innerHTML = `<i class="ri-live-line"></i> Jogo Atual`;
+                    } else if (primeiroJogo.statusTipo === 'finished') {
+                        titleHeader.innerHTML = `<i class="ri-checkbox-circle-line"></i> Último Jogo`;
+                    } else {
+                        titleHeader.innerHTML = `<i class="ri-calendar-line"></i> Próximo Jogo`;
+                    }
                 }
 
                 if (primeiroJogo.placar && scoreContainer) {
@@ -98,3 +105,4 @@ class CardNextGame extends HTMLElement {
 }
 
 customElements.define('card-next-game', CardNextGame);
+window.CardNextGame = CardNextGame;
