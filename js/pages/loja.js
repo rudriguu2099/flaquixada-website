@@ -1,3 +1,9 @@
+import '../components/navbar.js';
+import '../components/CardLive.js';
+import '../components/Carousel.js';
+import '../components/CardItemStore.js';
+import '../components/Footer.js';
+
 // Array de testes com os produtos da loja
 const listaProdutos = [
     {

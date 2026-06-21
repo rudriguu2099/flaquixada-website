@@ -1,24 +1,24 @@
 import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
-import { obterCardapioLocal } from '../../js/utils/mockCardapio.js';
+import { ApiCardapioService } from '../../js/services/ApiCardapioService.js';
 
 renderDashboard();
 
-function renderDashboard() {
+async function renderDashboard() {
     const container = document.getElementById('dashboard-content');
     if (!container) return;
 
-    // Busca o total de itens
-    let totalCardapio = 24; // fallback
+    // Busca o total de itens via API
+    let totalCardapio = 0;
     try {
-        const dadosCardapio = obterCardapioLocal();
+        const dadosCardapio = await ApiCardapioService.fetchCardapio();
         if (dadosCardapio) {
             totalCardapio = (dadosCardapio.bebidas?.length || 0) + 
                             (dadosCardapio.petiscos?.length || 0) + 
                             (dadosCardapio.pratos?.length || 0);
         }
     } catch(e) {
-        console.error("Erro ao ler cardápio", e);
+        console.error("Erro ao buscar total de cardápio da API", e);
     }
 
     // Dados que viriam do Backend

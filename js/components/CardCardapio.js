@@ -1,4 +1,4 @@
-import { obterCardapioLocal } from '../utils/mockCardapio.js';
+import { ApiCardapioService } from '../services/ApiCardapioService.js';
 
 class CardCardapio extends HTMLElement {
     async connectedCallback() {
@@ -24,14 +24,11 @@ class CardCardapio extends HTMLElement {
 
     async carregarDadosDaAPI() {
         try {
-            const res = await fetch('http://localhost:3000/api/cardapio');
-            if (res.ok) {
-                return await res.json();
-            }
+            return await ApiCardapioService.fetchCardapio();
         } catch (e) {
-            console.log("Back-end offline. Usando dados mockados do localStorage.");
+            console.error("Erro ao buscar cardápio da API no componente:", e);
+            return { bebidas: [], petiscos: [], pratos: [] }; // Retorna vazio em caso de erro
         }
-        return obterCardapioLocal();
     }
 
     renderizarLista(idLista, itens, limite = 3) {

@@ -1,4 +1,14 @@
 import { fetchJogos } from '../services/ApiJogosService.js';
+import '../components/navbar.js';
+import '../components/CardNextGame.js';
+import '../components/CardLive.js';
+import '../components/NextGame.js';
+import '../components/Bolao.js';
+import '../components/DivulgaSocioFla.js';
+import '../components/MonthlyPrizes.js';
+import '../components/CardCardapio.js';
+import '../components/Noticias.js';
+import '../components/Footer.js';
 
 if (!localStorage.getItem('user')) {
     const adminFalso = {
