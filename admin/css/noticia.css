@@ -1,0 +1,195 @@
+/* --- Grupos do Formulário e Labels --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: var(--white-fla);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+/* --- Unificação de Inputs e Textarea --- */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white-fla);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito de foco padrão para todos os campos */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--red-fla);
+    box-shadow: 0 0 0 3px rgba(219, 0, 0, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+
+/* --- Alinhamento das Ações (Botões Inferiores) --- */
+.admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Container Principal da Lista */
+.admin-lista-itens {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espaçamento entre cada notícia */
+}
+
+/* Item Individual (Card de Notícia) */
+.admin-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+/* Efeito Hover no Card */
+.admin-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(214, 40, 40, 0.3); /* Sutil borda vermelha do Flamengo ao passar o mouse */
+    transform: translateY(-2px);
+}
+
+/* Bloco de Informações da Notícia */
+.item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-right: 24px;
+}
+
+/* Título da Notícia */
+.item-info .item-nome {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+/* Badge / Etiqueta de Categoria */
+.item-info span[style*="background: rgba"] {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #e5e5e5;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Resumo / Conteúdo */
+.item-info .item-descricao {
+    font-size: 0.95rem;
+    color: #b3b3b3;
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+/* Rodapé do Card (Onde fica a Data) */
+.item-info .item-precos {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.item-info .item-precos span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #888888 !important;
+}
+
+.item-info .item-precos i {
+    font-size: 1rem;
+    color: var(--red-fla); 
+}
+
+
+.item-acoes {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Botão Ícone Base */
+.btn-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+/* Hover Geral nos Botões */
+.btn-icon:hover {
+    transform: scale(1.05);
+}
+
+/* Botão Editar (Pencil) */
+.btn-icon.edit:hover {
+    background: rgba(243, 156, 18, 0.15);
+    border-color: #f39c12;
+    color: #f39c12;
+}
+
+/* Botão Excluir (Trash) */
+.btn-icon.delete:hover {
+    background: rgba(214, 40, 40, 0.15);
+    border-color: #d62828;
+    color: #d62828;
+}
+
+@media (max-width: 576px) {
+    .admin-item {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .item-info {
+        padding-right: 0;
+    }
+
+    .item-acoes {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 12px;
+    }
+}

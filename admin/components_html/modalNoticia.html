@@ -1,0 +1,47 @@
+<div id="modal-noticia" class="admin-modal" style="display: none;">
+    <div class="admin-modal-content">
+        <div class="admin-modal-header">
+            <h3 id="modal-titulo">Nova Notícia</h3>
+            <button type="button" class="btn-icon" id="btn-fechar-modal-noticia" title="Fechar">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        
+        <form id="form-noticia">
+            <div class="admin-modal-body">
+                <input type="hidden" id="noticia-id">
+                
+                <div class="form-group">
+                    <label for="noticia-titulo">Título da Notícia</label>
+                    <input type="text" id="noticia-titulo" required placeholder="Ex: Grande evento neste domingo">
+                </div>
+                
+                <div class="form-row" style="display: flex; gap: 16px; margin-bottom: 16px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label for="noticia-categoria">Categoria</label>
+                        <select id="noticia-categoria" required style="width: 100%;">
+                            <option value="Eventos">Eventos</option>
+                            <option value="Jogos">Jogos</option>
+                            <option value="Avisos">Avisos</option>
+                            <option value="Promoções">Promoções</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="noticia-data">Data</label>
+                        <input type="date" id="noticia-data" required style="width: 100%;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="noticia-resumo">Resumo / Conteúdo</label>
+                    <textarea id="noticia-resumo" rows="5" required placeholder="Digite os detalhes da notícia aqui..." style="resize: vertical;"></textarea>
+                </div>
+            </div>
+            
+            <div class="admin-modal-actions">
+                <button type="button" class="btn-secundary" id="btn-cancelar-noticia">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
