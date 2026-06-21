@@ -1,3 +1,6 @@
+import './components/AdminSidebar.js';
+import './components/AdminHeader.js';
+import './components/ModalCardapio.js';
 import { mascaraTextoENumeros, mascaraMoeda, desmascararMoeda, formatarMoedaInput } from '../../js/utils/mascaras.js';
 import { obterCardapioLocal, salvarCardapioLocal } from '../../js/utils/mockCardapio.js';
 

@@ -1,3 +1,5 @@
+import './components/AdminSidebar.js';
+import './components/AdminHeader.js';
 import { obterCardapioLocal } from '../../js/utils/mockCardapio.js';
 
 renderDashboard();
