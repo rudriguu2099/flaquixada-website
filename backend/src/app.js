@@ -4,6 +4,7 @@ import cors from "cors";
 import { conectarBanco } from "./config/db.js";
 import authRoutes from "./routes/auth.routes.js";
 import fixturesRoutes from "./routes/fixtures.routes.js";
+import cardapioRoutes from "./routes/cardapio.routes.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/fixtures", fixturesRoutes);
+app.use("/api/cardapios", cardapioRoutes);
 
 async function iniciarServidor() {
   await conectarBanco();
