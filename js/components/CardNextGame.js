@@ -1,8 +1,9 @@
 class CardNextGame extends HTMLElement {
     //recebe a lista completa de jogos
-    constructor(listaJogos) {
+    constructor(listaJogos, isPlaceholder = false) {
         super();
         this.listaJogos = listaJogos || [];
+        this.isPlaceholder = isPlaceholder;
     }
 
     async connectedCallback() {
@@ -19,7 +20,7 @@ class CardNextGame extends HTMLElement {
                 // Separa o primeiro jogo do resto da lista
                 const [primeiroJogo, ...jogosSeguintes] = this.listaJogos;
                 
-                //Preenche os dados do jogo principal de destaque
+                // 1. Preenche os dados do jogo principal de destaque
                 this.querySelector('#team-home-name').textContent = primeiroJogo.timeCasa;
                 this.querySelector('#team-home-img').src = primeiroJogo.escudoCasa;
                 this.querySelector('#team-visiting-name').textContent = primeiroJogo.timeFora;
@@ -27,9 +28,33 @@ class CardNextGame extends HTMLElement {
                 this.querySelector('#championship').textContent = primeiroJogo.campeonato;
                 this.querySelector('#stage').textContent = primeiroJogo.faseRodada;
                 this.querySelector('#time').textContent = primeiroJogo.horario;
-                this.querySelector('#stadium').textContent = primeiroJogo.estadio;
                 this.querySelector('#date-day').textContent = primeiroJogo.diaSemana;
                 this.querySelector('#date').textContent = primeiroJogo.dataExtenso;
+                
+                // Tratar Placar e Status
+                const scoreContainer = this.querySelector('#match-score-container');
+                const titleHeader = this.querySelector('#title-next-game h2');
+                
+                if (primeiroJogo.statusTipo === 'inprogress') {
+                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-live-line"></i> Jogo Atual`;
+                } else if (primeiroJogo.statusTipo === 'finished') {
+                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-checkbox-circle-line"></i> Último Jogo`;
+                } else {
+                    if(titleHeader) titleHeader.innerHTML = `<i class="ri-calendar-line"></i> Próximo Jogo`;
+                }
+
+                if (primeiroJogo.placar && scoreContainer) {
+                    scoreContainer.innerHTML = `
+                        <div class="score-display" style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="font-size: 2.5rem; font-weight: 700; color: white;">
+                                ${primeiroJogo.placar.casa} <span style="font-size: 1.5rem; color: #999; margin: 0 5px;">X</span> ${primeiroJogo.placar.visitante}
+                            </div>
+                            <span style="font-size: 0.8rem; background: var(--red-fla); color: white; padding: 2px 8px; border-radius: 4px; margin-top: -5px; font-weight: 600;">
+                                ${primeiroJogo.placar.status}
+                            </span>
+                        </div>
+                    `;
+                }
                 
                 // 2. Renderiza a lista de próximos jogos
                 const blocoLista = this.querySelector('#see-more-block');

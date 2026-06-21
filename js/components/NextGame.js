@@ -21,7 +21,14 @@ class NextGame extends HTMLElement {
                 this.querySelector('#main-team').textContent = this.jogo.timeCasa;
                 this.querySelector('#visiting-team').textContent = this.jogo.timeFora;
                 this.querySelector('#date').textContent = this.jogo.dataFormatada;
-                this.querySelector('#time').textContent = this.jogo.horario + 'h';
+                
+                if (this.jogo.placar) {
+                    this.querySelector('#vs-or-score').innerHTML = `<span style="color: var(--black-fla-dark); background: white; padding: 1px 6px; border-radius: 4px; font-weight: bold;">${this.jogo.placar.casa} x ${this.jogo.placar.visitante}</span>`;
+                    this.querySelector('#time').textContent = this.jogo.placar.status;
+                } else {
+                    this.querySelector('#vs-or-score').textContent = 'X';
+                    this.querySelector('#time').textContent = this.jogo.horario;
+                }
 
                 // Lógica da barrinha: Se o Flamengo jogar em casa (Time Casa), bota a cor vermelha do Fla
                 const barrinha = this.querySelector('.block');

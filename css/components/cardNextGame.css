@@ -57,15 +57,37 @@
     transform: scale(1.02);
 }
 
+.container-next-game .panel-next-game .championship-stage {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--red-fla);
+    color: var(--white-fla);
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0 auto 15px auto;
+    padding: 4px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
 .container-next-game .match {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
 .container-next-game .match img {
-    width: 60px;
+    width: 65px;
+    transition: transform 0.3s ease;
+}
+
+.container-next-game .match img:hover {
+    transform: scale(1.1);
 }
 
 .container-next-game .match .team {
@@ -73,6 +95,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex: 1;
+}
+
+.container-next-game .match .match-score-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
 }
 
 .container-next-game .match .team .name {
@@ -89,15 +120,7 @@
 .container-next-game .match-infor {
     display: flex;
     flex-direction: column;
-}
-
-.container-next-game .match-infor .championship-stage {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 5px;
-    color: var(--red-fla);
-    font-size: 12px;
+    gap: 3px;
 }
 
 .container-next-game .match-infor .stadium-time {
@@ -105,17 +128,20 @@
     flex-direction: row;
     justify-content: center;
     color: var(--white-fla);
-    font-weight: bold;
+    font-weight: 800;
     gap: 5px;
-    font-size: 16px;
+    font-size: 20px;
+    margin-top: 5px;
 }
 
 .container-next-game .match-infor .date-match {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 5px;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 12px;
+    font-weight: 500;
+    margin-top: 2px;
 }
 
 /* Ver Mais Jogos */
@@ -129,7 +155,8 @@
     display: flex;
     flex-direction: column;
     border-radius: 15px;
-    border: 1px solid var(--white-fla);
+    border: none;
+    background: var(--linear-red-fla);
     max-height: 300px;
     padding: 10px;
     gap: 10px;

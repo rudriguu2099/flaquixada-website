@@ -1,3 +1,5 @@
+import { fetchJogos } from '../services/ApiJogosService.js';
+
 const jogadoresFlamengo = [
     { id: 1, nomeJogador: "Varela", participante: "Randson" },
     { id: 2, nomeJogador: "Fabrício Bruno", participante: "" },
@@ -75,9 +77,32 @@ function salvarAposta() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     renderBolao();
     
     const btnSalvar = document.getElementById('btn-bolao-salvar');
     if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
+
+    // Carrega e renderiza o Próximo Jogo
+    const containerPrincipal = document.getElementById('bolao-jogo-atual');
+    if (!containerPrincipal) return;
+
+    const loader = document.createElement('div');
+    loader.innerHTML = '<p style="text-align: center; color: white;">Carregando jogo...</p>';
+    containerPrincipal.appendChild(loader);
+
+    try {
+        const jogosDaRodada = await fetchJogos();
+        containerPrincipal.innerHTML = ''; 
+
+        if (jogosDaRodada.length > 0) {
+            const cardDestaque = new CardNextGame(jogosDaRodada);
+            containerPrincipal.appendChild(cardDestaque);
+        } else {
+            containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Nenhum jogo disponível no momento.</p>';
+        }
+    } catch (error) {
+        containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Erro ao carregar o jogo.</p>';
+        console.error("Erro renderizando CardNextGame:", error);
+    }
 });
