@@ -50,7 +50,9 @@ class AdminSidebar extends HTMLElement {
         const btnLogoutMobile = this.querySelector('#btn-admin-logout-mobile');
         if (btnLogoutMobile) {
             btnLogoutMobile.addEventListener('click', () => {
-                window.location.href = '../index.html';
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
+                window.location.href = '../login.html';
             });
         }
     }

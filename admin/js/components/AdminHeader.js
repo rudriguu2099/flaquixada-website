@@ -13,8 +13,9 @@ class AdminHeader extends HTMLElement {
             const btnLogout = this.querySelector('#btn-admin-logout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
-                    // TODO: Adicionar lógica real de logout (limpar storage/cookies)
-                    window.location.href = '../index.html';
+                    localStorage.removeItem('adminToken');
+                    localStorage.removeItem('adminUser');
+                    window.location.href = '../login.html';
                 });
             }
 
