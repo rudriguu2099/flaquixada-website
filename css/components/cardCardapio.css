@@ -30,12 +30,12 @@
     text-align: center;
 }
 
-.cardapio-header h2::after {
+/* .cardapio-header h2::after {
     content: '';
     display: block;
     width: 1.4rem;
     margin-left: 10px;
-}
+} */
 
 .cardapio-header h2 i {
     font-size: 1.4rem;
