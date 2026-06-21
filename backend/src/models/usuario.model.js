@@ -28,3 +28,8 @@ export class Usuario {
     };
   }
 }
+
+export const LoginValidationSchema = z.object({
+  email: z.string().email("Formato de e-mail inválido"),
+  password: z.string().min(8, "A senha deve conter no mínimo 8 caracteres"),
+});

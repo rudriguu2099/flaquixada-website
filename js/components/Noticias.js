@@ -1,27 +1,3 @@
-const dadosNoticias = [
-    {
-        id: 1,
-        titulo: 'Grande evento no Consulado neste sábado',
-        resumo: 'Venha assistir ao jogo com a melhor torcida de Quixadá!',
-        categoria: 'Eventos',
-        link: '#'
-    },
-    {
-        id: 2,
-        titulo: 'Fla-Quixadá abre inscrições para novos sócios',
-        resumo: 'Aproveite os benefícios exclusivos e faça parte dessa família!',
-        categoria: 'Associação',
-        link: '#'
-    },
-    {
-        id: 3,
-        titulo: 'Bolão da rodada: prêmio de R$ 200 em jogo',
-        resumo: 'Participe e concorra a prêmios incríveis. Quanto mais você acerta, mais você ganha!',
-        categoria: 'Bolão',
-        link: '#'
-    }
-];
-
 class Noticias extends HTMLElement {
     async connectedCallback() {
         try {
@@ -33,23 +9,46 @@ class Noticias extends HTMLElement {
                 ${htmlPuro}
             `;
             
-            this.renderizarNoticias();
+            await this.carregarNoticias();
         } catch (error) {
             console.error('Erro ao carregar o HTML do card de notícias:', error);
         }
     }
 
-    renderizarNoticias() {
+    async carregarNoticias() {
+        let noticias = [];
+        try {
+            const response = await fetch('http://localhost:4000/api/noticias');
+            const data = await response.json();
+            if (response.ok && data.success) {
+                // Pega apenas as últimas 3 notícias para a home
+                noticias = data.data.slice(0, 3);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar notícias da API:', error);
+        }
+        
+        this.renderizarNoticias(noticias);
+    }
+
+    renderizarNoticias(noticias) {
         const container = this.querySelector('.noticias-list');
         if (!container) return;
+        
+        container.innerHTML = '';
 
-        dadosNoticias.forEach(noticia => {
+        if (!noticias || noticias.length === 0) {
+            container.innerHTML = '<p style="color: white; margin-top: 10px;">Nenhuma notícia disponível no momento.</p>';
+            return;
+        }
+
+        noticias.forEach(noticia => {
             const item = document.createElement('div');
             item.className = 'noticia-item';
             
             item.innerHTML = `
                 <div class="noticia-titulo-row">
-                    <h3 class="noticia-titulo"><a href="${noticia.link}">${noticia.titulo}</a></h3>
+                    <h3 class="noticia-titulo"><a href="noticias.html">${noticia.titulo}</a></h3>
                     <span class="noticia-categoria-badge">${noticia.categoria}</span>
                 </div>
                 <p class="noticia-resumo">${noticia.resumo}</p>

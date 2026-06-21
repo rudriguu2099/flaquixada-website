@@ -40,12 +40,16 @@ body {
   color: var(--secundary-color-2);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  flex: 1;
 }
 
 .main-full-width {

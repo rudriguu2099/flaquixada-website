@@ -1,7 +1,8 @@
-import { mascaraTextoENumeros, mascaraMoeda, desmascararMoeda, formatarMoedaInput } from '../../js/utils/mascaras.js';
-import { obterCardapioLocal, salvarCardapioLocal } from '../../js/utils/mockCardapio.js';
-
-const CAMINHO_API = 'caminho_api';
+import './components/AdminSidebar.js';
+import './components/AdminHeader.js';
+import './components/ModalCardapio.js';
+import { formatarMoedaInput, desmascararMoeda, mascaraMoeda, mascaraTextoENumeros } from '../../js/utils/mascaras.js';
+import { ApiCardapioService } from '../../js/services/ApiCardapioService.js';
 
 console.log("Admin Cardápio inicializado.");
     
@@ -12,15 +13,10 @@ console.log("Admin Cardápio inicializado.");
     // ----- INICIALIZAÇÃO -----
     async function carregarDados() {
         try {
-            const response = await fetch(CAMINHO_API);
-            if (response.ok) {
-                cardapioAtual = await response.json();
-            } else {
-                throw new Error("Backend indisponível");
-            }
+            cardapioAtual = await ApiCardapioService.fetchCardapio();
         } catch (error) {
-            console.log("Usando dados do LocalStorage (Mock Fallback)");
-            cardapioAtual = obterCardapioLocal();
+            console.error("Erro ao carregar cardápio da API", error);
+            cardapioAtual = { bebidas: [], petiscos: [], pratos: [] };
         }
         renderizarCardapio();
     }
@@ -91,7 +87,7 @@ console.log("Admin Cardápio inicializado.");
         document.querySelectorAll('.btn-icon.edit').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const btnClicado = e.target.closest('.btn-icon');
-                const id = parseInt(btnClicado.dataset.id);
+                const id = btnClicado.dataset.id; // String (_id do Mongo)
                 const cat = btnClicado.dataset.categoria;
                 editarItem(id, cat);
             });
@@ -100,7 +96,7 @@ console.log("Admin Cardápio inicializado.");
         document.querySelectorAll('.btn-icon.delete').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const btnClicado = e.target.closest('.btn-icon');
-                const id = parseInt(btnClicado.dataset.id);
+                const id = btnClicado.dataset.id; // String (_id do Mongo)
                 const cat = btnClicado.dataset.categoria;
                 if(confirm("Tem certeza que deseja excluir este item?")) {
                     excluirItem(id, cat);
@@ -178,8 +174,7 @@ console.log("Admin Cardápio inicializado.");
         const precoSocio = desmascararMoeda(document.getElementById('item-preco-socio').value);
         const categoriaNova = document.getElementById('item-categoria').value;
 
-        const novoItem = {
-            id: id ? parseInt(id) : Date.now(), // Gera um ID único se for novo
+        const payload = {
             nome,
             descricao,
             precoSocio,
@@ -187,42 +182,44 @@ console.log("Admin Cardápio inicializado.");
             categoria: categoriaNova
         };
 
+        const btnSubmit = document.querySelector('#form-cardapio button[type="submit"]');
+        const originalText = btnSubmit ? btnSubmit.innerHTML : 'Salvar';
+        if (btnSubmit) { btnSubmit.innerHTML = 'Salvando...'; btnSubmit.disabled = true; }
+
         try {
             if (id) {
-                // Remover das categorias antigas caso tenha mudado
-                for (let cat in cardapioAtual) {
-                    cardapioAtual[cat] = cardapioAtual[cat].filter(i => i.id !== parseInt(id));
-                }
+                // Atualiza na API
+                await ApiCardapioService.atualizarItem(id, payload);
+            } else {
+                // Cria na API
+                await ApiCardapioService.criarItem(payload);
             }
-
-            // Adiciona/Atualiza na categoria certa
-            if(!cardapioAtual[categoriaNova]) {
-                cardapioAtual[categoriaNova] = [];
-            }
-            cardapioAtual[categoriaNova].push(novoItem);
-
-            // Persiste no localStorage
-            salvarCardapioLocal(cardapioAtual);
 
             // Fecha Modal (ocultando a div via display)
             const modal = document.getElementById('modal-cardapio');
             if(modal) modal.style.display = 'none';
 
             // Atualiza tela
-            renderizarCardapio();
+            await carregarDados();
             
         } catch (error) {
             console.error('Erro ao salvar item:', error);
-            alert('Erro ao salvar item.');
+            alert('Erro ao salvar item. Verifique sua conexão ou credenciais.');
+        } finally {
+            if (btnSubmit) { btnSubmit.innerHTML = originalText; btnSubmit.disabled = false; }
         }
     }
 
-    function excluirItem(id, categoria) {
+    async function excluirItem(id, categoria) {
         if (!cardapioAtual[categoria]) return;
         
-        cardapioAtual[categoria] = cardapioAtual[categoria].filter(i => i.id !== id);
-        salvarCardapioLocal(cardapioAtual);
-        renderizarCardapio();
+        try {
+            await ApiCardapioService.excluirItem(id);
+            await carregarDados();
+        } catch(error) {
+            console.error('Erro ao excluir item:', error);
+            alert('Erro ao excluir item. Verifique sua permissão.');
+        }
     }
 
     // Inicializa a tela

@@ -9,6 +9,19 @@ class AdminSidebar extends HTMLElement {
                 ${pureHtml}
             `;
 
+            // Verifica permissão para exibir "Gerenciar Administradores"
+            try {
+                const user = JSON.parse(localStorage.getItem('adminUser'));
+                if (user && user.role !== 'super-admin') {
+                    const adminLink = this.querySelector('#link-admin');
+                    if (adminLink && adminLink.parentElement) {
+                        adminLink.parentElement.style.display = 'none';
+                    }
+                }
+            } catch (e) {
+                console.error("Erro ao processar usuário local", e);
+            }
+
             this.setActiveLink();
         } catch (error) {
             console.error('Erro ao carregar o HTML do admin sidebar:', error);
@@ -50,7 +63,9 @@ class AdminSidebar extends HTMLElement {
         const btnLogoutMobile = this.querySelector('#btn-admin-logout-mobile');
         if (btnLogoutMobile) {
             btnLogoutMobile.addEventListener('click', () => {
-                window.location.href = '../index.html';
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminUser');
+                window.location.href = '../login.html';
             });
         }
     }

@@ -1,19 +1,22 @@
-import { obterCardapioLocal } from '../utils/mockCardapio.js';
+import { ApiCardapioService } from '../services/ApiCardapioService.js';
+import '../components/navbar.js';
+import '../components/Footer.js';
 
-const formataMoeda = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const formataMoeda = (v) => {
+    // Caso v seja undefined ou não numérico, retorna R$ 0,00 para não quebrar a tela
+    if (v === undefined || v === null) return 'R$ 0,00';
+    return Number(v).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+};
 
 async function carregarCardapio() {
     let dadosCardapioPage;
     try {
-        const res = await fetch('http://localhost:3000/api/cardapio');
-        if (res.ok) {
-            dadosCardapioPage = await res.json();
-        } else {
-            dadosCardapioPage = obterCardapioLocal();
-        }
+        dadosCardapioPage = await ApiCardapioService.fetchCardapio();
     } catch (e) {
-        console.log('Back-end offline. Usando dados mockados do localStorage.');
-        dadosCardapioPage = obterCardapioLocal();
+        console.error('Erro ao carregar cardápio da API', e);
+        // Fallback visual de erro
+        dadosCardapioPage = { bebidas: [], petiscos: [], pratos: [] };
+        alert("O cardápio está temporariamente indisponível.");
     }
 
     renderizarLista('page-lista-bebidas',  dadosCardapioPage.bebidas);

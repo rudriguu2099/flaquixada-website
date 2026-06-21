@@ -3,15 +3,14 @@ import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
 import './components/ModalAdministradores.js';
 
-import { obterAdminsLocal, salvarAdminsLocal } from '../../js/utils/mockAdministradores.js';
-
 let adminsAtual = [];
 const containerLista = document.getElementById('admin-list-container');
 const btnNovoAdmin = document.getElementById('btn-novo-admin');
 let modalComponent = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+const API_URL = 'http://localhost:4000/api/usuarios';
 
+document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         modalComponent = document.querySelector('modal-administradores');
         inicializarEventosGlobais();
@@ -19,9 +18,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-function carregarDados() {
-    adminsAtual = obterAdminsLocal();
-    renderizarAdmins();
+async function carregarDados() {
+    try {
+        const token = localStorage.getItem('adminToken');
+        const response = await fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            const loggedUserStr = localStorage.getItem('adminUser');
+            let loggedUserId = null;
+            if (loggedUserStr) {
+                try {
+                    loggedUserId = JSON.parse(loggedUserStr).id;
+                } catch(e) {}
+            }
+
+            // A API retorna um array em data.data
+            adminsAtual = data.data
+                .filter(user => user._id !== loggedUserId)
+                .map(user => ({
+                    id: user._id,
+                    nome: user.nome,
+                    email: user.email,
+                    role: user.role
+                }));
+            renderizarAdmins();
+        } else {
+            console.error('Erro ao buscar administradores:', data.error);
+            alert('Não foi possível carregar a lista de administradores.');
+        }
+    } catch (error) {
+        console.error('Erro de conexão ao buscar administradores:', error);
+        alert('Erro de conexão com o backend. O servidor está rodando?');
+    }
 }
 
 function inicializarEventosGlobais() {
@@ -86,33 +121,84 @@ function renderizarAdmins() {
     });
 }
 
-function salvarAdministrador(dadosNovos) {
-    const index = adminsAtual.findIndex(a => a.id === dadosNovos.id);
-    
-    if (index !== -1) {
-        // Editando existente
-        // Se a senha veio vazia, mantemos a senha antiga
-        if (!dadosNovos.senha) {
-            dadosNovos.senha = adminsAtual[index].senha;
-        }
-        adminsAtual[index] = { ...adminsAtual[index], ...dadosNovos };
-    } else {
-        // Criando novo
-        adminsAtual.push(dadosNovos);
+async function salvarAdministrador(dadosNovos) {
+    const isEdit = adminsAtual.some(a => a.id === dadosNovos.id);
+    const token = localStorage.getItem('adminToken');
+
+    const payload = {
+        nome: dadosNovos.nome,
+        email: dadosNovos.email,
+        role: 'admin' // Definindo o nível padrão, o backend também valida
+    };
+
+    if (dadosNovos.senha) {
+        payload.password = dadosNovos.senha;
     }
     
-    salvarAdminsLocal(adminsAtual);
-    renderizarAdmins();
+    try {
+        let url = API_URL;
+        let method = 'POST';
+
+        if (isEdit) {
+            url = `${API_URL}/${dadosNovos.id}`;
+            method = 'PUT';
+        }
+
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            alert(isEdit ? 'Administrador atualizado com sucesso!' : 'Administrador cadastrado com sucesso!');
+            // Recarrega os dados do backend para atualizar a lista
+            await carregarDados();
+        } else {
+            let errorMsg = data.error || 'Erro ao salvar administrador.';
+            if (data.detalhes) {
+                const mensagens = Object.values(data.detalhes).flat().join('\n');
+                errorMsg += '\n' + mensagens;
+            }
+            alert(errorMsg);
+        }
+    } catch (error) {
+        console.error('Erro de conexão ao salvar administrador:', error);
+        alert('Erro de conexão com o backend. O servidor está rodando?');
+    }
 }
 
-function excluirAdmin(id) {
-    // Evita excluir o único administrador
+async function excluirAdmin(id) {
+    // Evita excluir visualmente antes de confirmar
     if (adminsAtual.length <= 1) {
         alert("Atenção: Não é possível excluir o único administrador do sistema.");
         return;
     }
     
-    adminsAtual = adminsAtual.filter(a => a.id !== id);
-    salvarAdminsLocal(adminsAtual);
-    renderizarAdmins();
+    try {
+        const token = localStorage.getItem('adminToken');
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            alert('Administrador excluído com sucesso!');
+            await carregarDados();
+        } else {
+            alert(data.error || 'Erro ao excluir administrador.');
+        }
+    } catch (error) {
+        console.error('Erro de conexão ao excluir administrador:', error);
+        alert('Erro de conexão com o backend.');
+    }
 }
