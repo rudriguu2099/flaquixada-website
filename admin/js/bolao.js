@@ -384,14 +384,14 @@ function renderizarPagamentos(slots) {
         const row = document.createElement('div');
         row.className = 'bolao-pagamento-row';
 
-        const infoAtleta = isSorteado ? ` <small style="opacity: 0.6; font-size: 12px;">— Atleta: ${slot.jogadorSorteado}</small>` : '';
+        const infoAtleta = isSorteado ? ` <small style="font-size: 12px;">— Jogador: ${slot.jogadorSorteado}</small>` : '';
 
         row.innerHTML = `
             <div class="pagamento-info">
                 <span class="pagamento-num">${slot.numeroSlot}</span>
                 <div style="display:flex; flex-direction:column; gap:4px;">
                     <input type="text" class="input-nome-pagamento" value="${slot.participante || ''}" placeholder="Vaga Disponível" data-slot="${slot.numeroSlot}" />
-                    <span style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">${infoAtleta}</span>
+                    <span style="font-size: 0.75rem; color: rgba(255,255,255,0.8);">${infoAtleta}</span>
                 </div>
             </div>
             <div class="pagamento-acoes">
