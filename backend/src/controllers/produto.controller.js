@@ -12,8 +12,8 @@ export class ProdutoController {
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res
-          .status(400)
-          .json({ success: false, detalhes: error.flatten().fieldErrors });
+        .status(400)
+        .json({ success: false, detalhes: error.flatten().fieldErrors });
       }
 
       return res.status(500).json({ success: false, error: error.message });
@@ -71,6 +71,32 @@ export class ProdutoController {
         .json({ success: true, message: "Produto deletado com sucesso." });
     } catch (error) {
       return res.status(404).json({ success: false, error: error.message });
+    }
+  }
+
+  static async exibirFoto(req, res) {
+    try {
+      const { id } = req.params;
+
+      // Busca o produto focado apenas na foto para poupar memória
+      const produto = await ProdutoService.buscarPorId(id);
+
+      if (!produto || !produto.foto) {
+        return res
+          .status(404)
+          .json({ success: false, error: "Imagem não encontrada." });
+      }
+
+      // ? configura o cabeçalho com o tipo nativo salvo (image/png, image/jpeg, etc.)
+      res.set("Content-Type", produto.foto.contentType);
+
+      // garantia do express ler o buffer
+      const binarioImagem = Buffer.from(
+        produto.foto.data.buffer || produto.foto.data,
+      );
+      return res.send(binarioImagem);
+    } catch (error) {
+      return res.status(500).json({ success: false, error: error.message });
     }
   }
 }

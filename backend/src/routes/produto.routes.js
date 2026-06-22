@@ -8,6 +8,7 @@ import {
 const router = Router();
 
 router.get("/", ProdutoController.listarTodos);
+router.get("/:id/foto", ProdutoController.exibirFoto);
 
 router.post(
   "/",
