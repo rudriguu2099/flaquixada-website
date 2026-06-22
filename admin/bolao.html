@@ -23,9 +23,6 @@
         <main class="admin-main admin-card">
             <div class="admin-main-header">
                 <h2><i class="ri-trophy-line"></i> Gerenciar Bolão</h2>
-                <button id="btn-zerar-apostas">
-                    <i class="ri-refresh-line"></i> Zerar Apostas
-                </button>
             </div>
 
             <div class="admin-content-padding">
@@ -80,6 +77,9 @@
                             </div>
 
                             <div class="bolao-admin-actions">
+                                <button type="button" class="btn-secundary" id="btn-sorteio-cartola">
+                                    <i class="ri-download-cloud-2-line"></i> Sorteio
+                                </button>
                                 <button type="button" class="btn-secundary" id="btn-embaralhar-jogadores">
                                     <i class="ri-shuffle-line"></i> Embaralhar Nomes
                                 </button>
@@ -99,8 +99,13 @@
                     </button>
                     
                     <div class="accordion-content" id="content-pagamentos">
+                        <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+                            <button type="button" class="btn-primary" id="btn-zerar-apostas" style="background-color: #ff4444; border: none; color: white; padding: 6px 12px; font-size: 12px; gap: 5px; border-radius: 8px;">
+                                <i class="ri-refresh-line"></i> Zerar Bolão
+                            </button>
+                        </div>
                         <div id="bolao-pagamentos-container" class="bolao-pagamentos-list">
-                            </div>
+                        </div>
                     </div>
                 </div>
 

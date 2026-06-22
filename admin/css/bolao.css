@@ -439,24 +439,41 @@
 
 /* Status Pendente */
 .btn-pagamento.pendente {
-    background: rgba(255, 255, 255, 0.1);
-    color: #cccccc;
+    background: #444444;
+    color: #ffffff;
+    border: 1px solid #555555;
 }
 
 .btn-pagamento:not(:disabled):hover.pendente {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+    background: #555555;
 }
 
 /* Status Pago */
 .btn-pagamento.pago {
-    background: rgba(40, 167, 69, 0.15);
-    color: #28a745;
-    border: 1px solid rgba(40, 167, 69, 0.3);
+    background: #28a745;
+    color: #ffffff;
+    border: 1px solid #28a745;
 }
 
 .btn-pagamento:not(:disabled):hover.pago {
-    background: rgba(40, 167, 69, 0.25);
+    background: #218838;
+}
+
+.input-nome-pagamento {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--white-fla);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 220px;
+    transition: border-color 0.2s;
+}
+
+.input-nome-pagamento:focus {
+    outline: none;
+    border-color: var(--red-fla);
 }
 
 /* Responsividade do Pagamento */
