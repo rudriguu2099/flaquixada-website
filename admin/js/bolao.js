@@ -88,6 +88,11 @@ async function mudarEstadoBolaoAPI(newState) {
         await ApiBolaoService.alterarStatusManual(currentAdminGameId, newState);
         currentState = newState;
         atualizarUIEstado();
+        
+        if (newState === 'INATIVO') {
+            carregarEstadoBolao(currentAdminGameId);
+        }
+        
         alert(`Estado do bolão alterado para: ${newState}`);
     } catch (error) {
         alert(error.message || "Erro ao mudar status.");
@@ -150,7 +155,7 @@ function renderizarInputsJogadores(jogadores = []) {
         const row = document.createElement('div');
         row.className = 'bolao-jogador-row';
         
-        const jogadorVal = (jogadores[i] && jogadores[i].nomeJogador) ? jogadores[i].nomeJogador : '';
+        const jogadorVal = (jogadores[i] && jogadores[i].nomeJogador) ? escapeHTML(jogadores[i].nomeJogador) : '';
 
         row.innerHTML = `
             <div class="bolao-jogador-number">${i + 1}</div>
@@ -384,13 +389,14 @@ function renderizarPagamentos(slots) {
         const row = document.createElement('div');
         row.className = 'bolao-pagamento-row';
 
-        const infoAtleta = isSorteado ? ` <small style="font-size: 12px;">— Jogador: ${slot.jogadorSorteado}</small>` : '';
+        const infoAtleta = isSorteado ? ` <small style="font-size: 12px;">— Jogador: ${escapeHTML(slot.jogadorSorteado)}</small>` : '';
+        const participanteEscapado = escapeHTML(slot.participante || '');
 
         row.innerHTML = `
             <div class="pagamento-info">
                 <span class="pagamento-num">${slot.numeroSlot}</span>
                 <div style="display:flex; flex-direction:column; gap:4px;">
-                    <input type="text" class="input-nome-pagamento" value="${slot.participante || ''}" placeholder="Vaga Disponível" data-slot="${slot.numeroSlot}" />
+                    <input type="text" class="input-nome-pagamento" value="${participanteEscapado}" placeholder="Vaga Disponível" data-slot="${slot.numeroSlot}" />
                     <span style="font-size: 0.75rem; color: rgba(255,255,255,0.8);">${infoAtleta}</span>
                 </div>
             </div>
@@ -483,6 +489,20 @@ async function salvarNomeAPI(numeroSlot, novoNome) {
     } catch (error) {
         alert(error.message || "Erro ao alterar nome do participante.");
     }
+}
+
+function escapeHTML(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        };
+        return charsToReplace[tag] || tag;
+    });
 }
 
 console.log("Interface visual de Gerenciar Bolão (Semi-Automático) conectada com sucesso!");

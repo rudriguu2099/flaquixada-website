@@ -229,6 +229,11 @@ export class BolaoService {
   }
 
   static async salvarStatusManual(idJogo, status) {
+    if (status === 'INATIVO') {
+      await this.resetarDadosDoJogo(idJogo);
+      return { status };
+    }
+
     await db.collection("bolao_estado").updateOne(
       { idJogo: String(idJogo) },
       { $set: { idJogo: String(idJogo), status } },
