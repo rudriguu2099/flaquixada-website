@@ -117,22 +117,21 @@ console.log("Admin Cardápio inicializado.");
     }
 
     // ----- FORMULÁRIO E CRUD -----
-    // Como o Modal é injetado via Web Component assíncrono, aguardamos um instante para conectar o submit do form
-    setTimeout(() => {
-        const form = document.getElementById('form-cardapio');
-        if (form) {
-            form.addEventListener('submit', salvarItem);
+    // Usa event delegation no document para garantir que o form e as máscaras sejam pegos
+    // mesmo que o HTML do modal demore para ser baixado no Vercel
+    document.addEventListener('submit', (e) => {
+        if (e.target && e.target.id === 'form-cardapio') {
+            salvarItem(e);
         }
+    });
 
-        // Aplica os eventos de máscara globais
-        const inputNome = document.getElementById('item-nome');
-        const inputNormal = document.getElementById('item-preco-normal');
-        const inputSocio = document.getElementById('item-preco-socio');
-        
-        if (inputNome) inputNome.addEventListener('input', mascaraTextoENumeros);
-        if (inputNormal) inputNormal.addEventListener('input', mascaraMoeda);
-        if (inputSocio) inputSocio.addEventListener('input', mascaraMoeda);
-    }, 500);
+    document.addEventListener('input', (e) => {
+        if (e.target) {
+            if (e.target.id === 'item-nome') mascaraTextoENumeros(e);
+            if (e.target.id === 'item-preco-normal') mascaraMoeda(e);
+            if (e.target.id === 'item-preco-socio') mascaraMoeda(e);
+        }
+    });
 
     function limparFormulario() {
         const form = document.getElementById('form-cardapio');

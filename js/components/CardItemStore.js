@@ -38,7 +38,7 @@ class CardItemStore extends HTMLElement {
             btnBuyEl.addEventListener('click', () => {
                 const mensagem = `Olá! Gostaria de comprar o produto: *${title}* no valor de *${price}*.`;
                 
-                const urlWhatsapp = `https://wa.me/88981942857?text=${encodeURIComponent(mensagem)}`;
+                const urlWhatsapp = `https://wa.me/5588981942857?text=${encodeURIComponent(mensagem)}`;
                 
                 window.open(urlWhatsapp, '_blank');
             });

@@ -467,7 +467,8 @@
     border-radius: 6px;
     font-family: inherit;
     font-size: 0.95rem;
-    width: 220px;
+    width: 100%;
+    max-width: 220px;
     transition: border-color 0.2s;
 }
 
@@ -482,6 +483,19 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+        padding: 12px 15px;
+    }
+    
+    .pagamento-info {
+        width: 100%;
+    }
+    
+    .pagamento-info > div {
+        flex: 1; /* Faz a div do input/jogador preencher o espaço restante */
+    }
+
+    .input-nome-pagamento {
+        max-width: 100%; /* No mobile preenche todo o espaço */
     }
     
     .pagamento-acoes {

@@ -104,13 +104,13 @@ if (btnNovo) {
 }
 
 // ----- FORMULÁRIO E CRUD -----
-// Aguarda o ciclo do Web Component injetar o HTML para vincular o Submit
-setTimeout(() => {
-    const form = document.getElementById('form-noticia');
-    if (form) {
-        form.addEventListener('submit', salvarNoticia);
+// Usa event delegation no document para garantir que o submit seja pego
+// mesmo que o HTML do modal demore para ser baixado
+document.addEventListener('submit', (e) => {
+    if (e.target && e.target.id === 'form-noticia') {
+        salvarNoticia(e);
     }
-}, 500);
+});
 
 function limparFormulario() {
     const form = document.getElementById('form-noticia');
@@ -191,7 +191,7 @@ async function salvarNoticia(e) {
         
     } catch (error) {
         console.error('Erro ao salvar notícia:', error);
-        alert('Erro ao salvar notícia. Verifique os dados ou sua conexão.');
+        alert(`Erro ao salvar notícia: ${error.message}`);
     } finally {
         if (btnSubmit) { btnSubmit.innerHTML = originalText; btnSubmit.disabled = false; }
     }

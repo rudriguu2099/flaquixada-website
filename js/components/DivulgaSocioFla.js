@@ -23,7 +23,7 @@ class DivulgaSocioFla extends HTMLElement {
       if (btnSocio) {
           btnSocio.addEventListener('click', () => {
               const mensagem = "Olá! Gostaria de me associar ao Consulado Fla-Quixadá.";
-              const whatsappUrl = `https://wa.me/88981942857?text=${encodeURIComponent(mensagem)}`;
+              const whatsappUrl = `https://wa.me/5588981942857?text=${encodeURIComponent(mensagem)}`;
               window.open(whatsappUrl, '_blank');
           });
       }

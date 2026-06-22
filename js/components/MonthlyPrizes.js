@@ -22,7 +22,7 @@ class MonthlyPrizes extends HTMLElement {
         if (btnCompete) {
             btnCompete.addEventListener('click', () => {
                 const mensagem = "Olá! Gostaria de concorrer aos prêmios mensais do Fla-Quixadá.";
-                const whatsappUrl = `https://wa.me/88981942857?text=${encodeURIComponent(mensagem)}`;
+                const whatsappUrl = `https://wa.me/5588981942857?text=${encodeURIComponent(mensagem)}`;
                 window.open(whatsappUrl, '_blank');
             });
         }
