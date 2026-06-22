@@ -2,6 +2,7 @@ import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
 import './components/modalProduto.js';
 import { ApiProdutoService } from '../../js/services/ApiProdutoService.js';
+import { formatarMoedaInput, desmascararMoeda, mascaraMoeda } from '../../js/utils/mascaras.js';
 
 console.log("Admin Loja inicializado.");
 
@@ -129,7 +130,7 @@ function editarProduto(id) {
     document.getElementById('produto-id').value = produto._id;
     document.getElementById('produto-nome').value = produto.nome;
     document.getElementById('produto-descricao').value = produto.descricao || '';
-    document.getElementById('produto-preco').value = produto.preco;
+    document.getElementById('produto-preco').value = formatarMoedaInput(produto.preco);
 
     const preview = document.getElementById('preview-imagem-produto');
     if (preview) preview.src = ApiProdutoService.getUrlFoto(produto._id) + `?t=${Date.now()}`;
@@ -148,7 +149,7 @@ async function salvarProduto(e) {
     const id = document.getElementById('produto-id').value;
     const nome = document.getElementById('produto-nome').value.trim();
     const descricao = document.getElementById('produto-descricao').value.trim();
-    const preco = parseFloat(document.getElementById('produto-preco').value);
+    const preco = desmascararMoeda(document.getElementById('produto-preco').value);
 
     // Pega o Base64 gerado pelo componente do modal
     const modalProduto = document.querySelector('modal-produto');
@@ -205,6 +206,12 @@ async function excluirProduto(id) {
 document.addEventListener('submit', (e) => {
     if (e.target && e.target.id === 'form-produto') {
         salvarProduto(e);
+    }
+});
+
+document.addEventListener('input', (e) => {
+    if (e.target && e.target.id === 'produto-preco') {
+        mascaraMoeda(e);
     }
 });
 
