@@ -211,7 +211,7 @@
 /* Card de cada Produto na Lista */
 .admin-item-loja {
     background: var(--black-fla-dark);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 12px 20px;
     display: flex;
@@ -275,37 +275,4 @@
 .item-loja-acoes {
     display: flex;
     gap: 8px;
-}
-
-.btn-acao {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.2s;
-}
-
-.btn-acao.edit {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--white-fla);
-}
-
-.btn-acao.edit:hover {
-    background: var(--white-fla);
-    color: black;
-}
-
-.btn-acao.delete {
-    background: rgba(219, 0, 0, 0.1);
-    color: #ff4d4d;
-}
-
-.btn-acao.delete:hover {
-    background: #db0000;
-    color: white;
 }

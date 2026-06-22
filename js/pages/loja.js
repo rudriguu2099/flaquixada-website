@@ -3,47 +3,46 @@ import '../components/CardLive.js';
 import '../components/Carousel.js';
 import '../components/CardItemStore.js';
 import '../components/Footer.js';
+import { ApiProdutoService } from '../services/ApiProdutoService.js';
 
-// Array de testes com os produtos da loja
-const listaProdutos = [
-    {
-        id: 1,
-        titulo: "Camisa do Consulado",
-        descricao: "Venha garantir sua camisa e se junte com a melhor torcida de Quixadá!",
-        preco: "120,00 R$",
-        imagem: "https://imgcentauro-a.akamaihd.net/1024x1024/9973SK2VA12.jpg" 
-    },
-    {
-        id: 2,
-        titulo: "Copo Personalizado",
-        descricao: "Venha garantir seu copo e se junte com a melhor torcida de Quixadá!",
-        preco: "35,00 R$",
-        imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR88Xlwetvynptbf9j7Qa3bd6jVyzRFmRzmpg&s" 
-    }
-];
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const containerProdutos = document.getElementById("products");
+    if (!containerProdutos) return;
 
-    if (!containerProdutos) {
-        console.warn("Elemento #products não foi encontrado na página.");
-        return;
-    }
+    // Mantém o skeleton enquanto carrega
+    try {
+        const produtos = await ApiProdutoService.fetchProdutos();
 
-    // Aguarda 1.5 segundos exibindo o skeleton antes de injetar os itens
-    setTimeout(() => {
         containerProdutos.innerHTML = "";
 
-        listaProdutos.forEach(produto => {
+        if (!produtos || produtos.length === 0) {
+            containerProdutos.innerHTML = `
+                <div style="text-align:center; padding: 60px; color: rgba(255,255,255,0.4); grid-column: 1/-1;">
+                    <i class="ri-inbox-line" style="font-size: 3rem;"></i>
+                    <p>Nenhum produto disponível no momento.</p>
+                </div>
+            `;
+            return;
+        }
+
+        produtos.forEach(produto => {
             const novoCard = document.createElement("card-item-fla");
-            
-            // Configura os atributos que o componente espera receber
-            novoCard.setAttribute("img", produto.imagem);
-            novoCard.setAttribute("title", produto.titulo);
-            novoCard.setAttribute("description", produto.descricao);
-            novoCard.setAttribute("price", produto.preco);
+
+            novoCard.setAttribute("img", ApiProdutoService.getUrlFoto(produto._id));
+            novoCard.setAttribute("title", produto.nome);
+            novoCard.setAttribute("description", produto.descricao || '');
+            novoCard.setAttribute("price", `R$ ${parseFloat(produto.preco).toFixed(2)}`);
 
             containerProdutos.appendChild(novoCard);
         });
-    }, 1500);
+
+    } catch (error) {
+        console.error("Erro ao carregar produtos da loja:", error);
+        containerProdutos.innerHTML = `
+            <div style="text-align:center; padding: 60px; color: rgba(255,255,255,0.4); grid-column: 1/-1;">
+                <i class="ri-wifi-off-line" style="font-size: 3rem;"></i>
+                <p>Não foi possível carregar os produtos. Tente novamente mais tarde.</p>
+            </div>
+        `;
+    }
 });

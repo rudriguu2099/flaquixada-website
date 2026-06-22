@@ -3,13 +3,13 @@ class ModalProduto extends HTMLElement {
         super();
         this.htmlCarregado = false;
         this.deveAbrirImediatamente = false;
+        this._base64Atual = null;     // Armazena o Base64 da imagem selecionada
+        this._modoEdicao = false;     // true = editando produto existente
     }
 
     async connectedCallback() {
         try {
-            // Busca o HTML do modal
             const response = await fetch('./components_html/modalProduto.html');
-            
             if (!response.ok) {
                 throw new Error(`Não foi possível carregar o arquivo HTML. Status: ${response.status}`);
             }
@@ -17,13 +17,11 @@ class ModalProduto extends HTMLElement {
             const pureHtml = await response.text();
             this.innerHTML = pureHtml;
 
-            // Configura os seletores e cliques internos
             this.configurarEventosVisuais();
             this.htmlCarregado = true;
 
-            // Se o usuário clicou no botão "Novo Item" antes do fetch terminar, abre o modal agora
             if (this.deveAbrirImediatamente) {
-                this.abrirModal();
+                this.abrirModal(this._produtoPendente || null);
             }
 
         } catch (error) {
@@ -32,54 +30,84 @@ class ModalProduto extends HTMLElement {
     }
 
     configurarEventosVisuais() {
-        const modal = this.querySelector('#modal-produto');
         const btnFechar = this.querySelector('#btn-fechar-modal-produto');
         const btnCancelar = this.querySelector('#btn-cancelar-produto');
         const inputImagem = this.querySelector('#produto-imagem');
         const preview = this.querySelector('#preview-imagem-produto');
-        const form = this.querySelector('#form-produto');
+        const modal = this.querySelector('#modal-produto');
 
-        // Preview da imagem
+        // ----- PREVIEW + CONVERSÃO PARA BASE64 -----
         inputImagem?.addEventListener('change', (e) => {
             const arquivo = e.target.files[0];
             if (!arquivo) return;
 
             const reader = new FileReader();
             reader.onload = (event) => {
-                if (preview) preview.src = event.target.result;
+                const base64 = event.target.result; // "data:image/jpeg;base64,..."
+                this._base64Atual = base64;
+                if (preview) preview.src = base64;
             };
             reader.readAsDataURL(arquivo);
         });
 
-        // Envio do formulário
-        form?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Formulário enviado com sucesso!');
-            this.fecharModal();
-        });
-
-        // Eventos para fechar
+        // ----- FECHAR -----
         btnFechar?.addEventListener('click', () => this.fecharModal());
         btnCancelar?.addEventListener('click', () => this.fecharModal());
+
+        // Fecha ao clicar no overlay de fundo
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) this.fecharModal();
+        });
     }
 
-    abrirModal() {
-        const modal = this.querySelector('#modal-produto');
-        
-        if (this.htmlCarregado && modal) {
-            modal.style.display = 'flex';
-            this.deveAbrirImediatamente = false;
-        } else {
-            // Se o HTML ainda não carregou, avisa o componente para abrir assim que terminar
+    /**
+     * Abre o modal.
+     * @param {Object|null} produto - Se null, abre em modo criação.
+     *                                Se passado, abre em modo edição.
+     */
+    abrirModal(produto = null) {
+        if (!this.htmlCarregado) {
             this.deveAbrirImediatamente = true;
+            this._produtoPendente = produto;
+            return;
         }
+
+        const modal = this.querySelector('#modal-produto');
+        const inputImagem = this.querySelector('#produto-imagem');
+        if (!modal) return;
+
+        // Reseta o Base64 ao abrir — será preenchido quando o usuário escolher nova foto
+        this._base64Atual = null;
+        this._modoEdicao = !!produto;
+
+        // No modo edição, o campo de imagem NÃO é obrigatório
+        // (a foto atual já está salva no banco)
+        if (inputImagem) {
+            if (this._modoEdicao) {
+                inputImagem.removeAttribute('required');
+            } else {
+                inputImagem.setAttribute('required', 'true');
+            }
+        }
+
+        modal.style.display = 'flex';
+        this.deveAbrirImediatamente = false;
     }
 
     fecharModal() {
         const modal = this.querySelector('#modal-produto');
         if (modal) {
             modal.style.display = 'none';
+            this._base64Atual = null;
         }
+    }
+
+    /**
+     * Retorna o Base64 da imagem atualmente selecionada pelo usuário.
+     * Retorna null se nenhuma imagem nova foi selecionada.
+     */
+    getBase64Atual() {
+        return this._base64Atual;
     }
 }
 

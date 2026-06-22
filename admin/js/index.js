@@ -1,6 +1,8 @@
 import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
 import { ApiCardapioService } from '../../js/services/ApiCardapioService.js';
+import { ApiNoticiasService } from '../../js/services/ApiNoticiasService.js';
+import { ApiProdutoService } from '../../js/services/ApiProdutoService.js';
 
 renderDashboard();
 
@@ -8,27 +10,35 @@ async function renderDashboard() {
     const container = document.getElementById('dashboard-content');
     if (!container) return;
 
-    // Busca o total de itens via API
+    // Busca contagens reais das APIs em paralelo
     let totalCardapio = 0;
-    try {
-        const dadosCardapio = await ApiCardapioService.fetchCardapio();
-        if (dadosCardapio) {
-            totalCardapio = (dadosCardapio.bebidas?.length || 0) + 
-                            (dadosCardapio.petiscos?.length || 0) + 
-                            (dadosCardapio.pratos?.length || 0);
-        }
-    } catch(e) {
-        console.error("Erro ao buscar total de cardápio da API", e);
+    let totalNoticias = 0;
+    let totalProdutos = 0;
+
+    const [resultCardapio, resultNoticias, resultProdutos] = await Promise.allSettled([
+        ApiCardapioService.fetchCardapio(),
+        ApiNoticiasService.fetchNoticias(),
+        ApiProdutoService.fetchProdutos()
+    ]);
+
+    if (resultCardapio.status === 'fulfilled' && resultCardapio.value) {
+        const d = resultCardapio.value;
+        totalCardapio = (d.bebidas?.length || 0) + (d.petiscos?.length || 0) + (d.pratos?.length || 0);
+    }
+    if (resultNoticias.status === 'fulfilled') {
+        totalNoticias = resultNoticias.value?.length || 0;
+    }
+    if (resultProdutos.status === 'fulfilled') {
+        totalProdutos = resultProdutos.value?.length || 0;
     }
 
     // Lê o status do Bolão
     const bolaoStatus = localStorage.getItem('bolao_status') || 'INATIVO';
 
-    // Dados que viriam do Backend
     const kpis = [
-        { icone: 'ri-newspaper-line', valor: '12', label: 'Notícias Publicadas' },
+        { icone: 'ri-newspaper-line', valor: totalNoticias.toString(), label: 'Notícias Publicadas' },
         { icone: 'ri-restaurant-line', valor: totalCardapio.toString(), label: 'Itens no Cardápio' },
-        { icone: 'ri-shopping-bag-line', valor: '8', label: 'Produtos na Loja' }
+        { icone: 'ri-shopping-bag-line', valor: totalProdutos.toString(), label: 'Produtos na Loja' }
     ];
 
     const actions = [
