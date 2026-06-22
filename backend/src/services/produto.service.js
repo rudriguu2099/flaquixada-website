@@ -4,7 +4,12 @@ import { Produto } from "../models/produto.model.js";
 
 export class ProdutoService {
   static async criarProduto(produtoData) {
-    const novoProduto = new Produto({ ...produtoData });
+    const novoProduto = new Produto({
+      nome: produtoData.nome,
+      preco: produtoData.preco,
+      descricao: produtoData.descricao,
+      foto: produtoData.fotoBase64,
+    });
 
     const produtoCriado = await db
       .collection("produtos")
@@ -51,6 +56,12 @@ export class ProdutoService {
   static async editarProduto(id, dadosAtualizados) {
     if (!ObjectId.isValid(id)) {
       throw new Error("ID inválido");
+    }
+
+    // ? atualiza foto corretamente
+    if (dadosAtualizados.fotoBase64) {
+      dadosAtualizados.foto = dadosAtualizados.fotoBase64;
+      delete dadosAtualizados.fotoBase64; // Remove a chave antiga para não poluir o banco
     }
 
     const resultado = await db
