@@ -41,6 +41,13 @@ class ModalProduto extends HTMLElement {
             const arquivo = e.target.files[0];
             if (!arquivo) return;
 
+            const MAX_FILE_SIZE = 5242880;
+            if (arquivo.size > MAX_FILE_SIZE) {
+                alert('A imagem selecionada é muito grande. O tamanho máximo permitido é de 5MB.');
+                e.target.value = '';
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = (event) => {
                 const base64 = event.target.result; // "data:image/jpeg;base64,..."
