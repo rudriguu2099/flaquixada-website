@@ -7,8 +7,8 @@
 
 .stat-card {
     flex: 1 1 200px;
-    background: var(--black-fla);
-    border: 1px solid var(--admin-border);
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -72,8 +72,8 @@
 
 .btn-quick-action {
     flex: 1 1 180px;
-    background: var(--black-fla);
-    border: 1px solid var(--admin-border);
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 16px;
     display: flex;
@@ -142,8 +142,8 @@
 
 .dashboard-bolao-status {
     padding: 20px;
-    background: var(--black-fla);
-    border: 1px solid var(--admin-border);
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
