@@ -13,7 +13,8 @@
                 
                 <div class="form-group">
                     <label for="noticia-titulo">Título da Notícia</label>
-                    <input type="text" id="noticia-titulo" required placeholder="Ex: Grande evento neste domingo">
+                    <input type="text" id="noticia-titulo" required minlength="5" placeholder="Ex: Grande evento neste domingo">
+                    <small style="color: rgba(255,255,255,0.4); font-size: 0.75rem;">Mínimo de 5 caracteres.</small>
                 </div>
                 
                 <div class="form-row" style="display: flex; gap: 16px; margin-bottom: 16px;">
@@ -34,7 +35,8 @@
 
                 <div class="form-group">
                     <label for="noticia-resumo">Resumo / Conteúdo</label>
-                    <textarea id="noticia-resumo" rows="5" required placeholder="Digite os detalhes da notícia aqui..." style="resize: vertical;"></textarea>
+                    <textarea id="noticia-resumo" rows="5" required minlength="10" placeholder="Digite os detalhes da notícia aqui..." style="resize: vertical;"></textarea>
+                    <small style="color: rgba(255,255,255,0.4); font-size: 0.75rem;">Mínimo de 10 caracteres.</small>
                 </div>
             </div>
             

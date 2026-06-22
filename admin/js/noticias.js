@@ -191,7 +191,7 @@ async function salvarNoticia(e) {
         
     } catch (error) {
         console.error('Erro ao salvar notícia:', error);
-        alert('Erro ao salvar notícia. Verifique os dados ou sua conexão.');
+        alert(`Erro ao salvar notícia: ${error.message}`);
     } finally {
         if (btnSubmit) { btnSubmit.innerHTML = originalText; btnSubmit.disabled = false; }
     }
