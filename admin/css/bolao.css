@@ -359,3 +359,118 @@
         justify-content: center;
     }
 }
+
+
+/* ==========================================================================
+   GERENCIADOR DE PAGAMENTOS
+   ========================================================================== */
+
+.bolao-pagamentos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bolao-pagamento-row {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.bolao-pagamento-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.pagamento-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pagamento-num {
+    color: var(--red-fla);
+    font-weight: bold;
+    font-size: 1.2rem;
+    min-width: 25px;
+    text-align: center;
+}
+
+.pagamento-nome {
+    color: var(--white-fla);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.pagamento-nome.vazio {
+    color: rgba(255, 255, 255, 0.3);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.pagamento-acoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-pagamento {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-pagamento:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+/* Status Pendente */
+.btn-pagamento.pendente {
+    background: rgba(255, 255, 255, 0.1);
+    color: #cccccc;
+}
+
+.btn-pagamento:not(:disabled):hover.pendente {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Status Pago */
+.btn-pagamento.pago {
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.btn-pagamento:not(:disabled):hover.pago {
+    background: rgba(40, 167, 69, 0.25);
+}
+
+/* Responsividade do Pagamento */
+@media (max-width: 576px) {
+    .bolao-pagamento-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .pagamento-acoes {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding-top: 10px;
+    }
+}

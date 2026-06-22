@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     inicializarSelecaoJogo();
+    inicializarTogglePagamentos();
+    renderizarPagamentos();
 });
 
 function inicializarToggleJogadores() {
@@ -48,7 +50,6 @@ function inicializarToggleJogadores() {
 }
 
 function inicializarEstadoBolao() {
-    // Carrega o estado atual do localStorage (Mock do banco)
     const savedState = localStorage.getItem('bolao_mock_state');
     if (savedState) {
         currentState = savedState;
@@ -70,9 +71,6 @@ function inicializarEstadoBolao() {
 function mudarEstadoBolao(newState) {
     if (currentState === newState) return;
     
-    // Regra: se mudar para ABERTO, os jogadores devem estar definidos
-    // Aqui assumimos que o Admin já salvou os nomes.
-    
     currentState = newState;
     localStorage.setItem('bolao_mock_state', currentState);
     atualizarUIEstado();
@@ -81,13 +79,11 @@ function mudarEstadoBolao(newState) {
 }
 
 function atualizarUIEstado() {
-    // Atualiza a Label e a Badge
     const lblEstado = document.getElementById('lbl-estado-atual');
     const lblDesc = document.getElementById('lbl-estado-desc');
     
     if (!lblEstado || !lblDesc) return;
 
-    // Reseta classes
     lblEstado.className = 'badge-estado';
     
     const btnsState = document.querySelectorAll('.btn-state');
@@ -116,12 +112,12 @@ function carregarJogadoresMock() {
     if (saved) {
         return JSON.parse(saved);
     }
-    // Padrão inicial vazio
     const iniciais = [];
     for(let i=1; i<=10; i++) iniciais.push({ id: i, nomeJogador: "", participante: "" });
     return iniciais;
 }
 
+// 1. APENAS OS JOGADORES DO TIME AQUI (Foco total na escalação)
 function renderizarInputsJogadores() {
     const container = document.getElementById('bolao-jogadores-container');
     if (!container) return;
@@ -135,9 +131,9 @@ function renderizarInputsJogadores() {
         
         row.innerHTML = `
             <div class="bolao-jogador-number">${index + 1}</div>
-            <div class="bolao-jogador-input-group">
+            <div class="bolao-jogador-input-group" style="width: 100%;">
                 <label>Jogador ${index + 1}</label>
-                <input type="text" class="input-jogador" id="jogador-input-${index+1}" placeholder="Nome do Jogador ${index+1}" value="${j.nomeJogador || ''}">
+                <input type="text" class="input-jogador" id="jogador-input-${index+1}" placeholder="Nome do Atleta ${index+1}" value="${j.nomeJogador || ''}">
             </div>
         `;
         
@@ -146,23 +142,28 @@ function renderizarInputsJogadores() {
 }
 
 function salvarJogadoresMock() {
+    const old = carregarJogadoresMock();
     const jogadores = [];
-    for(let i=1; i<=10; i++) {
+
+    for(let i = 1; i <= 10; i++) {
         const input = document.getElementById(`jogador-input-${i}`);
+        const nomeInformado = input ? input.value.trim() : '';
+        const jogadorAntigo = old.find(j => j.id === i);
+
+        const participanteAtual = jogadorAntigo ? jogadorAntigo.participante : '';
+        const pagoAtual = jogadorAntigo ? jogadorAntigo.pago : false;
+
         jogadores.push({
             id: i,
-            nomeJogador: input ? input.value.trim() : '',
-            participante: '' // Resetar o participante se quiser, ou manter? No mock vamos só salvar o nome.
+            nomeJogador: nomeInformado,
+            participante: participanteAtual, // Preserva quem apostou no front
+            pago: nomeInformado === '' ? false : (pagoAtual || false)
         });
     }
 
-    // Para evitar apagar os participantes ao editar o nome, vamos mesclar
-    const old = carregarJogadoresMock();
-    for(let i=0; i<10; i++) {
-        jogadores[i].participante = old[i].participante || '';
-    }
-
     localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
+    
+    renderizarPagamentos();
     alert("Lista de jogadores salva com sucesso! O bolão pode ser aberto.");
 }
 
@@ -173,8 +174,9 @@ function zerarApostasMock() {
     jogadores.forEach(j => j.participante = "");
     localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
     
-    // Volta para inativo automaticamente
     mudarEstadoBolao('INATIVO');
+    renderizarInputsJogadores();
+    renderizarPagamentos();
     
     alert("Todas as apostas foram apagadas. O bolão voltou para INATIVO.");
 }
@@ -195,7 +197,6 @@ async function inicializarSelecaoJogo() {
             option.style.color = '#ffffff';
             option.style.padding = '10px';
             
-            // Formatacao ultra clean: Campeonato - Time x Time (Data)
             const dataCurta = jogo.dataFormatada.substring(0, 5); 
             option.textContent = `${jogo.campeonato}: ${jogo.timeCasa} x ${jogo.timeFora} (${dataCurta})`;
             
@@ -215,7 +216,6 @@ async function inicializarSelecaoJogo() {
             const selectedGame = loadedJogos.find(j => j.id == gameId);
             if (selectedGame) {
                 previewContainer.innerHTML = '';
-                // Instancia o componente com apenas este jogo
                 const cardDestaque = new CardNextGame([selectedGame]);
                 previewContainer.appendChild(cardDestaque);
                 previewBlock.style.display = 'block';
@@ -224,7 +224,6 @@ async function inicializarSelecaoJogo() {
             }
         };
 
-        // Tentar selecionar o que já está salvo
         const savedGameId = localStorage.getItem('bolao_mock_game_id');
         if (savedGameId) {
             select.value = savedGameId;
@@ -238,7 +237,7 @@ async function inicializarSelecaoJogo() {
         btnSalvar.addEventListener('click', () => {
             if (select.value) {
                 localStorage.setItem('bolao_mock_game_id', select.value);
-                alert('Jogo salvo com sucesso! O bolão agora exibirá este jogo como destaque.');
+                alert('Jogo saved com sucesso!');
                 renderPreview(select.value);
             } else {
                 alert('Selecione um jogo válido.');
@@ -247,53 +246,175 @@ async function inicializarSelecaoJogo() {
 
     } catch (error) {
         select.innerHTML = '<option value="">Erro ao carregar jogos</option>';
-        console.error("Erro inicializando seleção de jogo:", error);
+        console.error(error);
     }
 }
 
 function embaralharJogadores() {
-    const inputs = [];
-    for(let i=1; i<=10; i++) {
-        const el = document.getElementById(`jogador-input-${i}`);
-        if (el && el.value.trim() !== '') {
-            inputs.push({ index: i, value: el.value.trim() });
-        }
-    }
+    const jogadoresAtuais = carregarJogadoresMock();
+    
+    const itensParaEmbaralhar = jogadoresAtuais
+        .filter(j => j.nomeJogador && j.nomeJogador.trim() !== '')
+        .map(j => ({ nomeJogador: j.nomeJogador, pago: j.pago || false }));
 
-    if (inputs.length < 2) {
-        alert("Preencha pelo menos 2 jogadores para poder embaralhar.");
+    if (itensParaEmbaralhar.length < 2) {
+        alert("Preencha e salve pelo menos 2 jogadores para poder embaralhar.");
         return;
     }
 
-    const originalPositions = inputs.map(item => item.index);
-    let shuffledValues = [];
+    let shuffled = [...itensParaEmbaralhar];
     let attempts = 0;
     let derangement = false;
 
-    // Tenta encontrar um derangement (onde nenhum elemento fica na posição original)
     while (!derangement && attempts < 100) {
         attempts++;
-        shuffledValues = [...inputs];
-        
-        for (let i = shuffledValues.length - 1; i > 0; i--) {
+        for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            [shuffledValues[i], shuffledValues[j]] = [shuffledValues[j], shuffledValues[i]];
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
-
         derangement = true;
-        for (let i = 0; i < shuffledValues.length; i++) {
-            if (shuffledValues[i].index === originalPositions[i]) {
+        for (let i = 0; i < itensParaEmbaralhar.length; i++) {
+            if (shuffled[i].nomeJogador === itensParaEmbaralhar[i].nomeJogador) {
                 derangement = false;
                 break;
             }
         }
     }
 
-    // Aplica os valores embaralhados de volta aos inputs originais
-    for(let i = 0; i < inputs.length; i++) {
-        const el = document.getElementById(`jogador-input-${originalPositions[i]}`);
-        el.value = shuffledValues[i].value;
+    let indexEmbaralhado = 0;
+    const novosJogadores = jogadoresAtuais.map(j => {
+        if (j.nomeJogador && j.nomeJogador.trim() !== '') {
+            const dadosSorteados = shuffled[indexEmbaralhado];
+            indexEmbaralhado++;
+            return {
+                id: j.id,
+                nomeJogador: dadosSorteados.nomeJogador,
+                participante: j.participante || '', 
+                pago: dadosSorteados.pago
+            };
+        }
+        return j; 
+    });
+
+    localStorage.setItem('bolao_mock_jogadores', JSON.stringify(novosJogadores));
+    
+    renderizarInputsJogadores();
+    renderizarPagamentos();
+    alert("Jogadores embaralhar com sucesso!");
+}
+
+function inicializarTogglePagamentos() {
+    const btnToggle = document.getElementById('btn-toggle-pagamentos');
+    const content = document.getElementById('content-pagamentos');
+
+    if (btnToggle && content) {
+        btnToggle.addEventListener('click', () => {
+            btnToggle.classList.toggle('active');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        });
     }
 }
+
+
+function renderizarPagamentos() {
+    const container = document.getElementById('bolao-pagamentos-container');
+    if (!container) return;
+
+    const jogadores = carregarJogadoresMock();
+    container.innerHTML = '';
+
+    jogadores.forEach(j => {
+        const temParticipante = j.participante && j.participante.trim() !== '';
+        const temNomeJogador = j.nomeJogador && j.nomeJogador.trim() !== '';
+        const isPago = j.pago === true;
+
+        // Foco no Apostador: Se alguém comprou, mostra o nome dele. 
+        // Se o admin já colocou o atleta, exibe em formato secundário ao lado.
+        let textoExibicao = 'Vaga Disponível';
+        if (temParticipante) {
+            textoExibicao = j.participante; 
+        } else if (temNomeJogador) {
+            textoExibicao = `Vaga Livre (${j.nomeJogador})`;
+        }
+
+        const vagaSemApostador = !temParticipante;
+
+        const row = document.createElement('div');
+        row.className = 'bolao-pagamento-row';
+
+        // Mostra qual Atleta está atrelado a essa vaga caso já exista
+        const infoAtleta = (temParticipante && temNomeJogador) ? ` <small style="opacity: 0.6; font-size: 12px;">— Atleta: ${j.nomeJogador}</small>` : '';
+
+        row.innerHTML = `
+            <div class="pagamento-info">
+                <span class="pagamento-num">${j.id}</span>
+                <span class="pagamento-nome ${vagaSemApostador ? 'vazio' : ''}">
+                    ${textoExibicao}${infoAtleta}
+                </span>
+            </div>
+            <div class="pagamento-acoes">
+                <button class="btn-pagamento ${isPago ? 'pago' : 'pendente'}" ${vagaSemApostador ? 'disabled' : ''}>
+                    <i class="${isPago ? 'ri-check-line' : 'ri-time-line'}"></i> 
+                    ${isPago ? 'Pago' : 'Pendente'}
+                </button>
+                <button class="btn-icon delete" title="Remover Aposta" ${vagaSemApostador ? 'style="visibility:hidden;"' : ''}>
+                    <i class="ri-delete-bin-line"></i>
+                </button>
+            </div>
+        `;
+
+        const btnToggle = row.querySelector('.btn-pagamento');
+        if (btnToggle) {
+            btnToggle.addEventListener('click', () => alternarPagamento(j.id));
+        }
+
+        const btnDelete = row.querySelector('.delete');
+        if (btnDelete) {
+            btnDelete.addEventListener('click', () => limparApostaParticipante(j.id));
+        }
+
+        container.appendChild(row);
+    });
+}
+
+function alternarPagamento(id) {
+    const jogadores = carregarJogadoresMock();
+    const index = jogadores.findIndex(j => j.id === id);
+    
+    if (index !== -1 && jogadores[index].participante) {
+        jogadores[index].pago = !jogadores[index].pago; 
+        localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
+        renderizarPagamentos(); 
+    }
+}
+
+// Remove apenas o apostador da vaga sem apagar o jogador definido pelo Admin
+function limparApostaParticipante(id) {
+    if (!confirm("Tem certeza que deseja remover esta aposta e resetar o pagamento?")) return;
+    
+    const jogadores = carregarJogadoresMock();
+    const index =调 = jogadores.findIndex(j => j.id === id);
+    
+    if (index !== -1) {
+        jogadores[index].participante = "";
+        jogadores[index].pago = false; 
+        
+        localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
+        
+        renderizarInputsJogadores();
+        renderizarPagamentos();      
+    }
+}
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'bolao_mock_jogadores') {
+        renderizarInputsJogadores();
+        renderizarPagamentos();
+    }
+});
 
 console.log("Interface visual de Gerenciar Bolão carregada com sucesso.");
