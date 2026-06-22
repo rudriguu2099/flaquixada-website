@@ -121,6 +121,17 @@ function limparFormulario() {
     
     const titulo = document.getElementById('modal-titulo');
     if(titulo) titulo.innerText = 'Nova Notícia';
+
+    // Pega a data atual no fuso horário local (Brasil) e não em UTC
+    const dataInput = document.getElementById('noticia-data');
+    if (dataInput) {
+        const d = new Date();
+        d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+        const hoje = d.toISOString().split('T')[0];
+        
+        dataInput.value = hoje;
+        dataInput.min = hoje;
+    }
 }
 
 function editarNoticia(id) {
@@ -138,7 +149,17 @@ function editarNoticia(id) {
     // Converte a data ISO para YYYY-MM-DD para funcionar na tag <input type="date">
     if (noticia.data) {
         const dataInput = document.getElementById('noticia-data');
-        if (dataInput) dataInput.value = noticia.data.split('T')[0];
+        if (dataInput) {
+            const dataFormatada = noticia.data.split('T')[0];
+            dataInput.value = dataFormatada;
+            
+            // Permite salvar notícias antigas sem erro de validação da data mínima
+            const d = new Date();
+            d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+            const hoje = d.toISOString().split('T')[0];
+            
+            dataInput.min = dataFormatada < hoje ? dataFormatada : hoje;
+        }
     }
     
     const tituloModal = document.getElementById('modal-titulo');
@@ -163,8 +184,9 @@ async function salvarNoticia(e) {
         titulo,
         resumo,
         categoria,
-        // Envia no formato ISO string esperado pelo MongoDB backend
-        data: dataInput ? new Date(dataInput).toISOString() : new Date().toISOString()
+        // Adiciona 12:00:00 UTC para garantir que, ao converter para o fuso brasileiro, 
+        // o dia continue sendo o mesmo (vai cair às 09:00 da manhã do dia correto).
+        data: dataInput ? dataInput + 'T12:00:00Z' : new Date().toISOString()
     };
 
     const btnSubmit = document.querySelector('#form-noticia button[type="submit"]');
