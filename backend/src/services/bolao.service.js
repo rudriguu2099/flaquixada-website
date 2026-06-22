@@ -59,6 +59,16 @@ export class BolaoService {
     const idJogoStr = String(dadosAposta.idJogo);
     const numeroSlotNum = Number(dadosAposta.numeroSlot);
 
+    // 1. TRAVA DE SEGURANÇA: Verificar o status atual do bolão na coleção 'bolao_estado'
+    const estadoDoBolao = await db.collection("bolao_estado").findOne({ idJogo: idJogoStr });
+    const statusAtual = estadoDoBolao?.status || "INATIVO";
+
+    // Se o status não for explicitamente ABERTO, barra a inserção
+    if (statusAtual !== "ABERTO") {
+      throw new Error("As apostas para este jogo já foram encerradas ou não estão disponíveis no momento.");
+    }
+
+    // 2. Validação de Slot Ocupado (Seu código original)
     const slotOcupado = await db.collection("apostas_bolao").findOne({
       idJogo: idJogoStr,
       numeroSlot: numeroSlotNum
@@ -68,6 +78,7 @@ export class BolaoService {
       throw new Error(`Este número de slot já foi preenchido por outro membro (${slotOcupado.participanteNome || 'Membro'}).`);
     }
 
+    // 3. Criação da aposta (Seu código original)
     const novaAposta = {
       idJogo: idJogoStr,
       numeroSlot: numeroSlotNum,

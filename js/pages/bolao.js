@@ -153,6 +153,7 @@ async function salvarAposta() {
         alert(`Aposta confirmada no Jogador ${numeroSlot}! Boa sorte, o nome real será revelado em breve!`);
     } catch (error) {
         alert(error.message || 'Erro ao realizar a aposta. Tente novamente.');
+        await renderBolaoState(window.currentBolaoGameId);
     } finally {
         const btnSalvar = document.getElementById('btn-bolao-salvar');
         if (btnSalvar) btnSalvar.disabled = false;
