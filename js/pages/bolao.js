@@ -1,35 +1,18 @@
 import { fetchJogos } from '../services/ApiJogosService.js';
+import { ApiBolaoService } from '../services/ApiBolaoService.js';
 import '../components/navbar.js';
 import '../components/Bolao.js';
 import '../components/NextGame.js';
 import '../components/CardNextGame.js';
 import '../components/Footer.js';
 
-function getBolaoState() {
-    return localStorage.getItem('bolao_mock_state') || 'INATIVO';
-}
+window.currentBolaoGameId = null;
 
-function getBolaoJogadores() {
-    const saved = localStorage.getItem('bolao_mock_jogadores');
-    if (saved) return JSON.parse(saved);
-    
-    // Default de segurança
-    const iniciais = [];
-    for(let i=1; i<=10; i++) iniciais.push({ id: i, nomeJogador: "", participante: "" });
-    return iniciais;
-}
-
-function saveBolaoJogadores(jogadores) {
-    localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
-}
-
-function renderBolaoState() {
+async function renderBolaoState(idJogo) {
     const container = document.getElementById('bolao-dynamic-container');
     if (!container) return;
 
-    const state = getBolaoState();
-
-    if (state === 'INATIVO') {
+    if (!idJogo) {
         container.innerHTML = `
             <div class="bolao-empty-state">
                 <i class="ri-lock-2-line"></i>
@@ -37,43 +20,69 @@ function renderBolaoState() {
                 <p>O bolão para essa partida logo mais será aberto, fique de olho!</p>
             </div>
         `;
-    } else if (state === 'AGUARDANDO') {
+        return;
+    }
+
+    try {
+        const painel = await ApiBolaoService.consultarPainel(idJogo);
+        if (!painel) {
+            throw new Error("Erro ao carregar o painel");
+        }
+
+        const { status, slots } = painel;
+
+        if (status === 'INATIVO') {
+            container.innerHTML = `
+                <div class="bolao-empty-state">
+                    <i class="ri-lock-2-line"></i>
+                    <h2>Bolão Fechado</h2>
+                    <p>O bolão para essa partida ainda não foi aberto, fique de olho!</p>
+                </div>
+            `;
+            return;
+        }
+
+        const state = status;
+
+        if (state === 'ABERTO') {
+            container.innerHTML = `
+                <div class="bolao-participants-list" id="bolao-participants-list"></div>
+                
+                <div class="bolao-insert-area" id="bolao-insert-area">
+                    <p class="bolao-blind-bet-text">Faça sua aposta às cegas:</p>
+                    <select id="select-jogador" class="bolao-novo-input bolao-novo-input-margin"></select>
+                    <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
+                    <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar">
+                        <i class="ri-check-line"></i> Confirmar Aposta</button>
+                </div>
+            `;
+            renderBolaoList(state, slots);
+            
+            const btnSalvar = document.getElementById('btn-bolao-salvar');
+            if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
+        } else if (state === 'FECHADO') {
+            container.innerHTML = `
+                <div class="bolao-revelados-header">
+                    <h3><i class="ri-eye-line"></i> Jogadores Revelados!</h3>
+                    <p>As apostas estão encerradas. Confira qual o seu jogador!</p>
+                </div>
+                <div class="bolao-participants-list" id="bolao-participants-list"></div>
+            `;
+            renderBolaoList(state, slots);
+        }
+    } catch (error) {
+        console.error(error);
         container.innerHTML = `
             <div class="bolao-empty-state">
-                <i class="ri-clipboard-line"></i>
-                <h2>Aguardando Escalação</h2>
-                <p>Estamos fazendo o sorteio da escalação do bolão, em breve divulgaremos!</p>
+                <i class="ri-error-warning-line"></i>
+                <h2>Erro ao carregar o Bolão</h2>
+                <p>Ocorreu um erro ao conectar com o servidor. Tente novamente mais tarde.</p>
             </div>
         `;
-    } else if (state === 'ABERTO') {
-        container.innerHTML = `
-            <div class="bolao-participants-list" id="bolao-participants-list"></div>
-            
-            <div class="bolao-insert-area" id="bolao-insert-area">
-                <p class="bolao-blind-bet-text">Faça sua aposta às cegas:</p>
-                <select id="select-jogador" class="bolao-novo-input bolao-novo-input-margin"></select>
-                <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
-                <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar">
-                    <i class="ri-check-line"></i> Confirmar Aposta</button>
-            </div>
-        `;
-        renderBolaoList(state);
-        
-        const btnSalvar = document.getElementById('btn-bolao-salvar');
-        if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
-    } else if (state === 'FECHADO') {
-        container.innerHTML = `
-            <div class="bolao-revelados-header">
-                <h3><i class="ri-eye-line"></i> Jogadores Revelados!</h3>
-                <p>As apostas estão encerradas. Confira qual o seu jogador!</p>
-            </div>
-            <div class="bolao-participants-list" id="bolao-participants-list"></div>
-        `;
-        renderBolaoList(state);
     }
 }
 
-function renderBolaoList(state) {
+function renderBolaoList(state, slots) {
     const list = document.getElementById('bolao-participants-list');
     const select = document.getElementById('select-jogador'); 
     if (!list) return;
@@ -83,25 +92,23 @@ function renderBolaoList(state) {
         select.innerHTML = '<option value="" disabled selected>Escolha um número disponível...</option>';
     }
 
-    const jogadores = getBolaoJogadores();
-
-    jogadores.forEach(j => {
+    slots.forEach(slot => {
         const row = document.createElement('div');
         row.className = 'bolao-participant-row';
         
-        const isTaken = j.participante && j.participante.trim().length > 0;
+        const isTaken = slot.participante && slot.participante.trim().length > 0;
         
-        // LÓGICA PRINCIPAL: Se ABERTO, esconde o nome real. Se FECHADO, revela.
+        // Se FECHADO, mostra o jogador sorteado. Se ABERTO, esconde (Jogador 1, Jogador 2...)
         const nomeParaMostrar = state === 'FECHADO' 
-            ? (j.nomeJogador || 'Jogador Não Preenchido pelo Admin') 
-            : `Jogador ${j.id}`;
+            ? slot.jogadorSorteado
+            : `Jogador ${slot.numeroSlot}`;
 
         row.innerHTML = `
             <div class="bolao-player-info">
                 <span class="bolao-player-name">${nomeParaMostrar}</span>
             </div>
             <div class="bolao-participant-info">
-                ${isTaken ? `<span class="bolao-participant-name taken"><i class="ri-user-check-fill"></i> ${j.participante}</span>` : `<span class="bolao-participant-name free">Disponível</span>`}
+                ${isTaken ? `<span class="bolao-participant-name taken"><i class="ri-user-check-fill"></i> ${slot.participante}</span>` : `<span class="bolao-participant-name free">Disponível</span>`}
             </div>
         `;
         list.appendChild(row);
@@ -109,23 +116,23 @@ function renderBolaoList(state) {
         // Se está livre e estamos na fase de apostas, adiciona ao select
         if (!isTaken && select) {
             const option = document.createElement('option');
-            option.value = j.id;
-            option.textContent = `Jogador ${j.id}`;
+            option.value = slot.numeroSlot;
+            option.textContent = `Jogador ${slot.numeroSlot}`;
             select.appendChild(option);
         }
     });
 }
 
-function salvarAposta() {
+async function salvarAposta() {
     const select = document.getElementById('select-jogador');
     const inputNome = document.getElementById('novo-participante-nome');
     
-    if (!select || !inputNome) return;
+    if (!select || !inputNome || !window.currentBolaoGameId) return;
 
-    const jogadorId = parseInt(select.value);
+    const numeroSlot = parseInt(select.value);
     const participanteNome = inputNome.value.trim();
 
-    if (!jogadorId) {
+    if (!numeroSlot) {
         alert('Por favor, selecione uma vaga disponível na lista.');
         return;
     }
@@ -135,39 +142,24 @@ function salvarAposta() {
         return;
     }
 
-    const jogadores = getBolaoJogadores();
-    const jogador = jogadores.find(j => j.id === jogadorId);
-    
-    if (jogador) {
-        // Validação extra caso a vaga já tenha sido pega (útil para quando tivermos banco de dados real)
-        if (jogador.participante && jogador.participante.trim() !== '') {
-            alert('Ops! Alguém acabou de pegar essa vaga. Escolha outra.');
-            renderBolaoState(); 
-            return;
-        }
+    try {
+        const btnSalvar = document.getElementById('btn-bolao-salvar');
+        if (btnSalvar) btnSalvar.disabled = true;
 
-        jogador.participante = participanteNome;
-        saveBolaoJogadores(jogadores);
+        await ApiBolaoService.apostarSlot(window.currentBolaoGameId, numeroSlot, participanteNome);
         
         inputNome.value = '';
-        renderBolaoState();
-        alert(`Aposta confirmada no Jogador ${jogador.id}! Boa sorte, o nome real será revelado em breve!`);
+        await renderBolaoState(window.currentBolaoGameId);
+        alert(`Aposta confirmada no Jogador ${numeroSlot}! Boa sorte, o nome real será revelado em breve!`);
+    } catch (error) {
+        alert(error.message || 'Erro ao realizar a aposta. Tente novamente.');
+    } finally {
+        const btnSalvar = document.getElementById('btn-bolao-salvar');
+        if (btnSalvar) btnSalvar.disabled = false;
     }
 }
 
-// Escuta por mudanças no localStorage feitas por outras abas (Painel Admin)
-// Isso permite que você atualize o admin e a página pública reaja quase em tempo real (F5 manual não é necessário se implementar evento storage, mas vamos forçar um reload visual)
-window.addEventListener('storage', (e) => {
-    if (e.key === 'bolao_mock_state' || e.key === 'bolao_mock_jogadores') {
-        renderBolaoState();
-    }
-});
-
 document.addEventListener('DOMContentLoaded', async () => {
-    // Renderiza o bolão com o estado atual
-    renderBolaoState();
-
-    // Carrega e renderiza o Próximo Jogo
     const containerPrincipal = document.getElementById('bolao-jogo-atual');
     if (!containerPrincipal) return;
 
@@ -177,32 +169,40 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const jogosDaRodada = await fetchJogos();
+        const configGlobal = await ApiBolaoService.obterConfiguracaoGlobais();
+        
         containerPrincipal.innerHTML = ''; 
 
         if (jogosDaRodada.length > 0) {
-            const savedGameId = localStorage.getItem('bolao_mock_game_id');
             let jogosOrdenados = [...jogosDaRodada];
 
-            // Se o admin selecionou um jogo específico para o bolão, forçamos ele a ser o primeiro
-            if (savedGameId) {
-                const targetGameId = Number(savedGameId);
+            // Define o id do jogo do bolão baseado na config global ou pega o próximo
+            if (configGlobal && configGlobal.idJogoAtivo) {
+                window.currentBolaoGameId = configGlobal.idJogoAtivo;
+                const targetGameId = Number(configGlobal.idJogoAtivo);
                 const gameIndex = jogosOrdenados.findIndex(j => j.id === targetGameId);
                 
                 if (gameIndex > -1) {
                     const selectedGame = jogosOrdenados.splice(gameIndex, 1)[0];
                     jogosOrdenados.unshift(selectedGame); // Coloca na primeira posição
                 }
+            } else {
+                window.currentBolaoGameId = jogosOrdenados[0].id;
             }
 
             const cardDestaque = new CardNextGame(jogosOrdenados);
             cardDestaque.setAttribute('custom-title', 'Faça sua aposta');
             cardDestaque.setAttribute('custom-icon', 'ri-trophy-line');
             containerPrincipal.appendChild(cardDestaque);
+            
+            // Renderiza o painel do bolão para o jogo atual
+            renderBolaoState(window.currentBolaoGameId);
         } else {
             containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Nenhum jogo disponível no momento.</p>';
+            renderBolaoState(null);
         }
     } catch (error) {
         containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Erro ao carregar o jogo.</p>';
-        console.error("Erro renderizando CardNextGame:", error);
+        console.error("Erro inicialização do bolão:", error);
     }
 });

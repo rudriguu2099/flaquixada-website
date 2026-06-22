@@ -10,14 +10,7 @@ import '../components/CardCardapio.js';
 import '../components/Noticias.js';
 import '../components/Footer.js';
 
-if (!localStorage.getItem('user')) {
-    const adminFalso = {
-        name: "Admin Provisório",
-        role: "admin",
-        token: "mocked-jwt-token-xyz123"
-    };
-    localStorage.setItem('user', JSON.stringify(adminFalso));
-}
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     const containerPrincipal = document.getElementById('match-fla');
