@@ -1,3 +1,6 @@
+import './components/AdminSidebar.js';
+import './components/AdminHeader.js';
+import './components/modalProduto.js';
 import { obterProdutosLocal, salvarProdutosLocal } from '../../js/utils/mockProdutos.js';
 
 const CAMINHO_API = 'sua_api_aqui/produtos';

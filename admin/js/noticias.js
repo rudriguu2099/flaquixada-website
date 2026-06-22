@@ -1,6 +1,6 @@
 import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
-import './components/modalNoticia.js';
+import './components/ModalNoticia.js';
 import { ApiNoticiasService } from '../../js/services/ApiNoticiasService.js'; // Ajuste o caminho se necessário
 
 console.log("Admin Notícias inicializado.");
