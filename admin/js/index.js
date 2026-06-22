@@ -32,8 +32,21 @@ async function renderDashboard() {
         totalProdutos = resultProdutos.value?.length || 0;
     }
 
-    // Lê o status do Bolão
-    const bolaoStatus = localStorage.getItem('bolao_status') || 'INATIVO';
+    // Lê o status do Bolão via API
+    let bolaoStatus = 'INATIVO';
+    let bolaoIdAtivo = null;
+    try {
+        // Traz o módulo dinamicamente para não quebrar dependências do dashboard
+        const { ApiBolaoService } = await import('../../js/services/ApiBolaoService.js');
+        const config = await ApiBolaoService.obterConfiguracaoGlobais();
+        if (config && config.idJogoAtivo) {
+            bolaoIdAtivo = config.idJogoAtivo;
+            const painel = await ApiBolaoService.consultarPainel(bolaoIdAtivo);
+            bolaoStatus = painel?.status || 'INATIVO';
+        }
+    } catch (e) {
+        console.error("Erro ao carregar status do bolão:", e);
+    }
 
     const kpis = [
         { icone: 'ri-newspaper-line', valor: totalNoticias.toString(), label: 'Notícias Publicadas' },
@@ -100,25 +113,25 @@ async function renderDashboard() {
 
     container.innerHTML = html;
 
-    // Configura os eventos dos botões de estado do Bolão
-    document.getElementById('btn-dash-inativo')?.addEventListener('click', () => {
-        if(bolaoStatus !== 'INATIVO' && confirm('Deseja inativar o bolão?')) {
-            localStorage.setItem('bolao_status', 'INATIVO');
-            renderDashboard();
-        }
-    });
+    const attachStatusEvent = (btnId, novoStatus, mensagem) => {
+        document.getElementById(btnId)?.addEventListener('click', async () => {
+            if (bolaoStatus !== novoStatus && confirm(mensagem)) {
+                if (!bolaoIdAtivo) {
+                    alert('Nenhum jogo configurado no Bolão! Vá para "Gerenciar" e selecione um jogo primeiro.');
+                    return;
+                }
+                try {
+                    const { ApiBolaoService } = await import('../../js/services/ApiBolaoService.js');
+                    await ApiBolaoService.alterarStatusManual(bolaoIdAtivo, novoStatus);
+                    renderDashboard(); // recarrega a página de dashboard atualizada da API
+                } catch (e) {
+                    alert(e.message || 'Erro ao mudar status do bolão.');
+                }
+            }
+        });
+    };
 
-    document.getElementById('btn-dash-aberto')?.addEventListener('click', () => {
-        if(bolaoStatus !== 'ABERTO' && confirm('Deseja abrir as apostas do bolão?')) {
-            localStorage.setItem('bolao_status', 'ABERTO');
-            renderDashboard();
-        }
-    });
-
-    document.getElementById('btn-dash-fechado')?.addEventListener('click', () => {
-        if(bolaoStatus !== 'FECHADO' && confirm('Deseja encerrar as apostas e revelar os jogadores?')) {
-            localStorage.setItem('bolao_status', 'FECHADO');
-            renderDashboard();
-        }
-    });
+    attachStatusEvent('btn-dash-inativo', 'INATIVO', 'Deseja inativar o bolão?');
+    attachStatusEvent('btn-dash-aberto', 'ABERTO', 'Deseja abrir as apostas do bolão?');
+    attachStatusEvent('btn-dash-fechado', 'FECHADO', 'Deseja encerrar as apostas e revelar os jogadores?');
 }
