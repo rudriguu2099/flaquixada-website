@@ -5,17 +5,52 @@
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     width: 100%;
+    
 }
 
 /* Cabeçalho do Card */
-
-.cardapio-header h2 {
-    margin-bottom: 20px;
+.cardapio-header {
     background: var(--black-fla-dark);
     margin: -20px -20px 20px -20px;
     border-radius: 15px 15px 0 0;
-    padding: 10px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cardapio-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
     text-align: center;
+}
+
+/* .cardapio-header h2::after {
+    content: '';
+    display: block;
+    width: 1.4rem;
+    margin-left: 10px;
+} */
+
+.cardapio-header h2 i {
+    font-size: 1.4rem;
+    margin-right: 10px;
+}
+
+#btn-novo-item {
+    position: absolute;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* Seções (Bebidas, Petiscos, Pratos) */
@@ -80,18 +115,19 @@
 
 /* Tabela de Preços*/
 .tabela-precos {
-    display: grid;
-    grid-template-columns: 80px 10px 80px;
+    display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     text-align: center;
 }
 
 .col-socio, .col-normal {
+    width: 80px;
     font-size: 0.95em;
 }
 
 .col-divisor {
+    width: 10px;
     color: rgba(255, 255, 255, 0.4);
     font-size: 0.9em;
 }
@@ -123,24 +159,43 @@
 }
 
 .btn-cardapio-completo {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: #333;
-    color: var(--secundary-color-2);
-    padding: 12px 24px;
-    border-radius: 12px;
+    background-color: transparent;
+    color: var(--white-fla);
+    width: 100%;
+    padding: 10px 0px;
+    border: 1px solid var(--white-fla);
+    border-radius: 15px;
     font-weight: bold;
-    font-size: 0.95em;
+    font-size: 16px;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.5s ease;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-cardapio-completo:hover {
-    background-color: #444;
-    transform: scale(1.1);
+    border-color: var(--red-fla);
+    background-color: var(--red-fla);
 }
 
 .btn-cardapio-completo i {
     font-size: 1.2em;
+}
+
+@media (max-width: 600px) {
+    .col-socio, .col-normal {
+        width: 60px;
+        font-size: 0.85em;
+    }
+    .cardapio-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    .tabela-precos {
+        align-self: flex-end;
+    }
 }

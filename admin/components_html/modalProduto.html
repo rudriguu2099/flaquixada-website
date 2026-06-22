@@ -1,0 +1,74 @@
+<div class="admin-modal" id="modal-produto">
+    <div class="admin-modal-content">
+
+        <div class="admin-modal-header">
+            <h3 id="modal-produto-title">Novo Produto</h3>
+
+            <button class="btn-icon" id="btn-fechar-modal-produto" title="Fechar">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+
+        <div class="admin-modal-body">
+            <form id="form-produto">
+
+                <input type="hidden" id="produto-id">
+
+                <!-- Imagem -->
+                <div class="form-group">
+                    <label for="produto-imagem">
+                        Imagem do Produto
+                    </label>
+
+                    <input type="file" id="produto-imagem" accept="image/*" required>
+                </div>
+
+
+                <!-- Preview -->
+                <div class="preview-produto">
+                    <img id="preview-imagem-produto" src="" alt="Preview do Produto">
+                </div>
+
+                <!-- Nome -->
+                <div class="form-group">
+                    <label for="produto-nome">
+                        Nome do Produto
+                    </label>
+
+                    <input type="text" id="produto-nome" placeholder="Ex: Camisa do Consulado" required>
+                </div>
+
+                <!-- Descrição -->
+                <div class="form-group">
+                    <label for="produto-descricao">
+                        Descrição
+                    </label>
+
+                    <textarea id="produto-descricao" rows="4" placeholder="Descrição do produto..." required></textarea>
+                </div>
+
+                <!-- Preço -->
+                <div class="form-group">
+                    <label for="produto-preco">
+                        Preço (R$)
+                    </label>
+
+                    <input type="number" id="produto-preco" step="0.01" min="0" placeholder="120.00" required>
+                </div>
+
+                <div class="admin-modal-actions">
+                    <input type="hidden" id="produto-id">
+                    <button type="button" class="btn-secundary" id="btn-cancelar-produto">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn-primary" id="btn-salvar-produto">
+                        Salvar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

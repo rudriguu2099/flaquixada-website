@@ -1,0 +1,156 @@
+/* Configuração Base da Página */
+body {
+    background-color: var(--black-fla);
+    color: var(--white-fla);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Header */
+.login-header {
+    width: 100%;
+    margin: 0;
+}
+
+.btn-voltar {
+    color: var(--white-fla);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.btn-voltar:hover {
+    color: var(--red-fla);
+}
+
+/* Corpo Principal */
+.login-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    width: 100%;
+    max-width: 450px;
+    align-self: center;
+}
+
+/* Ícone do Cadeado */
+.login-icon-wrapper {
+    background-color: var(--white-fla);
+    color: var(--black-fla);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Títulos */
+.login-titles {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-titles h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.login-titles p {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin: 0;
+}
+
+/* Formulário */
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--white-fla);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f2f2f2;
+    color: var(--black-fla);
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--red-fla);
+}
+
+/* Botão de Entrar */
+.btn-entrar {
+    margin-top: 15px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #000000;
+    color: var(--white-fla);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-entrar i {
+    font-size: 18px;
+}
+
+.btn-entrar:hover {
+    background-color: var(--red-fla);
+    transform: translateY(-2px);
+}
+
+.btn-entrar:active {
+    transform: translateY(0);
+}

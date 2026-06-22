@@ -1,17 +1,4 @@
-const dadosCardapio = {
-    bebidas: [
-        { nome: 'Brahma Chopp', descricao: 'CERVEJA (600ml)', precoNormal: 12.00, precoSocio: 10.00 },
-        { nome: 'Refrigerante', descricao: 'LATA (350ml)', precoNormal: 6.00, precoSocio: 5.00 }
-    ],
-    petiscos: [
-        { nome: 'Batatinha', descricao: 'PORÇÃO DE BATATA FRITA', precoNormal: 25.00, precoSocio: 20.00 },
-        { nome: 'Calabresa', descricao: 'PORÇÃO ACEBOLADA', precoNormal: 30.00, precoSocio: 25.00 }
-    ],
-    pratos: [
-        { nome: 'Feijoada', descricao: 'PRATO COMPLETO (SERVE 2)', precoNormal: 45.00, precoSocio: 35.00 },
-        { nome: 'Prato Feito', descricao: 'OPÇÃO INDIVIDUAL', precoNormal: 20.00, precoSocio: 18.00 }
-    ]
-};
+import { ApiCardapioService } from '../services/ApiCardapioService.js';
 
 class CardCardapio extends HTMLElement {
     async connectedCallback() {
@@ -24,6 +11,8 @@ class CardCardapio extends HTMLElement {
                 ${htmlPuro}
             `;
 
+            let dadosCardapio = await this.carregarDadosDaAPI();
+
             this.renderizarLista('lista-bebidas', dadosCardapio.bebidas);
             this.renderizarLista('lista-petiscos', dadosCardapio.petiscos);
             this.renderizarLista('lista-pratos', dadosCardapio.pratos);
@@ -33,10 +22,20 @@ class CardCardapio extends HTMLElement {
         }
     }
 
+    async carregarDadosDaAPI() {
+        try {
+            return await ApiCardapioService.fetchCardapio();
+        } catch (e) {
+            console.error("Erro ao buscar cardápio da API no componente:", e);
+            return { bebidas: [], petiscos: [], pratos: [] }; // Retorna vazio em caso de erro
+        }
+    }
+
     renderizarLista(idLista, itens, limite = 3) {
         const ul = this.querySelector(`#${idLista}`);
         if (!ul) return;
 
+        ul.innerHTML = '';
         const itensLimitados = itens.slice(0, limite);
 
         itensLimitados.forEach(item => {
@@ -56,6 +55,7 @@ class CardCardapio extends HTMLElement {
                     <span class="col-normal preco-comum">${formataMoeda(item.precoNormal)}</span>
                 </div>
             `;
+
             ul.appendChild(li);
         });
     }

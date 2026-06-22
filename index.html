@@ -15,30 +15,26 @@
     
     <main>
         <div class="container-main">
-            <section>
-                <div-socio-fla></div-socio-fla>
-                <monthly-prizes></monthly-prizes>
-                <card-cardapio></card-cardapio>
-            </section>
-            <aside>
-                <div id="match-fla"></div>
+            <div-socio-fla></div-socio-fla>
+            <div id="match-fla"></div>
+            <!-- <div id="match-live"></div> -->
+            <!-- Trocar o id dinamicamente quando estiver ao vivo -->
+        </div>
+
+        <div class="container-main">
+            <card-cardapio></card-cardapio>
+            <aside class="side-widgets">
                 <bolao-fla></bolao-fla>
+                <monthly-prizes></monthly-prizes>
             </aside>
         </div>
         <div class="container-sec">
+            <noticias-fla></noticias-fla>
         </div>
     </main>
     
-    <script src="./js/pages/index.js"></script>
-    <!-- Componentes -->
-    <script src="js/components/navbar.js" defer></script>
-    <script src="js/components/CardNextGame.js" defer></script>
-    <script src="js/components/NextGame.js" defer></script>
-    <script src="js/components/Bolao.js" defer></script>
-    <script src="js/components/DivulgaSocioFla.js" defer></script>
-    <script src="js/components/MonthlyPrizes.js" defer></script>
-    <script src="js/components/CardCardapio.js" defer></script>
-    <script src="js/components/MonthlyPrizes.js" defer></script>
-    <script src="js/components/CardCardapio.js" defer></script>
+    <custom-footer></custom-footer>
+
+    <script type="module" src="./js/pages/index.js"></script>
 </body>
 </html>

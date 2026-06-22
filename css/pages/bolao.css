@@ -1,0 +1,314 @@
+.bolao-page-content {
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    background: var(--linear-red-fla);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(225, 26, 34, 0.25);
+}
+
+.bolao-jogo-atual {
+    width: 100%;
+}
+
+/* We style card-next-game to fill its container */
+.bolao-jogo-atual card-next-game {
+    width: 100%;
+}
+
+/* Hide the "Ver Mais" button only on the Bolão page */
+.bolao-jogo-atual card-next-game #btn-see-more-next-game {
+    display: none !important;
+}
+
+/* Deixa o container principal transparente para se fundir com o fundo vermelho */
+.bolao-jogo-atual .container-next-game {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Suaviza o fundo escuro do painel do jogo para combinar com o vermelho */
+.bolao-jogo-atual .panel-next-game {
+    background: rgba(0, 0, 0, 0) !important;
+    border: 1px solid rgba(255, 255, 255, 0);
+    backdrop-filter: blur(5px);
+    box-shadow: none !important;
+}
+
+/* Inverte as cores da etiqueta de campeonato para destacar no fundo vermelho */
+.bolao-jogo-atual .panel-next-game .championship-stage {
+    background-color: var(--black-fla-dark) !important;
+    color: var(--white-fla) !important;
+    font-size: 13px !important;
+    padding: 6px 18px !important;
+    margin-bottom: 0px !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+}
+
+@media (max-width: 768px) {
+    .bolao-jogo-atual .panel-next-game .championship-stage {
+        font-size: 11px !important;
+        padding: 4px 12px !important;
+        white-space: normal !important;
+    }
+}
+
+/* VS Branco */
+.bolao-jogo-atual .panel-next-game .vs {
+    color: var(--white-fla) !important;
+}
+
+/* Remove a linha divisória do card de jogo */
+.bolao-jogo-atual .panel-next-game hr {
+    display: none !important;
+}
+
+.bolao-participants-card {
+    width: 100%;
+    background: transparent;
+    padding: 25px 10px 10px 10px;
+    color: var(--white-fla);
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bolao-participants-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bolao-participants-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.bolao-participants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.bolao-participants-list::-webkit-scrollbar {
+    width: 6px;
+}
+.bolao-participants-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.bolao-participant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.bolao-player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.bolao-participant-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    width: 20px;
+}
+
+.bolao-player-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white-fla);
+}
+
+.bolao-participant-info {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: right;
+}
+
+.bolao-participan.btn-state.active.btn-fechado {
+    background: var(--red-fla);
+    border-color: var(--red-fla);
+}
+
+.bolao-blind-bet-text {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.bolao-novo-input-margin {
+    margin-bottom: 12px;
+}
+
+.bolao-participant-name.taken {
+    background: var(--black-fla);
+    color: var(--white-fla);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: inline-block;
+}
+
+.bolao-participant-name.free {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+}
+
+.bolao-insert-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.bolao-novo-input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    color: var(--black-fla);
+    background: var(--white-fla);
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.bolao-novo-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
+.btn-bolao {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-bolao-salvar {
+    background: #000;
+    color: var(--white-fla);
+    margin-top: 12px;
+}
+
+.btn-bolao-salvar:hover {
+    background: #111;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .bolao-page-content {
+        padding: 24px 20px 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bolao-participants-card {
+        padding: 20px;
+    }
+    .bolao-page-content {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .bolao-participant-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .bolao-participant-info {
+        text-align: left;
+        width: 100%;
+    }
+    .bolao-page-content {
+        padding: 16px 12px 40px;
+        border-radius: 14px;
+        width: calc(100% - 20px);
+    }
+}
+
+/* Empty States (Inativo e Aguardando) */
+.bolao-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--white-fla);
+    animation: fadeIn 0.4s ease;
+}
+
+.bolao-empty-state i {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 15px;
+}
+
+.bolao-empty-state h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.bolao-empty-state p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 400px;
+    line-height: 1.5;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bolao-revelados-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bolao-revelados-header h3 {
+    color: white;
+}
+
+.bolao-revelados-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}

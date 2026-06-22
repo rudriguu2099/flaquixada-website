@@ -11,9 +11,23 @@ class DivulgaSocioFla extends HTMLElement {
         ${htmlPuro}
       `;
 
+      this.setupButton();
+
     } catch (error) {
       console.error('Erro ao carregar o HTML do DivulgaSocioFla:', error);
     }
-}}
+  }
+
+  setupButton() {
+      const btnSocio = this.querySelector('#btn-socio-fla');
+      if (btnSocio) {
+          btnSocio.addEventListener('click', () => {
+              const mensagem = "Olá! Gostaria de me associar ao Consulado Fla-Quixadá.";
+              const whatsappUrl = `https://wa.me/88981942857?text=${encodeURIComponent(mensagem)}`;
+              window.open(whatsappUrl, '_blank');
+          });
+      }
+  }
+}
 
 customElements.define('div-socio-fla', DivulgaSocioFla);

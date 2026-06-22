@@ -1,0 +1,93 @@
+.cardapio-shortcuts {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.btn-shortcut {
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(225, 26, 34, 0.2);
+}
+
+.btn-shortcut:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(225, 26, 34, 0.4);
+}
+
+/* --- Layout da Lista --- */
+.cardapio-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.admin-categoria {
+    background-color: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.admin-categoria h3 {
+    padding: 16px 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+    text-transform: uppercase;
+}
+
+.admin-lista-itens {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-item:last-child { border-bottom: none; }
+.admin-item:hover { background: rgba(255,255,255,0.03); }
+
+.item-info { flex: 1; }
+.item-nome { font-weight: 600; color: var(--white-fla); font-size: 1.05rem; }
+.item-descricao { font-size: 0.8rem; color: #999; display: block; margin-top: 2px;}
+
+.item-precos {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+.preco-socio { color: var(--red-fla); font-weight: 700; }
+.preco-normal { color: rgba(255,255,255,0.35); }
+
+.item-acoes {
+    display: flex;
+    gap: 8px;
+}
+
+/* --- Modal Específico Cardapio --- */
+
+@media (max-width: 768px) {
+    .form-row > .form-group { flex: 1 1 100%; margin-bottom: 14px; }
+    .admin-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .item-acoes { align-self: flex-end; }
+}

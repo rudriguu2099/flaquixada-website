@@ -1,0 +1,278 @@
+/* --- Customização do Scrollbar para o Modal --- */
+
+/* 1. Define a largura da barra de rolagem (mais fina para ficar elegante) */
+.admin-modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* 2. O fundo da pista por onde o scroll corre */
+.admin-modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+
+/* 3. O "dedo" (a barrinha que se move) */
+.admin-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+/* 4. Quando o usuário passa o mouse em cima da barrinha (ela ganha o destaque vermelho sutil ou branco aceso) */
+.admin-modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--red-fla); /* Ou rgba(255, 255, 255, 0.2) se preferir neutro */
+}
+
+.admin-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+    display: none;
+    justify-content: center;
+    align-items: center; /* Centraliza verticalmente o card */
+    z-index: 1000;
+    padding: 20px; /* Garante que em telas pequenas o modal não cole na barra do navegador */
+    box-sizing: border-box;
+}
+
+.admin-modal-content {
+    background: #1e1e1e; 
+    width: 100%;
+    max-width: 500px; 
+    height: auto; 
+    max-height: 90vh; 
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantém os cantos arredondados perfeitos */
+}
+
+
+/* 3. O Cabeçalho */
+.admin-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 4. O Corpo do Modal (Onde ficam os inputs) */
+.admin-modal-body {
+    padding: 24px;
+    overflow-y: auto; /* Se o formulário for maior que a tela, cria uma barra de rolagem linda só aqui dentro */
+    flex: 1; /* Ocupa o espaço restante dinamicamente */
+}
+
+/* 5. Rodapé dos botões */
+.admin-modal-actions {
+    padding: 16px 24px 24px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Linha sutil separando os botões */
+    background: #1e1e1e; /* Mantém o fundo fixo ao rolar */
+}
+
+/* --- Grupos do Formulário e Labels --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    color: var(--white-fla);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+/* --- Unificação de Inputs e Textarea --- */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--white-fla);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito de foco padrão para todos os campos */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--red-fla);
+    box-shadow: 0 0 0 3px rgba(219, 0, 0, 0.15);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* --- Customização do Botão de Upload (File) --- */
+.form-group input[type="file"] {
+    background: var(--black-fla-dark);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    padding: 10px;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* Estiliza o botão "Escolher arquivo" interno do navegador */
+.form-group input[type="file"]::file-selector-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white-fla);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-right: 10px;
+    transition: background 0.2s;
+}
+
+.form-group input[type="file"]::file-selector-button:hover {
+    background: var(--red-fla);
+}
+
+/* --- Container e Foto de Preview --- */
+.preview-produto {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.preview-produto img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Esconde o ícone feio de imagem quebrada caso o SRC esteja vazio */
+.preview-produto img:not([src]), 
+.preview-produto img[src=""] {
+    position: relative;
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+}
+
+/* Cria um placeholder bonito em texto enquanto não há imagem */
+.preview-produto img:not([src])::after,
+.preview-produto img[src=""]::after {
+    content: "Nenhuma imagem selecionada";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #1e1e1e; /* Um tom escuro neutro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+    border-radius: 12px;
+}
+
+/* --- Alinhamento das Ações (Botões Inferiores) --- */
+.admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Container Principal */
+.admin-produtos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Card de cada Produto na Lista */
+.admin-item-loja {
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.admin-item-loja:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: #252525;
+}
+
+/* Alinhamento da Esquerda (Imagem + Info) */
+.item-loja-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Miniatura da Imagem na lista */
+.item-loja-thumb {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Informações de Texto */
+.item-loja-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-loja-nome {
+    color: var(--white-fla);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.item-loja-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Preço em destaque */
+.item-loja-preco {
+    color: #2ecc71; /* Verde para dinheiro/preço */
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 2px;
+}
+
+/* Botões de Ação (Direita) */
+.item-loja-acoes {
+    display: flex;
+    gap: 8px;
+}

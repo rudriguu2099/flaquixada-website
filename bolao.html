@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Participe do Bolão do Consulado Fla-Quixadá e concorra a prêmios incríveis.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pages/bolao.css">
+    <title>Bolão | Fla-Quixadá</title>
+</head>
+<body>
+    <header>
+        <nav-bar></nav-bar>
+    </header>
+
+    <main class="main-full-width">
+        <!-- Hero da página -->
+        <div class="page-hero">
+            <div class="page-hero-text">
+                <h1><i class="ri-trophy-line"></i> Bolão Fla-Quixadá</h1>
+            </div>
+        </div>
+
+        <div class="bolao-page-content">
+            <!-- Jogo Atual -->
+            <div class="bolao-jogo-atual" id="bolao-jogo-atual">
+                <!-- Injetado pelo bolao.js -->
+            </div>
+            
+            <!-- Lista de participantes -->
+            <div class="bolao-participants-card">
+                <div id="bolao-dynamic-container">
+                    <!-- O JS vai injetar a tela correspondente ao estado do Bolão aqui -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script type="module" src="./js/pages/bolao.js"></script>
+</body>
+</html>

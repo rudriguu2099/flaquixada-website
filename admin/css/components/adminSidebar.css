@@ -1,0 +1,113 @@
+/* adminSidebar.css */
+.admin-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+}
+
+.admin-sidebar h3 {
+    font-size: 0.85rem;
+    color: var(--admin-text-muted);
+    font-weight: 600;
+    margin-bottom: 16px;
+    margin-top: 0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.admin-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--white-fla);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.admin-menu li a i {
+    font-size: 1.2rem;
+    color: var(--admin-text-muted);
+    transition: color 0.2s ease;
+}
+
+.admin-menu li a:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-menu li a.active {
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+}
+
+.admin-menu li a.active i {
+    color: var(--white-fla);
+}
+
+.sidebar-header-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar-header-mobile {
+        display: flex;
+        justify-content: flex-end; /* Apenas o botão de fechar */
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--admin-border);
+    }
+    
+    .sidebar-header-mobile h3 {
+        display: none; /* Removido o título Módulos */
+    }
+
+    #close-admin-menu {
+        background: transparent;
+        border: none;
+        color: var(--white-fla);
+        font-size: 28px; /* Maior para toque */
+        cursor: pointer;
+    }
+
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        width: 300px;
+        z-index: 1000;
+        transition: right 0.4s ease;
+        border-radius: 0;
+        border: none;
+        border-left: 1px solid var(--admin-border);
+        padding: 20px;
+    }
+
+    .admin-sidebar.active {
+        right: 0;
+    }
+
+    /* Ajuste do tamanho das fontes para ficar igual ao do site público */
+    .admin-menu li a {
+        font-size: 18px;
+        font-weight: 400;
+        padding: 12px 15px;
+        gap: 20px;
+    }
+
+    .admin-menu li a i {
+        font-size: 22px;
+    }
+}

@@ -1,40 +1,163 @@
 main {
     margin-top: 100px;
-    width: 100vw;
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px 40px;
 }
 
 main .container-main {
-    display: grid;
-    grid-template-columns: 1fr 400px; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 30px;
+    margin-top: 30px;
 }
 
-main .container-main section, 
-main .container-main aside {
-    display: contents;
+main .container-main > div-socio-fla,
+main .container-main > card-cardapio {
+    flex: 1 1 300px;
 }
 
-div-socio-fla { grid-column: 1; grid-row: 1; }
-card-cardapio { grid-column: 1; grid-row: 2; }
-#match-fla    { grid-column: 2; grid-row: 1; }
-bolao-fla     { grid-column: 2; grid-row: 2; }
+#match-fla { 
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 400px;
+}
+
+#match-fla card-next-game {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 0 0 400px;
+}
+
+main .container-sec {
+    margin-top: 40px;
+}
 
 @media (max-width: 940px) {
     main .container-main {
         display: flex;
-        flex-direction: column-reverse;
-        gap: 30px;
-        align-items: center;
-        width: 100%;
-    }
-    
-    main .container-main section, 
-    main .container-main aside {
-        display: flex;
         flex-direction: column;
         gap: 30px;
-        align-items: center;
+        align-items: stretch;
         width: 100%;
     }
+
+    main .container-main > div-socio-fla,
+    main .container-main > card-cardapio {
+        flex: 1 1 auto;
+    }
+
+    #match-fla,
+    .side-widgets {
+        flex: none;
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 20px 15px;
+    }
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DO LOADER (SPINNER ANIMADO)
+   ========================================================================== */
+.jogos-loader-container {
+    display: flex;
+    height: 400px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    gap: 16px;
+    color: #b3b3b3;
+    font-size: 0.95rem;
+}
+
+.jogos-spinner {
+    width: 45px;
+    height: 45px;
+    border: 4px solid rgba(255, 255, 255, 0.05);
+    border-top-color: #d62828; /* Vermelho Flamengo */
+    border-radius: 50%;
+    animation: spinnerCircular 1s linear infinite;
+}
+
+@keyframes spinnerCircular {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.jogos-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 450px;
+    margin: 70px auto;
+    padding: 32px 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+    .jogos-empty-state {
+        margin: auto;
+    }
+    
+}
+
+/* Círculo do Ícone */
+.jogos-empty-state .empty-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.jogos-empty-state .empty-icon-wrapper i {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Título do Estado */
+.jogos-empty-state h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+/* Parágrafo explicativo */
+.jogos-empty-state p {
+    font-size: 0.9rem;
+    color: #999999;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Variação de estilo caso ocorra um erro de API */
+.jogos-empty-state.error .empty-icon-wrapper {
+    background: rgba(214, 40, 40, 0.1);
+}
+
+.jogos-empty-state.error .empty-icon-wrapper i {
+    color: #d62828; /* Ícone fica vermelho em caso de erro */
 }

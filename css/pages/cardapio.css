@@ -1,0 +1,202 @@
+.cardapio-shortcuts {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-shortcut {
+    background: var(--linear-red-fla);
+    color: var(--white-fla);
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(225, 26, 34, 0.2);
+}
+
+.btn-shortcut:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(225, 26, 34, 0.4);
+}
+
+/* ===== CONTEÚDO ===== */
+.cardapio-page-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 60px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ===== SEÇÃO ===== */
+.cardapio-page-section {
+    background-color: var(--black-fla-dark);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cardapio-page-section-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--linear-red-fla);
+}
+
+.cardapio-page-section-header h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white-fla);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cardapio-page-section-header h2 i {
+    font-size: 1.1rem;
+    color: var(--white-fla);
+}
+
+.col-labels {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.col-labels .lbl-socio,
+.col-labels .lbl-normal {
+    width: 80px;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: var(--secundary-color-2);
+}
+
+.col-labels .col-divisor {
+    width: 10px;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.9em;
+}
+
+/* ===== LISTA DE ITENS ===== */
+.cardapio-page-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cardapio-page-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s ease;
+}
+
+.cardapio-page-item:last-child { border-bottom: none; }
+
+.cardapio-page-item:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.cardapio-page-item .item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 3px;
+}
+
+.cardapio-page-item .item-nome {
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: var(--white-fla);
+}
+
+.cardapio-page-item .item-descricao {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 2px;
+}
+
+.cardapio-page-item .tabela-precos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.cardapio-page-item .col-socio {
+    width: 80px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--red-fla);
+}
+
+.cardapio-page-item .col-normal {
+    width: 80px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.35);
+}
+
+.cardapio-page-item .col-divisor {
+    width: 10px;
+    text-align: center;
+    color: rgba(255,255,255,0.12);
+    font-size: 0.85rem;
+}
+
+
+/* ===== SKELETON ===== */
+.cardapio-skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--black-fla-dark) 25%,
+        rgba(255,255,255,0.04) 50%,
+        var(--black-fla-dark) 75%
+    );
+    background-size: 200% 100%;
+    border-radius: 10px;
+    animation: shimmer 1.8s infinite;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 900px) {
+    .cardapio-page-content { padding: 36px 24px 60px; }
+}
+
+@media (max-width: 600px) {
+    .cardapio-page-content { padding: 24px 16px 50px; }
+    .cardapio-page-item { padding: 14px 16px; }
+    .cardapio-page-section-header { padding: 14px 16px; }
+    .cardapio-page-item .col-socio,
+    .cardapio-page-item .col-normal,
+    .col-labels .lbl-socio,
+    .col-labels .lbl-normal { width: 72px; }
+}
+
+@media (max-width: 400px) {
+    .cardapio-page-item .col-socio,
+    .cardapio-page-item .col-normal,
+    .col-labels .lbl-socio,
+    .col-labels .lbl-normal { width: 58px; font-size: 0.75rem; }
+    .cardapio-page-item .col-divisor,
+    .col-labels .col-divisor { width: 6px; font-size: 0.7rem; }
+    .cardapio-page-item .item-nome { font-size: 0.95rem; }
+}

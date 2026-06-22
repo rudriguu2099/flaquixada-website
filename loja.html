@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css">
     <link rel="stylesheet" href="css/global.css">    
+    <link rel="stylesheet" href="css/pages/loja.css">    
     <title>Loja</title>
 </head>
 <body>
@@ -13,11 +14,36 @@
     </header>
     
     <main>
-        Loja
+        <div class="container-main">
+            <div class="page-hero">
+                <div class="page-hero-text">
+                    <h1><i class="ri-shopping-bag-fill"></i> Explore nossa Loja</h1>
+                    <p>Tudo o que você precisa em um só lugar.</p>
+                </div>
+            </div>
+            
+            <carousel-fla></carousel-fla>
+
+            <div id="products">
+                <div class="product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-button"></div>
+                </div>
+                
+                <div class="product-skeleton">
+                    <div class="skeleton-image"></div>
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                    <div class="skeleton-button"></div>
+                </div>
+            </div>
+        </div>
     </main>
     
+    <custom-footer></custom-footer>
 
-    <!-- Componentes -->
-    <script src="js/components/navbar.js" defer></script>
+    <script type="module" src="./js/pages/loja.js"></script>
 </body>
 </html>

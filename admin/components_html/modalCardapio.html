@@ -1,0 +1,46 @@
+<div id="modal-cardapio" class="admin-modal">
+    <div class="admin-modal-content">
+        <div class="admin-modal-header">
+            <h3 id="modal-titulo">Novo Item</h3>
+            <button type="button" class="btn-icon" id="btn-fechar-modal" title="Fechar"><i class="ri-close-line"></i></button>
+        </div>
+        <form id="form-cardapio">
+            <input type="hidden" id="item-id">
+            
+            <div class="form-group">
+                <label for="item-nome">Nome do Item</label>
+                <input type="text" id="item-nome" required placeholder="Ex: Brahma Chopp">
+            </div>
+            
+            <div class="form-group">
+                <label for="item-desc">Descrição</label>
+                <input type="text" id="item-desc" required placeholder="Ex: CERVEJA (600ml)">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="item-preco-normal">Preço Normal (R$)</label>
+                    <input type="text" id="item-preco-normal" required placeholder="0,00">
+                </div>
+                <div class="form-group">
+                    <label for="item-preco-socio">Preço Sócio (R$)</label>
+                    <input type="text" id="item-preco-socio" required placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="item-categoria">Categoria</label>
+                <select id="item-categoria" required>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="petiscos">Petiscos</option>
+                    <option value="pratos">Pratos</option>
+                </select>
+            </div>
+
+            <div class="admin-modal-actions">
+                <button type="button" id="btn-cancelar" class="btn-secundary">Cancelar</button>
+                <button type="submit" class="btn-primary">Salvar Item</button>
+            </div>
+        </form>
+    </div>
+</div>

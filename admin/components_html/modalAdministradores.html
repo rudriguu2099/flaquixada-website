@@ -1,0 +1,35 @@
+<div class="admin-modal" id="modal-admin">
+    <div class="admin-modal-content">
+        <div class="admin-modal-header">
+            <h3 id="modal-admin-title">Novo Administrador</h3>
+            <button type="button" class="btn-icon" id="btn-fechar-modal-admin" title="Fechar">
+                <i class="ri-close-line"></i>
+            </button>
+        </div>
+        <div class="admin-modal-body">
+            <form id="form-admin">
+                <input type="hidden" id="admin-id">
+                
+                <div class="form-group">
+                    <label for="admin-nome">Nome Completo</label>
+                    <input type="text" id="admin-nome" placeholder="Ex: João da Silva" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-email">E-mail</label>
+                    <input type="email" id="admin-email" placeholder="Ex: admin@flaquixada.com.br" required>
+                </div>
+
+                <div class="form-group" id="grupo-senha">
+                    <label for="admin-senha">Senha</label>
+                    <input type="password" id="admin-senha" placeholder="Digite a senha" required>
+                </div>
+
+                <div class="admin-modal-actions">
+                    <button type="button" class="btn-secundary" id="btn-cancelar-admin">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="btn-salvar-admin">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

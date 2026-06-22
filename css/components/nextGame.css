@@ -11,9 +11,10 @@
 }
 
 .next-game .block {
-    background-color: var(--red-fla);
+    background-color: var(--white-fla);
     width: 10px;
     height: auto;
+    border-radius: 3px;
 }
 
 .next-game .infor {
@@ -27,11 +28,64 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-weight: bold;
-    font-size: 12px;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
 }
 
 .next-game .infor .championship-stage {
-    color: var(--red-fla);
-    font-size: 10px;
+    color: var(--white-fla);
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.next-game .infor .teams-score {
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--white-fla);
+    margin: 2px 0;
+}
+
+.next-game .infor .teams-score .vs-mini {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.next-game .infor .datetime {
+    color: var(--white-fla);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.next-game .infor .datetime .bullet {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.live-score-badge {
+    color: var(--black-fla-dark);
+    background: white;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .next-game .infor .teams-score {
+        font-size: 13px;
+    }
+    .next-game .infor .championship-stage,
+    .next-game .infor .datetime {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .next-game {
+        gap: 6px;
+    }
+    .next-game .block {
+        width: 6px;
+    }
 }

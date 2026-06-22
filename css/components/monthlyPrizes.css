@@ -1,7 +1,6 @@
 .monthly-prizes-card {
     width: 100%;
-    max-width: 400px;
-    background-color: var(--red-fla);
+    background: var(--linear-red-fla);
     border-radius: 25px;
     padding: 25px 20px;
     display: flex;
@@ -16,19 +15,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     color: var(--white-fla);
 }
 
 .monthly-prizes-header h2 {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     margin: 0;
+    text-align: center;
 }
 
-.monthly-prizes-header i {
-    font-size: 22px;
+.monthly-prizes-header h2 i {
+    font-size: 1.4rem;
 }
 
 .monthly-prizes-subtitle {
@@ -57,6 +59,7 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .prizes-badge {
@@ -101,7 +104,7 @@
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 #btn-compete i {
@@ -109,8 +112,7 @@
 }
 
 #btn-compete:hover {
-    background-color: #1a1a1a;
-    transform: translateY(-2px);
+    background-color: #000000;
 }
 
 #btn-compete:active {
@@ -126,3 +128,7 @@
     margin: 5px 0 0 0;
     padding: 0 5px;
 }
+
+.medal-gold { color: #FFD700; }
+.medal-silver { color: #C0C0C0; }
+.medal-bronze { color: #C5832B; }

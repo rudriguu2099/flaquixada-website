@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Bolão | Fla-Quixadá</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="./css/admin-global.css?v=2">
+    <link rel="stylesheet" href="./css/bolao.css">
+    
+    <script src="./js/auth-guard.js"></script>
+</head>
+<body>
+    <admin-header></admin-header>
+
+    <div class="admin-container">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="admin-main admin-card">
+            <div class="admin-main-header">
+                <h2><i class="ri-trophy-line"></i> Gerenciar Bolão</h2>
+            </div>
+
+            <div class="admin-content-padding">
+
+
+                <!-- Painel de Controle de Estado -->
+                <div class="bolao-state-panel">
+                    <div class="bolao-state-info">
+                        <h3>Status Atual: <span id="lbl-estado-atual" class="badge-estado inativo">INATIVO</span></h3>
+                        <p id="lbl-estado-desc">O bolão está fechado e aguardando configuração.</p>
+                    </div>
+                    <div class="bolao-state-actions">
+                        <button class="btn-state btn-inativo active" data-state="INATIVO"><i class="ri-lock-2-line"></i> Inativo</button>
+                        <button class="btn-state btn-aberto" data-state="ABERTO"><i class="ri-lock-unlock-line"></i> Aberto (Apostas)</button>
+                        <button class="btn-state btn-fechado" data-state="FECHADO"><i class="ri-eye-line"></i> Fechado (Revelado)</button>
+                    </div>
+                </div>
+
+
+                <!-- Seleção do Jogo -->
+                <div class="bolao-state-panel admin-jogo-panel">
+                    <div class="admin-jogo-wrapper">
+                        <label class="admin-jogo-label">
+                            <i class="ri-calendar-event-line"></i> Jogo do Bolão
+                        </label>
+                        <div class="admin-jogo-select-group">
+                            <select id="select-jogo-bolao" class="admin-jogo-select">
+                                <option value="">Carregando jogos...</option>
+                            </select>
+                            <button class="btn-primary" id="btn-salvar-jogo">
+                                <i class="ri-save-line"></i> Salvar Jogo
+                            </button>
+                        </div>
+                        
+                        <!-- Preview do Jogo -->
+                        <div id="admin-preview-game" class="admin-preview-game-wrapper">
+                            <div id="admin-preview-game-container"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geração dos jogadores -->
+                <div class="admin-accordion">
+                    <button type="button" class="accordion-header" id="btn-toggle-jogadores">
+                        <span><i class="ri-group-line"></i> Definir os 10 Jogadores</span>
+                        <i class="ri-arrow-down-s-line icon-arrow"></i>
+                    </button>
+                    
+                    <div class="accordion-content" id="content-jogadores">
+                        <form id="form-bolao-jogadores" class="bolao-jogadores-list">
+                            <div id="bolao-jogadores-container" class="bolao-jogadores-grid">
+                            </div>
+
+                            <div class="bolao-admin-actions">
+                                <button type="button" class="btn-secundary" id="btn-sorteio-cartola">
+                                    <i class="ri-download-cloud-2-line"></i> Sorteio
+                                </button>
+                                <button type="button" class="btn-secundary" id="btn-embaralhar-jogadores">
+                                    <i class="ri-shuffle-line"></i> Embaralhar Nomes
+                                </button>
+                                <button type="button" class="btn-primary" id="btn-salvar-jogadores">
+                                    <i class="ri-save-line"></i> Salvar Lista
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Gereciador de pagamento -->
+                <div class="admin-accordion">
+                    <button type="button" class="accordion-header" id="btn-toggle-pagamentos">
+                        <span><i class="ri-money-dollar-circle-line"></i> Gerenciar Pagamentos</span>
+                        <i class="ri-arrow-down-s-line icon-arrow"></i>
+                    </button>
+                    
+                    <div class="accordion-content" id="content-pagamentos">
+                        <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+                            <button type="button" class="btn-primary" id="btn-zerar-apostas" style="background-color: #ff4444; border: none; color: white; padding: 6px 12px; font-size: 12px; gap: 5px; border-radius: 8px;">
+                                <i class="ri-refresh-line"></i> Zerar Bolão
+                            </button>
+                        </div>
+                        <div id="bolao-pagamentos-container" class="bolao-pagamentos-list">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./js/bolao.js"></script>
+</body>
+</html>

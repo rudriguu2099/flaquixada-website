@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Administradores | Fla-Quixadá</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="./css/admin-global.css?v=2">
+    <link rel="stylesheet" href="./css/administradores.css">
+    
+    <script src="./js/auth-guard.js"></script>
+</head>
+<body>
+    <admin-header></admin-header>
+
+    <div class="admin-container">
+        <admin-sidebar></admin-sidebar>
+
+        <main class="admin-main admin-card">
+            <div class="admin-main-header">
+                <h2><i class="ri-admin-line"></i> Administradores</h2>
+                <button class="btn-primary" id="btn-novo-admin">
+                    <i class="ri-add-line"></i> <span class="btn-text">Novo Administrador</span>
+                </button>
+            </div>
+
+            <div class="admin-list-container" id="admin-list-container">
+
+            </div>
+        </main>
+    </div>
+
+    <modal-administradores></modal-administradores>
+
+    <script type="module" src="./js/administradores.js"></script>
+</body>
+</html>
